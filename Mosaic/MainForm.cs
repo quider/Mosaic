@@ -165,5 +165,11 @@ namespace Mosaic
             btnGo.Enabled = false;
             lblAddFirst.Visible = true;
         }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var about = new AboutBox();
+            about.ShowDialog();
+        }
     }
 }
