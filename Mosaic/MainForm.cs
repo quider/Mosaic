@@ -15,8 +15,20 @@ namespace Mosaic
         private MosaicClass mosaicClass;
 
         public MainForm()
-        {            
+        {
             InitializeComponent();
+            this.gbxMaster.Text = strings.MasterImage;
+            this.btnBrowse.Text = strings.Browse;
+            this.btnAdd.Text = strings.Add;
+            this.btnRemove.Text = strings.Remove;
+            this.btnGo.Text = strings.Go;
+            this.lblAddFirst.Text = strings.AddTilesFirst;
+            this.cbxAdjustTiles.Text = strings.AdjustHue;
+            this.lblHeight.Text = strings.Height;
+            this.lblWidth.Text = strings.Width;
+            this.gbxTiles.Text = strings.Tiles;
+            this.gbxMosaic.Text = strings.Mosaic;
+            
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
@@ -29,24 +41,30 @@ namespace Mosaic
             backgroundCalculateColorsOnPicture.DoWork += this.mosaicClass.CalculateColorsWork;
             backgroundCalculateColorsOnPicture.ProgressChanged += this.CalculateColorsProgressChanged;
             backgroundCalculateColorsOnPicture.RunWorkerCompleted += this.CalculateColorsCompleted;
-            
+
             if (oD.ShowDialog() == DialogResult.OK)
             {
                 tbxBrowse.Text = oD.FileName;
                 this.pictureBox.Image = Image.FromFile(oD.FileName);
             }
-            backgroundCalculateColorsOnPicture.RunWorkerAsync(new object[] { this.pictureBox.Image });
+
+            backgroundCalculateColorsOnPicture.RunWorkerAsync(new object[] { Image.FromFile(oD.FileName), this.nudHeight.Value, nudWidth.Value });
         }
 
         private void CalculateColorsCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             //Set all to 0;
+            pgbOperation.Value = 0;
+            lblOperation.Text = strings.ColorsCalculated;
+            var image = e.Result as Image;
+            this.pictureBox.Image = image;
+            this.pictureBox.Refresh();
             var calculateMosaicBackgroundWorker = new BackgroundWorker();
             calculateMosaicBackgroundWorker.ProgressChanged += CalculateColorsProgressChanged;
             calculateMosaicBackgroundWorker.RunWorkerCompleted += calculateMosaicBackgroundWorker_RunWorkerCompleted;
             calculateMosaicBackgroundWorker.DoWork += this.mosaicClass.CalculateMosaic;
-            calculateMosaicBackgroundWorker.RunWorkerAsync(new object[] { e.Result });
-            
+            // calculateMosaicBackgroundWorker.RunWorkerAsync(new object[] { e.Result });
+
         }
 
         void calculateMosaicBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -83,6 +101,17 @@ namespace Mosaic
                 {
                     MessageBox.Show("Directory doesn't exist");
                 }
+            }
+            if (this.lbxTiles.Items.Count > 15)
+            {
+                btnGo.Enabled = true;
+                lblAddFirst.Visible = false;
+            }
+            else
+            {
+                btnGo.Enabled = false;
+                lblAddFirst.Visible = true;
+                lblAddFirst.Text = "You have to add at least 15 tiles";
             }
         }
 
@@ -129,6 +158,12 @@ namespace Mosaic
             {
                 //tbxCache.Text = oD.SelectedPath;
             }
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            btnGo.Enabled = false;
+            lblAddFirst.Visible = true;
         }
     }
 }

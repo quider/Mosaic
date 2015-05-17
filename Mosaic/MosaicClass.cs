@@ -74,27 +74,33 @@ namespace Mosaic
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         internal void CalculateColorsWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             var arguments = e.Argument as object[];
             var worker = sender as BackgroundWorker;
             var image = arguments[0] as Image;
-            var szTile = image.Size;
+            var height = (decimal)arguments[1];
+            var width = (decimal)arguments[2];
+            var szTile = new Size((int)width, (int)height);
             Boolean bLoaded = false;
             Bitmap bMaster = null;
             LockBitmap bOut = null;
 
             /// Notification
             // lblUpdate.Text = 
-            worker.ReportProgress(1, String.Format("Loading Master File..."));
-            Application.DoEvents();
+            worker.ReportProgress(1, String.Format(strings.LoadingMasterFile));
 
             /// File Load Phase  
             while (!bLoaded)
             {
                 try
                 {
-                    bMaster = new Bitmap(image);
+                    bMaster = new Bitmap((Image)image.Clone());
                     bLoaded = true;
                 }
                 catch (OutOfMemoryException)
@@ -104,7 +110,7 @@ namespace Mosaic
             }
 
             /// Notification
-            worker.ReportProgress(1, String.Format("Averaging Master Bitmap..."));
+            worker.ReportProgress(1, String.Format(strings.AveragingMasterBitmap));
 
             /// Average Master Image Phase
             int tX = bMaster.Width / szTile.Width;
@@ -114,17 +120,23 @@ namespace Mosaic
             /// Notification
             var maximum = tX * tY;
             var progres = 4;
-            worker.ReportProgress(progres++, String.Format("Loading Master File..."));
-
+            lock (image)
+            {
             for (int x = 0; x < tX; x++)
             {
                 for (int y = 0; y < tY; y++)
                 {
                     avgsMaster[x, y] = GetTileAverage(bMaster, x * szTile.Width, y * szTile.Height, szTile.Width, szTile.Height);
-                    worker.ReportProgress(progres++, String.Format("Loading Master File..."));
+                    Rectangle r = new Rectangle(szTile.Width * x, szTile.Height * y, szTile.Width, szTile.Height);
+                    worker.ReportProgress((int)((double)x / tX * 100), String.Format(strings.AveragingMasterBitmap));
+
+                    using (Graphics g = Graphics.FromImage(image))
+                    {
+                        g.FillRectangle(new SolidBrush(avgsMaster[x, y]), r);
+                    }
                 }
             }
-            //pic.Image = bMaster;
+            }
 
             /// Output Load Phase                
             bLoaded = false;
@@ -147,7 +159,7 @@ namespace Mosaic
 
             /// Notification
             //lblUpdate.Text = String.Format("Loading and Resizing Tile Images...");
-
+            e.Result = image;
         }
 
         internal void CalculateMosaic(object sender, DoWorkEventArgs e)
