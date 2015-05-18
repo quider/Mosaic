@@ -141,6 +141,9 @@
   <data name="Height" xml:space="preserve">
     <value>Wysokość</value>
   </data>
+  <data name="LoadingAndResizingTiles" xml:space="preserve">
+    <value>Ładuję i zmieniam rozmiar miniaturek</value>
+  </data>
   <data name="LoadingMasterFile" xml:space="preserve">
     <value>Ładuję główny obraz...</value>
   </data>
