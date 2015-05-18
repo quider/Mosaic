@@ -133,6 +133,15 @@ namespace Mosaic {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading and Resizing Tile Images....
+        /// </summary>
+        internal static string LoadingAndResizingTiles {
+            get {
+                return ResourceManager.GetString("LoadingAndResizingTiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Loading maser file....
         /// </summary>
         internal static string LoadingMasterFile {

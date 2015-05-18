@@ -122,20 +122,20 @@ namespace Mosaic
             var progres = 4;
             lock (image)
             {
-            for (int x = 0; x < tX; x++)
-            {
-                for (int y = 0; y < tY; y++)
+                for (int x = 0; x < tX; x++)
                 {
-                    avgsMaster[x, y] = GetTileAverage(bMaster, x * szTile.Width, y * szTile.Height, szTile.Width, szTile.Height);
-                    Rectangle r = new Rectangle(szTile.Width * x, szTile.Height * y, szTile.Width, szTile.Height);
-                    worker.ReportProgress((int)((double)x / tX * 100), String.Format(strings.AveragingMasterBitmap));
-
-                    using (Graphics g = Graphics.FromImage(image))
+                    for (int y = 0; y < tY; y++)
                     {
-                        g.FillRectangle(new SolidBrush(avgsMaster[x, y]), r);
+                        avgsMaster[x, y] = GetTileAverage(bMaster, x * szTile.Width, y * szTile.Height, szTile.Width, szTile.Height);
+                        Rectangle r = new Rectangle(szTile.Width * x, szTile.Height * y, szTile.Width, szTile.Height);
+                        worker.ReportProgress((int)((double)x / tX * 100), String.Format(strings.AveragingMasterBitmap));
+
+                        using (Graphics g = Graphics.FromImage(image))
+                        {
+                            g.FillRectangle(new SolidBrush(avgsMaster[x, y]), r);
+                        }
                     }
                 }
-            }
             }
 
             /// Output Load Phase                
@@ -164,79 +164,77 @@ namespace Mosaic
 
         internal void CalculateMosaic(object sender, DoWorkEventArgs e)
         {
-            /// Notification
-            //lblUpdate.Text = String.Format("Loading and Resizing Tile Images...");
+            object[] arguments = e.Argument as object[];
+            var image = arguments[0] as Image;
+            List<string> tilesNames = arguments[1] as List<string>;
+            var height = (int)arguments[2];
+            var width = (int)arguments[3];
+            var worker = sender as BackgroundWorker;
+
+            worker.ReportProgress(0, String.Format(strings.LoadingAndResizingTiles));
+            double maximum = tilesNames.Count;
 
             /// Tile Load And Resize Phase
-            List<Tile> bTiles = new List<Tile>();
-            string[] fTiles = Directory.GetFiles(@"\tiles");
             String errorFiles = String.Empty;
             Bitmap bTile;
-            var arguments = e.Argument as object[];
-            var worker = sender as BackgroundWorker;
-            var image = arguments[0] as Image;
-            var szTile = image.Size;
-            int tX = image.Width / szTile.Width;
-            int tY = image.Height / szTile.Height;
+            var sizeTile = new Size(width, height);
+            int tX = image.Width / sizeTile.Width;
+            int tY = image.Height / sizeTile.Height;
             Color[,] avgsMaster = new Color[tX, tY];
+            Dictionary<string, Color> tilesColors = new Dictionary<string, Color>();
             LockBitmap bOut = null;
             /// Notification
             //pgbUpdate.Maximum = fTiles.Count();
             //pgbUpdate.Value = 0;
 
-            for (int i = 0; i < fTiles.Count(); i++)
+            if (Directory.Exists("tiles\\"))
+            {
+                Directory.Delete("tiles\\",true);
+            }
+            Directory.CreateDirectory("tiles\\");
+
+            int index = 0;
+            foreach (string tilePath in tilesNames)
             {
                 try
                 {
-                    bTile = (Bitmap)Bitmap.FromFile(fTiles[i]);
-                    bTile = ResizeBitmap(bTile, szTile);
-                    bTile.Save("\\tile" + i.ToString() + ".bmp");
-                    bTile.Dispose();
-                    //pgbUpdate.Value++;
+                    index++;
+                    var tilename = "tiles\\" + index.ToString() + ".bmp";
+                    using (Stream stream = new FileStream(tilePath, FileMode.Open))
+                    {
+                        using (bTile = (Bitmap)Bitmap.FromStream(stream))
+                        {
+                            bTile = ResizeBitmap(bTile, sizeTile);
+                            bTile.Save(tilename);
+                            tilesColors.Add(tilename, GetTileAverage(bTile, 0, 0, sizeTile.Width, sizeTile.Height));
+                            worker.ReportProgress((int)((index / maximum) * 100), String.Format(strings.LoadingAndResizingTiles));
+                        }
+                    }
                 }
                 catch (ArgumentException ex)
                 {
-                    errorFiles += String.Format("{0}: {1}\r\n", fTiles[i], ex.Message);
+                    errorFiles += String.Format("{0}: {1}\r\n", tilePath, ex.Message);
                 }
                 catch (OutOfMemoryException)
                 {
                     GC.WaitForPendingFinalizers();
-                    i--;
+                    //index--;
                 }
             }
+
 
             if (errorFiles.Length > 0)
             {
                 throw new Exception(errorFiles);
             }
 
-            /// Notification
-            //lblUpdate.Text = String.Format("Reloading Tiles...");
-            //pgbUpdate.Maximum = fTiles.Count();
-            //pgbUpdate.Value = 0;
-
-            /// Tile Reload Phase
-            for (int i = 0; i < fTiles.Count(); i++)
-            {
-                bTile = new Bitmap("\\tile" + i.ToString() + ".bmp");
-                bTiles.Add(new Tile(bTile, Color.Black));
-                //pgbUpdate.Value++;
-            }
-
-            /// Notification
+            // Notification
             //lblUpdate.Text = String.Format("Averaging Tiles...");
             //pgbUpdate.Maximum = bTiles.Count();
             //pgbUpdate.Value = 0;
 
-            /// Average Tile Images Phase
-            foreach (Tile t in bTiles)
-            {
-                t.setColor(GetTileAverage(t.getBitmap(), 0, 0, t.getBitmap().Width, t.getBitmap().Height));
-                //pgbUpdate.Value++;
-            }
-
-            /// Iterative Replacement Phase / Search Phase
-            if (bTiles.Count > 0)
+            // Iterative Replacement Phase / Search Phase
+            if (tilesColors.Count > 0)
             {
                 /// Notification
                 //lblUpdate.Text = String.Format("Applying Search Pattern...");
@@ -254,24 +252,24 @@ namespace Mosaic
                     // to suit the average
                     List<Tile> tileQueue = new List<Tile>();
                     Tile tFound = null;
-                    int maxQueueLength = Math.Min(1000, Math.Max(0, bTiles.Count - 50));
+                    int maxQueueLength = Math.Min(1000, Math.Max(0, tilesColors.Count - 50));
 
                     for (int x = 0; x < tX; x++)
                     {
                         for (int y = 0; y < tY; y++)
                         {
-                            int index = 0;
+                            int i = 0;
                             // Check if it's the same as the last (X)?
                             if (tileQueue.Count > 1)
                             {
-                                while (tileQueue.Contains(bTiles[index]))
-                                {
-                                    index = r.Next(bTiles.Count);
-                                }
+                                //while (tileQueue.Contains(tilesColors[i]))
+                                //{
+                                //    i = r.Next(tilesColors.Count);
+                                //}
                             }
 
                             // Add to the 'queue'
-                            tFound = bTiles[index];
+                            tFound = null;//tilesColors[i];
                             if ((tileQueue.Count >= maxQueueLength) && (tileQueue.Count > 0))
                             {
                                 tileQueue.RemoveAt(0);
@@ -282,9 +280,9 @@ namespace Mosaic
                             //Bitmap bAdjusted = AdjustHue(tFound.getBitmap(), avgsMaster[x, y]);
 
                             // Apply found tile to section
-                            for (int w = 0; w < szTile.Width; w++)
+                            for (int w = 0; w < sizeTile.Width; w++)
                             {
-                                for (int h = 0; h < szTile.Height; h++)
+                                for (int h = 0; h < sizeTile.Height; h++)
                                 {
                                     // bOut.SetPixel(x * szTile.Width + w, y * szTile.Height + h, bAdjusted.GetPixel(w, h));
                                 }
@@ -303,21 +301,21 @@ namespace Mosaic
                         {
                             // Reset searching threshold
                             int threshold = 0;
-                            int index = 0;
+                            int i = 0;
                             int searchCounter = 0;
                             Tile tFound = null;
                             while (tFound == null)
                             {
-                                index = r.Next(bTiles.Count);
-                                if (GetDifference(avgsMaster[x, y], bTiles[index].getColor()) < threshold)
+                                i = r.Next(tilesColors.Count);
+                                if (GetDifference(avgsMaster[x, y], tilesColors["tiles\\" + i.ToString() + ".bmp"]) < threshold)
                                 {
-                                    tFound = bTiles[index];
+                                    tFound = null; //tilesColors[i];
                                     Application.DoEvents();
                                 }
                                 else
                                 {
                                     searchCounter++;
-                                    if (searchCounter >= bTiles.Count)
+                                    if (searchCounter >= tilesColors.Count)
                                     {
                                         threshold += 5;
                                     }
@@ -325,11 +323,11 @@ namespace Mosaic
                                 }
                             }
                             // Apply found tile to section
-                            for (int w = 0; w < szTile.Width; w++)
+                            for (int w = 0; w < sizeTile.Width; w++)
                             {
-                                for (int h = 0; h < szTile.Height; h++)
+                                for (int h = 0; h < sizeTile.Height; h++)
                                 {
-                                    bOut.SetPixel(x * szTile.Width + w, y * szTile.Height + h, tFound.getBitmap().GetPixel(w, h));
+                                    bOut.SetPixel(x * sizeTile.Width + w, y * sizeTile.Height + h, tFound.getBitmap().GetPixel(w, h));
                                     Application.DoEvents();
                                 }
                             }
@@ -341,10 +339,6 @@ namespace Mosaic
             }
 
             // Close Files Phase
-            foreach (Tile t in bTiles)
-            {
-                t.Close();
-            }
 
             /// Notification
             //lblUpdate.Text = String.Format("Job Completed");

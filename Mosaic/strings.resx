@@ -141,6 +141,9 @@
   <data name="Height" xml:space="preserve">
     <value>Height</value>
   </data>
+  <data name="LoadingAndResizingTiles" xml:space="preserve">
+    <value>Loading and Resizing Tile Images...</value>
+  </data>
   <data name="LoadingMasterFile" xml:space="preserve">
     <value>Loading maser file...</value>
   </data>

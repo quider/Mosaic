@@ -56,15 +56,9 @@ namespace Mosaic
             //Set all to 0;
             pgbOperation.Value = 0;
             lblOperation.Text = strings.ColorsCalculated;
-            var image = e.Result as Image;
-            this.pictureBox.Image = image;
+            this.AverageImage = e.Result as Image;
+            this.pictureBox.Image = this.AverageImage;
             this.pictureBox.Refresh();
-            var calculateMosaicBackgroundWorker = new BackgroundWorker();
-            calculateMosaicBackgroundWorker.ProgressChanged += CalculateColorsProgressChanged;
-            calculateMosaicBackgroundWorker.RunWorkerCompleted += calculateMosaicBackgroundWorker_RunWorkerCompleted;
-            calculateMosaicBackgroundWorker.DoWork += this.mosaicClass.CalculateMosaic;
-            // calculateMosaicBackgroundWorker.RunWorkerAsync(new object[] { e.Result });
-
         }
 
         void calculateMosaicBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -135,8 +129,22 @@ namespace Mosaic
         {
             try
             {
+                List<string> items = new List<string>();
+                foreach(string item in this.lbxTiles.Items){
+                    items.Add(item);
+                }
                 Cursor = Cursors.WaitCursor;
                 Size szTile = new Size(Convert.ToInt16(nudWidth.Value), Convert.ToInt16(nudHeight.Value));
+                var calculateMosaicBackgroundWorker = new BackgroundWorker();
+                calculateMosaicBackgroundWorker.ProgressChanged += CalculateColorsProgressChanged;
+                calculateMosaicBackgroundWorker.RunWorkerCompleted += calculateMosaicBackgroundWorker_RunWorkerCompleted;
+                calculateMosaicBackgroundWorker.DoWork += this.mosaicClass.CalculateMosaic;
+
+                calculateMosaicBackgroundWorker.WorkerReportsProgress = true;
+
+                calculateMosaicBackgroundWorker.RunWorkerAsync(new object[] { this.AverageImage, items, (int)this.nudHeight.Value, (int)this.nudWidth.Value });
+
+
                 //LockBitmap test = MosaicClass.GenerateMosaic(tbxBrowse.Text, lbxTiles.Items.Cast<String>().ToArray(), szTile, lblOperation, pgbOperation, cbxAdjustTiles.Checked, tbxCache.Text, this.pictureBox);
                 //test.Save("test.bmp");
                 //pictureBox.Image = test.source;
@@ -170,6 +178,12 @@ namespace Mosaic
         {
             var about = new AboutBox();
             about.ShowDialog();
+        }
+
+        public Image AverageImage
+        {
+            get;
+            set;
         }
     }
 }
