@@ -6,11 +6,21 @@ using System.IO;
 using System.Drawing;
 using System.Windows.Forms;
 using System.ComponentModel;
+using log4net;
 
 namespace Mosaic
 {
     public class MosaicClass
     {
+        private static ILog log = LogManager.GetLogger(typeof(MosaicClass));
+        private Color[,] avgsMaster;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
         public static int GetDifference(Color source, Color target)
         {
             int dR = Math.Abs(source.R - target.R);
@@ -21,6 +31,15 @@ namespace Mosaic
             return diff;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bSource"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <returns></returns>
         public static Color GetTileAverage(Bitmap bSource, int x, int y, int width, int height)
         {
             long aR = 0;
@@ -42,6 +61,12 @@ namespace Mosaic
             return Color.FromArgb(255, Convert.ToInt32(aR), Convert.ToInt32(aG), Convert.ToInt32(aB));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bSource"></param>
+        /// <param name="targetColor"></param>
+        /// <returns></returns>
         public static Bitmap AdjustHue(Bitmap bSource, Color targetColor)
         {
             Bitmap result = new Bitmap(bSource.Width, bSource.Height);
@@ -63,13 +88,18 @@ namespace Mosaic
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bSource"></param>
+        /// <param name="newSize"></param>
+        /// <returns></returns>
         private static Bitmap ResizeBitmap(Bitmap bSource, Size newSize)
         {
             Bitmap result = new Bitmap(newSize.Width, newSize.Height);
             using (Graphics g = Graphics.FromImage(result))
             {
                 g.DrawImage(bSource, 0, 0, newSize.Width, newSize.Height);
-                g.Dispose();
             }
             return result;
         }
@@ -115,7 +145,7 @@ namespace Mosaic
             /// Average Master Image Phase
             int tX = bMaster.Width / szTile.Width;
             int tY = bMaster.Height / szTile.Height;
-            Color[,] avgsMaster = new Color[tX, tY];
+            this.avgsMaster = new Color[tX, tY];
 
             /// Notification
             var maximum = tX * tY;
@@ -169,6 +199,7 @@ namespace Mosaic
             List<string> tilesNames = arguments[1] as List<string>;
             var height = (int)arguments[2];
             var width = (int)arguments[3];
+            
             var worker = sender as BackgroundWorker;
 
             worker.ReportProgress(0, String.Format(strings.LoadingAndResizingTiles));
@@ -180,7 +211,7 @@ namespace Mosaic
             var sizeTile = new Size(width, height);
             int tX = image.Width / sizeTile.Width;
             int tY = image.Height / sizeTile.Height;
-            Color[,] avgsMaster = new Color[tX, tY];
+            
             Dictionary<string, Color> tilesColors = new Dictionary<string, Color>();
             LockBitmap bOut = null;
             /// Notification
@@ -213,12 +244,14 @@ namespace Mosaic
                 }
                 catch (ArgumentException ex)
                 {
+                    log.ErrorFormat("{0}: {1}", tilePath, ex.Message);
                     errorFiles += String.Format("{0}: {1}\r\n", tilePath, ex.Message);
                 }
-                catch (OutOfMemoryException)
+                catch (OutOfMemoryException ex)
                 {
+                    log.ErrorFormat("Problem with image {0}", tilePath);
+                    log.Error(ex.Message, ex);
                     GC.WaitForPendingFinalizers();
-                    //index--;
                 }
             }
 
@@ -303,13 +336,14 @@ namespace Mosaic
                             int threshold = 0;
                             int i = 0;
                             int searchCounter = 0;
-                            Tile tFound = null;
+                            Bitmap tFound = null;
                             while (tFound == null)
                             {
                                 i = r.Next(tilesColors.Count);
-                                if (GetDifference(avgsMaster[x, y], tilesColors["tiles\\" + i.ToString() + ".bmp"]) < threshold)
+                                string name = "tiles\\" + i.ToString() + ".bmp";
+                                if (GetDifference(this.avgsMaster[x, y], tilesColors["tiles\\" + i.ToString() + ".bmp"]) < threshold)
                                 {
-                                    tFound = null; //tilesColors[i];
+                                    //TODO: tFound = tilesColors[name];
                                     Application.DoEvents();
                                 }
                                 else
@@ -327,7 +361,7 @@ namespace Mosaic
                             {
                                 for (int h = 0; h < sizeTile.Height; h++)
                                 {
-                                    bOut.SetPixel(x * sizeTile.Width + w, y * sizeTile.Height + h, tFound.getBitmap().GetPixel(w, h));
+                                    bOut.SetPixel(x * sizeTile.Width + w, y * sizeTile.Height + h, tFound.GetPixel(w, h));
                                     Application.DoEvents();
                                 }
                             }

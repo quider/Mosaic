@@ -120,6 +120,9 @@
   <data name="Add" xml:space="preserve">
     <value>Dodaj</value>
   </data>
+  <data name="AddAtLeast15Tiles" xml:space="preserve">
+    <value>Musisz dodać co najmniej 15 obrazków.</value>
+  </data>
   <data name="AddTilesFirst" xml:space="preserve">
     <value>Najpierw dodaj zdjęcia miniaturek</value>
   </data>
@@ -134,6 +137,9 @@
   </data>
   <data name="ColorsCalculated" xml:space="preserve">
     <value>Kolory obliczone.</value>
+  </data>
+  <data name="DirectoryDoesNotExist" xml:space="preserve">
+    <value>Katalog nie istnieje!</value>
   </data>
   <data name="Go" xml:space="preserve">
     <value>Oblicz</value>

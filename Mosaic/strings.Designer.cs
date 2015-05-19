@@ -70,6 +70,15 @@ namespace Mosaic {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to At least you have to add 15 tiles..
+        /// </summary>
+        internal static string AddAtLeast15Tiles {
+            get {
+                return ResourceManager.GetString("AddAtLeast15Tiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You have to add some tiles first..
         /// </summary>
         internal static string AddTilesFirst {
@@ -111,6 +120,15 @@ namespace Mosaic {
         internal static string ColorsCalculated {
             get {
                 return ResourceManager.GetString("ColorsCalculated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Directory does not exist..
+        /// </summary>
+        internal static string DirectoryDoesNotExist {
+            get {
+                return ResourceManager.GetString("DirectoryDoesNotExist", resourceCulture);
             }
         }
         

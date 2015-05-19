@@ -1,10 +1,12 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 
@@ -13,42 +15,66 @@ namespace Mosaic
     public partial class MainForm : Form
     {
         private MosaicClass mosaicClass;
+        private static ILog log = LogManager.GetLogger(typeof(MainForm));
 
         public MainForm()
         {
+            log.Debug("initializing components");
             InitializeComponent();
+            log.InfoFormat("Setting up {0}",strings.MasterImage);
             this.gbxMaster.Text = strings.MasterImage;
+            log.InfoFormat("Setting up {0}",strings.Browse);
             this.btnBrowse.Text = strings.Browse;
+            log.InfoFormat("Setting up {0}",strings.Add);
             this.btnAdd.Text = strings.Add;
+            log.InfoFormat("Setting up {0}",strings.Remove);
             this.btnRemove.Text = strings.Remove;
+            log.InfoFormat("Setting up {0}",strings.Go);
             this.btnGo.Text = strings.Go;
+            log.InfoFormat("Setting up {0}",strings.AddTilesFirst);
             this.lblAddFirst.Text = strings.AddTilesFirst;
+            log.InfoFormat("Setting up {0}",strings.AdjustHue);
             this.cbxAdjustTiles.Text = strings.AdjustHue;
+            log.InfoFormat("Setting up {0}",strings.Height);
             this.lblHeight.Text = strings.Height;
+            log.InfoFormat("Setting up {0}",strings.Width);
             this.lblWidth.Text = strings.Width;
+            log.InfoFormat("Setting up {0}",strings.Tiles);
             this.gbxTiles.Text = strings.Tiles;
+            log.InfoFormat("Setting up {0}",strings.Mosaic);
             this.gbxMosaic.Text = strings.Mosaic;
+
             
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
-            OpenFileDialog oD = new OpenFileDialog();
-            oD.Multiselect = false;
-            this.mosaicClass = new MosaicClass();
-            var backgroundCalculateColorsOnPicture = new BackgroundWorker();
-            backgroundCalculateColorsOnPicture.WorkerReportsProgress = true;
-            backgroundCalculateColorsOnPicture.DoWork += this.mosaicClass.CalculateColorsWork;
-            backgroundCalculateColorsOnPicture.ProgressChanged += this.CalculateColorsProgressChanged;
-            backgroundCalculateColorsOnPicture.RunWorkerCompleted += this.CalculateColorsCompleted;
-
-            if (oD.ShowDialog() == DialogResult.OK)
+            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
             {
-                tbxBrowse.Text = oD.FileName;
-                this.pictureBox.Image = Image.FromFile(oD.FileName);
-            }
+                try
+                {
+                    OpenFileDialog oD = new OpenFileDialog();
+                    oD.Multiselect = false;
+                    this.mosaicClass = new MosaicClass();
+                    var backgroundCalculateColorsOnPicture = new BackgroundWorker();
+                    backgroundCalculateColorsOnPicture.WorkerReportsProgress = true;
+                    backgroundCalculateColorsOnPicture.DoWork += this.mosaicClass.CalculateColorsWork;
+                    backgroundCalculateColorsOnPicture.ProgressChanged += this.CalculateColorsProgressChanged;
+                    backgroundCalculateColorsOnPicture.RunWorkerCompleted += this.CalculateColorsCompleted;
 
-            backgroundCalculateColorsOnPicture.RunWorkerAsync(new object[] { Image.FromFile(oD.FileName), this.nudHeight.Value, nudWidth.Value });
+                    if (oD.ShowDialog() == DialogResult.OK)
+                    {
+                        tbxBrowse.Text = oD.FileName;
+                        this.pictureBox.Image = Image.FromFile(oD.FileName);
+                    }
+
+                    backgroundCalculateColorsOnPicture.RunWorkerAsync(new object[] { Image.FromFile(oD.FileName), this.nudHeight.Value, nudWidth.Value });
+                }
+                catch (Exception ex)
+                {
+                    log.Fatal(ex.Message, ex);
+                }
+            }
         }
 
         private void CalculateColorsCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -88,14 +114,16 @@ namespace Mosaic
                         {
                             lbxTiles.Items.Add(fN.FullName);
                         }
-                        Application.DoEvents();
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Directory doesn't exist");
+                    log.InfoFormat(strings.DirectoryDoesNotExist);
+                    MessageBox.Show(strings.DirectoryDoesNotExist);
                 }
             }
+
+            log.DebugFormat("Count tiles {0}", this.lbxTiles.Items.Count);
             if (this.lbxTiles.Items.Count > 15)
             {
                 btnGo.Enabled = true;
@@ -105,11 +133,9 @@ namespace Mosaic
             {
                 btnGo.Enabled = false;
                 lblAddFirst.Visible = true;
-                lblAddFirst.Text = "You have to add at least 15 tiles";
+                lblAddFirst.Text = strings.AddAtLeast15Tiles;
             }
         }
-
-
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
@@ -142,7 +168,7 @@ namespace Mosaic
 
                 calculateMosaicBackgroundWorker.WorkerReportsProgress = true;
 
-                calculateMosaicBackgroundWorker.RunWorkerAsync(new object[] { this.AverageImage, items, (int)this.nudHeight.Value, (int)this.nudWidth.Value });
+                calculateMosaicBackgroundWorker.RunWorkerAsync(new object[] { this.AverageImage, items, (int)this.nudHeight.Value, (int)this.nudWidth.Value});
 
 
                 //LockBitmap test = MosaicClass.GenerateMosaic(tbxBrowse.Text, lbxTiles.Items.Cast<String>().ToArray(), szTile, lblOperation, pgbOperation, cbxAdjustTiles.Checked, tbxCache.Text, this.pictureBox);
@@ -151,20 +177,12 @@ namespace Mosaic
             }
             catch (Exception x)
             {
+                log.Fatal(x.Message, x);
                 MessageBox.Show(this, x.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
                 Cursor = Cursors.Default;
-            }
-        }
-
-        private void btnCache_Click(object sender, EventArgs e)
-        {
-            FolderBrowserDialog oD = new FolderBrowserDialog();
-            if (oD.ShowDialog() == DialogResult.OK)
-            {
-                //tbxCache.Text = oD.SelectedPath;
             }
         }
 

@@ -30,6 +30,8 @@ namespace Mosaic
 
             log.InfoFormat("Culture info:{0}", CultureInfo.CurrentCulture);
 
+
+
             
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
