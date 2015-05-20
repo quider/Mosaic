@@ -168,24 +168,7 @@ namespace Mosaic
                 }
             }
 
-            /// Output Load Phase                
-            bLoaded = false;
-            while (!bLoaded)
-            {
-                try
-                {
-                    bOut = new LockBitmap(bMaster);
-                    bLoaded = true;
-                }
-                catch (OutOfMemoryException)
-                {
-                    GC.WaitForPendingFinalizers();
-                }
-            }
-
-            /// Close Master Image Phase
-            bMaster.Dispose();
-            bMaster = null;
+            
 
             /// Notification
             //lblUpdate.Text = String.Format("Loading and Resizing Tile Images...");
@@ -199,12 +182,9 @@ namespace Mosaic
             List<string> tilesNames = arguments[1] as List<string>;
             var height = (int)arguments[2];
             var width = (int)arguments[3];
-            
             var worker = sender as BackgroundWorker;
-
-            worker.ReportProgress(0, String.Format(strings.LoadingAndResizingTiles));
             double maximum = tilesNames.Count;
-
+            Boolean bLoaded = false;
             /// Tile Load And Resize Phase
             String errorFiles = String.Empty;
             Bitmap bTile;
@@ -212,11 +192,27 @@ namespace Mosaic
             int tX = image.Width / sizeTile.Width;
             int tY = image.Height / sizeTile.Height;
             
+            
+            worker.ReportProgress(0, String.Format(strings.LoadingAndResizingTiles));
+
             Dictionary<string, Color> tilesColors = new Dictionary<string, Color>();
             LockBitmap bOut = null;
-            /// Notification
-            //pgbUpdate.Maximum = fTiles.Count();
-            //pgbUpdate.Value = 0;
+
+            // Output Load Phase                
+            bLoaded = false;
+            while (!bLoaded)
+            {
+                try
+                {
+                    bOut = new LockBitmap(new Bitmap((Image)image.Clone()));
+                    bLoaded = true;
+                }
+                catch (OutOfMemoryException)
+                {
+                    GC.WaitForPendingFinalizers();
+                }
+            }
+
 
             if (Directory.Exists("tiles\\"))
             {
@@ -231,13 +227,16 @@ namespace Mosaic
                 {
                     index++;
                     var tilename = "tiles\\" + index.ToString() + ".bmp";
+                    log.DebugFormat("Creating tile {0}",tilename);
                     using (Stream stream = new FileStream(tilePath, FileMode.Open))
                     {
                         using (bTile = (Bitmap)Bitmap.FromStream(stream))
                         {
                             bTile = ResizeBitmap(bTile, sizeTile);
                             bTile.Save(tilename);
+                            log.DebugFormat("Tile saved");
                             tilesColors.Add(tilename, GetTileAverage(bTile, 0, 0, sizeTile.Width, sizeTile.Height));
+                            log.DebugFormat("Color added to collection {0}", tilesColors[tilename]);
                             worker.ReportProgress((int)((index / maximum) * 100), String.Format(strings.LoadingAndResizingTiles));
                         }
                     }
@@ -255,25 +254,12 @@ namespace Mosaic
                 }
             }
 
-
-            if (errorFiles.Length > 0)
-            {
-                throw new Exception(errorFiles);
-            }
-
-            // Notification
-            //lblUpdate.Text = String.Format("Averaging Tiles...");
-            //pgbUpdate.Maximum = bTiles.Count();
-            //pgbUpdate.Value = 0;
-
-            // Iterative Replacement Phase / Search Phase
             if (tilesColors.Count > 0)
             {
                 /// Notification
                 //lblUpdate.Text = String.Format("Applying Search Pattern...");
                 //pgbUpdate.Maximum = tX * tY;
                 //pgbUpdate.Value = 0;
-
 
                 Random r = new Random();
 
@@ -327,33 +313,34 @@ namespace Mosaic
                 }
                 else
                 {
+                    var buffer = 25;
+                    MessageBox.Show(buffer.ToString());
                     // Don't adjust hue - keep searching for a tile close enough
                     for (int x = 0; x < tX; x++)
                     {
                         for (int y = 0; y < tY; y++)
                         {
                             // Reset searching threshold
-                            int threshold = 0;
+                            var searchCounter = 0;
+                            Bitmap found = null;
                             int i = 0;
-                            int searchCounter = 0;
-                            Bitmap tFound = null;
-                            while (tFound == null)
+                            while (tilesColors.Count >= searchCounter)
                             {
-                                i = r.Next(tilesColors.Count);
+                                i++;
                                 string name = "tiles\\" + i.ToString() + ".bmp";
-                                if (GetDifference(this.avgsMaster[x, y], tilesColors["tiles\\" + i.ToString() + ".bmp"]) < threshold)
+                                //MessageBox.Show(name);
+                                if (GetDifference(this.avgsMaster[x, y], tilesColors[name]) < buffer)
                                 {
-                                    //TODO: tFound = tilesColors[name];
-                                    Application.DoEvents();
+                                    found = new Bitmap(name);
+                                    break;
                                 }
                                 else
                                 {
-                                    searchCounter++;
-                                    if (searchCounter >= tilesColors.Count)
-                                    {
-                                        threshold += 5;
-                                    }
-                                    Application.DoEvents();
+                                    //searchCounter++;
+                                    //if (searchCounter >= tilesColors.Count)
+                                    //{
+                                    //    threshold += 5;
+                                    //}
                                 }
                             }
                             // Apply found tile to section
@@ -361,8 +348,7 @@ namespace Mosaic
                             {
                                 for (int h = 0; h < sizeTile.Height; h++)
                                 {
-                                    bOut.SetPixel(x * sizeTile.Width + w, y * sizeTile.Height + h, tFound.GetPixel(w, h));
-                                    Application.DoEvents();
+                                    bOut.SetPixel(x * sizeTile.Width + w, y * sizeTile.Height + h, found.GetPixel(w, h));
                                 }
                             }
                             // Increment the progress bar
