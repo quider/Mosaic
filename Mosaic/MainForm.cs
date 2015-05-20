@@ -44,7 +44,18 @@ namespace Mosaic
             log.InfoFormat("Setting up {0}",strings.Mosaic);
             this.gbxMosaic.Text = strings.Mosaic;
 
-            
+            this.fileToolStripMenuItem.Text = strings.FileMenu;
+            this.newToolStripMenuItem.Text = strings.New;
+            this.saveAsToolStripMenuItem.Text = strings.SaveAs;
+            this.saveToolStripMenuItem.Text = strings.Save;
+            this.printPreviewToolStripMenuItem.Text = strings.PrintPreview;
+            this.printToolStripMenuItem.Text = strings.Print;
+            this.helpToolStripMenuItem.Text = strings.HelpMenu;
+            this.toolsToolStripMenuItem.Text = strings.ToolsMenu;
+            this.contentsToolStripMenuItem.Text = strings.Contents;
+            this.aboutToolStripMenuItem.Text = strings.Aboutbox;
+            this.optionsToolStripMenuItem.Text = strings.Options;
+            this.customizeToolStripMenuItem.Text = strings.Customize;
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
