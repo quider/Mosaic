@@ -149,7 +149,7 @@ namespace Mosaic
 
             /// Notification
             var maximum = tX * tY;
-            var progres = 4;
+
             lock (image)
             {
                 for (int x = 0; x < tX; x++)
