@@ -100,7 +100,7 @@ namespace Mosaic
 
         void calculateMosaicBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            throw new NotImplementedException();
+            
         }
 
         private void CalculateColorsProgressChanged(object sender, ProgressChangedEventArgs e)

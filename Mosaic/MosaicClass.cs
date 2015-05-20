@@ -225,7 +225,6 @@ namespace Mosaic
             {
                 try
                 {
-                    index++;
                     var tilename = "tiles\\" + index.ToString() + ".bmp";
                     log.DebugFormat("Creating tile {0}",tilename);
                     using (Stream stream = new FileStream(tilePath, FileMode.Open))
@@ -239,6 +238,7 @@ namespace Mosaic
                             log.DebugFormat("Color added to collection {0}", tilesColors[tilename]);
                             worker.ReportProgress((int)((index / maximum) * 100), String.Format(strings.LoadingAndResizingTiles));
                         }
+                        index++;
                     }
                 }
                 catch (ArgumentException ex)
@@ -256,19 +256,10 @@ namespace Mosaic
 
             if (tilesColors.Count > 0)
             {
-                /// Notification
-                //lblUpdate.Text = String.Format("Applying Search Pattern...");
-                //pgbUpdate.Maximum = tX * tY;
-                //pgbUpdate.Value = 0;
-
-                Random r = new Random();
-
                 //TODO: get as parameter
                 //if (bAdjustHue)
                 if (false)
                 {
-                    // Adjust hue - get the first (random) tile found and adjust its colours
-                    // to suit the average
                     List<Tile> tileQueue = new List<Tile>();
                     Tile tFound = null;
                     int maxQueueLength = Math.Min(1000, Math.Max(0, tilesColors.Count - 50));
@@ -295,9 +286,6 @@ namespace Mosaic
                             }
                             tileQueue.Add(tFound);
 
-                            // Adjust the hue
-                            //Bitmap bAdjusted = AdjustHue(tFound.getBitmap(), avgsMaster[x, y]);
-
                             // Apply found tile to section
                             for (int w = 0; w < sizeTile.Width; w++)
                             {
@@ -306,8 +294,6 @@ namespace Mosaic
                                     // bOut.SetPixel(x * szTile.Width + w, y * szTile.Height + h, bAdjusted.GetPixel(w, h));
                                 }
                             }
-                            // Increment the progress bar
-                            // pgbUpdate.Value++;
                         }
                     }
                 }
@@ -326,7 +312,6 @@ namespace Mosaic
                             int i = 0;
                             while (tilesColors.Count >= searchCounter)
                             {
-                                i++;
                                 string name = "tiles\\" + i.ToString() + ".bmp";
                                 //MessageBox.Show(name);
                                 if (GetDifference(this.avgsMaster[x, y], tilesColors[name]) < buffer)
@@ -342,8 +327,10 @@ namespace Mosaic
                                     //    threshold += 5;
                                     //}
                                 }
+                                i++;
                             }
                             // Apply found tile to section
+                            // Here we putting small image into big one.
                             for (int w = 0; w < sizeTile.Width; w++)
                             {
                                 for (int h = 0; h < sizeTile.Height; h++)

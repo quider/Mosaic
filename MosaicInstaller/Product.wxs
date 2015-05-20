@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="MosaicInstaller" Language="1033" Version="1.0.0.0" Manufacturer="" UpgradeCode="624a7393-71ed-45f4-a128-5e9f4cd4ec70">
+	<Product Id="*" Name="MosaicInstaller" Language="1033" Version="1.0.0.0" Manufacturer="Quider Software" UpgradeCode="624a7393-71ed-45f4-a128-5e9f4cd4ec70">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
