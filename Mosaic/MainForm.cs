@@ -103,6 +103,8 @@ namespace Mosaic
             var image = e.Result as Image;
             this.pictureBox.Image = image;
             this.pictureBox.Refresh();
+            this.pgbOperation.Value = 0;
+            this.lblOperation.Text = strings.Finished;
         }
 
         private void CalculateColorsProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -215,6 +217,19 @@ namespace Mosaic
         {
             get;
             set;
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.FileOk += sfd_FileOk;
+            sfd.ShowDialog();
+        }
+
+        void sfd_FileOk(object sender, CancelEventArgs e)
+        {
+            var sfd = sender as SaveFileDialog;
+            this.pictureBox.Image.Save(sfd.FileName);
         }
     }
 }

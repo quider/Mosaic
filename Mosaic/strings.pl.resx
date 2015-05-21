@@ -138,6 +138,9 @@
   <data name="Browse" xml:space="preserve">
     <value>Wyszukaj</value>
   </data>
+  <data name="CalculateMosaic" xml:space="preserve">
+    <value>Obliczam, zdjęcia do mozaiki. To może potrwać parę minut.</value>
+  </data>
   <data name="ColorsCalculated" xml:space="preserve">
     <value>Kolory obliczone.</value>
   </data>
@@ -155,6 +158,9 @@
   </data>
   <data name="FileMenu" xml:space="preserve">
     <value>Plik</value>
+  </data>
+  <data name="Finished" xml:space="preserve">
+    <value>Gotowe, możesz zapisać (Ctrl + S) obraz.</value>
   </data>
   <data name="Go" xml:space="preserve">
     <value>Oblicz</value>

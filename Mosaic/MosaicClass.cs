@@ -301,18 +301,22 @@ namespace Mosaic
                 {
                     log.Debug("Non hue algorythm");
                     var buffer = 25;
+                    worker.ReportProgress(0, strings.CalculateMosaic);
                     log.DebugFormat("Color buffer set to {0}", buffer);
                     // Don't adjust hue - keep searching for a tile close enough
                     log.DebugFormat("Image divided onto {0}x{1}", tX, tY);
+                    var searchCounter = 1;
                     for (int x = 0; x < tX; x++)
                     {
                         for (int y = 0; y < tY; y++)
                         {
-                            // Reset searching threshold
-                            var searchCounter = 0;
+
                             Bitmap found = null;
                             int i = 0;
-                            while (tilesColors.Count -1 >= i)
+                            maximum = tX * tY + 1;
+                            var percentage = (int)((searchCounter / maximum) * 100);
+                            worker.ReportProgress(percentage, strings.CalculateMosaic);
+                            while (tilesColors.Count - 1 >= i)
                             {
                                 log.DebugFormat("Searchcounter: {0}, index: {1}", searchCounter, i);
                                 string name = "tiles\\" + i.ToString() + ".bmp";
@@ -354,9 +358,7 @@ namespace Mosaic
                                 }
                                 i++;
                             }
-
-                            // Increment the progress bar
-                            //pgbUpdate.Value++;
+                            searchCounter++;
                         }
                     }
                 }
