@@ -100,7 +100,8 @@ namespace Mosaic
 
         void calculateMosaicBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            
+            var image = e.Result as Image;
+            this.pictureBox.Image = image;
         }
 
         private void CalculateColorsProgressChanged(object sender, ProgressChangedEventArgs e)
