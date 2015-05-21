@@ -168,7 +168,7 @@ namespace Mosaic
                 }
             }
 
-            
+
 
             /// Notification
             //lblUpdate.Text = String.Format("Loading and Resizing Tile Images...");
@@ -191,8 +191,8 @@ namespace Mosaic
             var sizeTile = new Size(width, height);
             int tX = image.Width / sizeTile.Width;
             int tY = image.Height / sizeTile.Height;
-            
-            
+
+
             worker.ReportProgress(0, String.Format(strings.LoadingAndResizingTiles));
 
             Dictionary<string, Color> tilesColors = new Dictionary<string, Color>();
@@ -216,7 +216,7 @@ namespace Mosaic
 
             if (Directory.Exists("tiles\\"))
             {
-                Directory.Delete("tiles\\",true);
+                Directory.Delete("tiles\\", true);
             }
             Directory.CreateDirectory("tiles\\");
 
@@ -226,7 +226,7 @@ namespace Mosaic
                 try
                 {
                     var tilename = "tiles\\" + index.ToString() + ".bmp";
-                    log.DebugFormat("Creating tile {0}",tilename);
+                    log.DebugFormat("Creating tile {0}", tilename);
                     using (Stream stream = new FileStream(tilePath, FileMode.Open))
                     {
                         using (bTile = (Bitmap)Bitmap.FromStream(stream))
@@ -299,8 +299,11 @@ namespace Mosaic
                 }
                 else
                 {
-                    var buffer = 25;                    
+                    log.Debug("Non hue algorythm");
+                    var buffer = 25;
+                    log.DebugFormat("Color buffer set to {0}", buffer);
                     // Don't adjust hue - keep searching for a tile close enough
+                    log.DebugFormat("Image divided onto {0}x{1}", tX, tY);
                     for (int x = 0; x < tX; x++)
                     {
                         for (int y = 0; y < tY; y++)
@@ -311,12 +314,26 @@ namespace Mosaic
                             int i = 0;
                             while (tilesColors.Count >= searchCounter)
                             {
+                                log.DebugFormat("Searchcounter: {0}, index: {1}", searchCounter, i);
                                 string name = "tiles\\" + i.ToString() + ".bmp";
-                                //MessageBox.Show(name);
+                                log.DebugFormat("Tile name {0}", name);
+
                                 if (GetDifference(this.avgsMaster[x, y], tilesColors[name]) < buffer)
                                 {
+                                    log.InfoFormat("Image fit to average color: {0}", this.avgsMaster[x, y]);
                                     found = new Bitmap(name);
-                                    break;
+                                    log.DebugFormat("Created bitmap from image {0}", name);
+                                    // Apply found tile to section
+                                    // Here we putting small image into big one.
+                                    
+                                    TextureBrush tBrush = new TextureBrush(found);
+                                    Pen blackPen = new Pen(Color.Black);
+                                    using (var g = Graphics.FromImage(image))
+                                    {
+                                        g.FillRectangle(tBrush, new Rectangle(x * width, y * height, width, height));
+                                        //g.DrawRectangle(blackPen, new Rectangle(0, 0, 200, 200));
+                                        break;
+                                    }
                                 }
                                 else
                                 {
@@ -328,28 +345,15 @@ namespace Mosaic
                                 }
                                 i++;
                             }
-                            // Apply found tile to section
-                            // Here we putting small image into big one.
-                            //Image peace = new Bitmap("HouseAndTree.gif");
-                            //TextureBrush tBrush = new TextureBrush(image);
-                            //Pen blackPen = new Pen(Color.Black);
-                            //e.Graphics.FillRectangle(tBrush, new Rectangle(0, 0, 200, 200));
-                            //e.Graphics.DrawRectangle(blackPen, new Rectangle(0, 0, 200, 200));
 
-                            for (int w = 0; w < sizeTile.Width; w++)
-                            {
-                                for (int h = 0; h < sizeTile.Height; h++)
-                                {
-                                    bOut.SetPixel(x * sizeTile.Width + w, y * sizeTile.Height + h, found.GetPixel(w, h));
-                                }
-                            }
                             // Increment the progress bar
                             //pgbUpdate.Value++;
                         }
                     }
                 }
             }
-
+            log.DebugFormat("Finishig calculate of mosaic");
+            e.Result = image;
             // Close Files Phase
 
             /// Notification
