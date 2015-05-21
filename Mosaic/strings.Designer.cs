@@ -322,7 +322,7 @@ namespace Mosaic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save.
+        ///   Looks up a localized string similar to Save picture.
         /// </summary>
         internal static string Save {
             get {
@@ -331,7 +331,7 @@ namespace Mosaic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save As.
+        ///   Looks up a localized string similar to Save project.
         /// </summary>
         internal static string SaveAs {
             get {

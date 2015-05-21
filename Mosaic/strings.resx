@@ -205,10 +205,10 @@
     <value>Remove</value>
   </data>
   <data name="Save" xml:space="preserve">
-    <value>Save</value>
+    <value>Save picture</value>
   </data>
   <data name="SaveAs" xml:space="preserve">
-    <value>Save As</value>
+    <value>Save project</value>
   </data>
   <data name="Tiles" xml:space="preserve">
     <value>Tiles</value>

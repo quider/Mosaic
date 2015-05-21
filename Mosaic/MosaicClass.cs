@@ -119,13 +119,9 @@ namespace Mosaic
             var szTile = new Size((int)width, (int)height);
             Boolean bLoaded = false;
             Bitmap bMaster = null;
-            LockBitmap bOut = null;
 
-            /// Notification
-            // lblUpdate.Text = 
             worker.ReportProgress(1, String.Format(strings.LoadingMasterFile));
 
-            /// File Load Phase  
             while (!bLoaded)
             {
                 try
@@ -138,16 +134,13 @@ namespace Mosaic
                     GC.WaitForPendingFinalizers();
                 }
             }
-
-            /// Notification
-            worker.ReportProgress(1, String.Format(strings.AveragingMasterBitmap));
-
-            /// Average Master Image Phase
+            
             int tX = bMaster.Width / szTile.Width;
             int tY = bMaster.Height / szTile.Height;
             this.avgsMaster = new Color[tX, tY];
 
-            /// Notification
+            worker.ReportProgress(1, String.Format(strings.AveragingMasterBitmap));
+
             var maximum = tX * tY;
 
             lock (image)
@@ -168,13 +161,14 @@ namespace Mosaic
                 }
             }
 
-
-
-            /// Notification
-            //lblUpdate.Text = String.Format("Loading and Resizing Tile Images...");
             e.Result = image;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         internal void CalculateMosaic(object sender, DoWorkEventArgs e)
         {
             object[] arguments = e.Argument as object[];
@@ -183,36 +177,15 @@ namespace Mosaic
             var height = (int)arguments[2];
             var width = (int)arguments[3];
             var worker = sender as BackgroundWorker;
-            double maximum = tilesNames.Count;
-            Boolean bLoaded = false;
-            /// Tile Load And Resize Phase
-            String errorFiles = String.Empty;
-            Bitmap bTile;
             var sizeTile = new Size(width, height);
             int tX = image.Width / sizeTile.Width;
             int tY = image.Height / sizeTile.Height;
+            string[,] usedTiles = new string[tX, tY];
 
 
             worker.ReportProgress(0, String.Format(strings.LoadingAndResizingTiles));
 
             Dictionary<string, Color> tilesColors = new Dictionary<string, Color>();
-            LockBitmap bOut = null;
-
-            // Output Load Phase                
-            bLoaded = false;
-            while (!bLoaded)
-            {
-                try
-                {
-                    bOut = new LockBitmap(new Bitmap((Image)image.Clone()));
-                    bLoaded = true;
-                }
-                catch (OutOfMemoryException)
-                {
-                    GC.WaitForPendingFinalizers();
-                }
-            }
-
 
             if (Directory.Exists("tiles\\"))
             {
@@ -220,6 +193,7 @@ namespace Mosaic
             }
             Directory.CreateDirectory("tiles\\");
 
+            double maximum = tilesNames.Count;
             int index = 0;
             foreach (string tilePath in tilesNames)
             {
@@ -229,12 +203,13 @@ namespace Mosaic
                     log.DebugFormat("Creating tile {0}", tilename);
                     using (Stream stream = new FileStream(tilePath, FileMode.Open))
                     {
-                        using (bTile = (Bitmap)Bitmap.FromStream(stream))
+                        Bitmap bitmapTile;
+                        using (bitmapTile = (Bitmap)Bitmap.FromStream(stream))
                         {
-                            bTile = ResizeBitmap(bTile, sizeTile);
-                            bTile.Save(tilename);
+                            bitmapTile = ResizeBitmap(bitmapTile, sizeTile);
+                            bitmapTile.Save(tilename);
                             log.DebugFormat("Tile saved");
-                            tilesColors.Add(tilename, GetTileAverage(bTile, 0, 0, sizeTile.Width, sizeTile.Height));
+                            tilesColors.Add(tilename, GetTileAverage(bitmapTile, 0, 0, sizeTile.Width, sizeTile.Height));
                             log.DebugFormat("Color added to collection {0}", tilesColors[tilename]);
                             worker.ReportProgress((int)((index / maximum) * 100), String.Format(strings.LoadingAndResizingTiles));
                         }
@@ -244,7 +219,6 @@ namespace Mosaic
                 catch (ArgumentException ex)
                 {
                     log.ErrorFormat("{0}: {1}", tilePath, ex.Message);
-                    errorFiles += String.Format("{0}: {1}\r\n", tilePath, ex.Message);
                 }
                 catch (OutOfMemoryException ex)
                 {
@@ -310,7 +284,6 @@ namespace Mosaic
                     {
                         for (int y = 0; y < tY; y++)
                         {
-
                             Bitmap found = null;
                             int i = 0;
                             maximum = tX * tY + 1;
@@ -323,32 +296,22 @@ namespace Mosaic
                                 log.DebugFormat("Tile name {0}", name);
                                 try
                                 {
-
                                     if (GetDifference(this.avgsMaster[x, y], tilesColors[name]) < buffer)
                                     {
                                         log.InfoFormat("Image fit to average color: {0}", this.avgsMaster[x, y]);
                                         found = new Bitmap(name);
                                         log.DebugFormat("Created bitmap from image {0}", name);
-                                        // Apply found tile to section
-                                        // Here we putting small image into big one.
-
                                         TextureBrush tBrush = new TextureBrush(found);
                                         Pen blackPen = new Pen(Color.Black);
                                         using (var g = Graphics.FromImage(image))
                                         {
                                             g.FillRectangle(tBrush, new Rectangle(x * width, y * height, width, height));
-                                            //g.DrawRectangle(blackPen, new Rectangle(0, 0, 200, 200));
                                             i++;
                                             break;
                                         }
                                     }
                                     else
                                     {
-                                        //searchCounter++;
-                                        //if (searchCounter >= tilesColors.Count)
-                                        //{
-                                        //    threshold += 5;
-                                        //}
                                     }
                                 }
                                 catch (Exception ex)
@@ -365,10 +328,6 @@ namespace Mosaic
             }
             log.DebugFormat("Finishig calculate of mosaic");
             e.Result = image;
-            // Close Files Phase
-
-            /// Notification
-            //lblUpdate.Text = String.Format("Job Completed");
         }
     }
 

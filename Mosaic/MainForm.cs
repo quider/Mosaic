@@ -19,6 +19,7 @@ namespace Mosaic
 
         public MainForm()
         {
+            this.MaximizeBox = false;
             log.Debug("initializing components");
             InitializeComponent();
             log.InfoFormat("Setting up {0}",strings.MasterImage);
@@ -80,6 +81,8 @@ namespace Mosaic
                     }
 
                     backgroundCalculateColorsOnPicture.RunWorkerAsync(new object[] { Image.FromFile(oD.FileName), this.nudHeight.Value, nudWidth.Value });
+                    
+                    gbxTiles.Enabled = true;
                 }
                 catch (Exception ex)
                 {
@@ -230,6 +233,17 @@ namespace Mosaic
         {
             var sfd = sender as SaveFileDialog;
             this.pictureBox.Image.Save(sfd.FileName);
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
+        }
+
+        private void contentsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new ContentForm();
+            form.ShowDialog();
         }
     }
 }
