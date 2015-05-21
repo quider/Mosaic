@@ -312,36 +312,45 @@ namespace Mosaic
                             var searchCounter = 0;
                             Bitmap found = null;
                             int i = 0;
-                            while (tilesColors.Count >= searchCounter)
+                            while (tilesColors.Count -1 >= i)
                             {
                                 log.DebugFormat("Searchcounter: {0}, index: {1}", searchCounter, i);
                                 string name = "tiles\\" + i.ToString() + ".bmp";
                                 log.DebugFormat("Tile name {0}", name);
-
-                                if (GetDifference(this.avgsMaster[x, y], tilesColors[name]) < buffer)
+                                try
                                 {
-                                    log.InfoFormat("Image fit to average color: {0}", this.avgsMaster[x, y]);
-                                    found = new Bitmap(name);
-                                    log.DebugFormat("Created bitmap from image {0}", name);
-                                    // Apply found tile to section
-                                    // Here we putting small image into big one.
-                                    
-                                    TextureBrush tBrush = new TextureBrush(found);
-                                    Pen blackPen = new Pen(Color.Black);
-                                    using (var g = Graphics.FromImage(image))
+
+                                    if (GetDifference(this.avgsMaster[x, y], tilesColors[name]) < buffer)
                                     {
-                                        g.FillRectangle(tBrush, new Rectangle(x * width, y * height, width, height));
-                                        //g.DrawRectangle(blackPen, new Rectangle(0, 0, 200, 200));
-                                        break;
+                                        log.InfoFormat("Image fit to average color: {0}", this.avgsMaster[x, y]);
+                                        found = new Bitmap(name);
+                                        log.DebugFormat("Created bitmap from image {0}", name);
+                                        // Apply found tile to section
+                                        // Here we putting small image into big one.
+
+                                        TextureBrush tBrush = new TextureBrush(found);
+                                        Pen blackPen = new Pen(Color.Black);
+                                        using (var g = Graphics.FromImage(image))
+                                        {
+                                            g.FillRectangle(tBrush, new Rectangle(x * width, y * height, width, height));
+                                            //g.DrawRectangle(blackPen, new Rectangle(0, 0, 200, 200));
+                                            i++;
+                                            break;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        //searchCounter++;
+                                        //if (searchCounter >= tilesColors.Count)
+                                        //{
+                                        //    threshold += 5;
+                                        //}
                                     }
                                 }
-                                else
+                                catch (Exception ex)
                                 {
-                                    //searchCounter++;
-                                    //if (searchCounter >= tilesColors.Count)
-                                    //{
-                                    //    threshold += 5;
-                                    //}
+                                    log.ErrorFormat("Name of tile during error {0}", name);
+                                    log.Error(ex.Message, ex);
                                 }
                                 i++;
                             }

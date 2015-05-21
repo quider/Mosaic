@@ -102,6 +102,7 @@ namespace Mosaic
         {
             var image = e.Result as Image;
             this.pictureBox.Image = image;
+            this.pictureBox.Refresh();
         }
 
         private void CalculateColorsProgressChanged(object sender, ProgressChangedEventArgs e)
