@@ -299,8 +299,7 @@ namespace Mosaic
                 }
                 else
                 {
-                    var buffer = 25;
-                    MessageBox.Show(buffer.ToString());
+                    var buffer = 25;                    
                     // Don't adjust hue - keep searching for a tile close enough
                     for (int x = 0; x < tX; x++)
                     {
@@ -331,6 +330,12 @@ namespace Mosaic
                             }
                             // Apply found tile to section
                             // Here we putting small image into big one.
+                            //Image peace = new Bitmap("HouseAndTree.gif");
+                            //TextureBrush tBrush = new TextureBrush(image);
+                            //Pen blackPen = new Pen(Color.Black);
+                            //e.Graphics.FillRectangle(tBrush, new Rectangle(0, 0, 200, 200));
+                            //e.Graphics.DrawRectangle(blackPen, new Rectangle(0, 0, 200, 200));
+
                             for (int w = 0; w < sizeTile.Width; w++)
                             {
                                 for (int h = 0; h < sizeTile.Height; h++)
