@@ -280,6 +280,7 @@ namespace Mosaic
                     // Don't adjust hue - keep searching for a tile close enough
                     log.DebugFormat("Image divided onto {0}x{1}", tX, tY);
                     var searchCounter = 1;
+                    List<string>[,] matchedColors = new List<string>[tX, tY];
                     for (int x = 0; x < tX; x++)
                     {
                         for (int y = 0; y < tY; y++)
@@ -289,6 +290,9 @@ namespace Mosaic
                             maximum = tX * tY + 1;
                             var percentage = (int)((searchCounter / maximum) * 100);
                             worker.ReportProgress(percentage, strings.CalculateMosaic);
+
+                            var colors = new List<string>();
+
                             while (tilesColors.Count - 1 >= i)
                             {
                                 log.DebugFormat("Searchcounter: {0}, index: {1}", searchCounter, i);
@@ -298,6 +302,7 @@ namespace Mosaic
                                 {
                                     if (GetDifference(this.avgsMaster[x, y], tilesColors[name]) < buffer)
                                     {
+                                        colors.Add(name);
                                         log.InfoFormat("Image fit to average color: {0}", this.avgsMaster[x, y]);
                                         found = new Bitmap(name);
                                         log.DebugFormat("Created bitmap from image {0}", name);
@@ -320,6 +325,10 @@ namespace Mosaic
                                     log.Error(ex.Message, ex);
                                 }
                                 i++;
+                                if (tilesColors.Count == i && colors.Count == 0)
+                                {
+                                    i = 0;
+                                }
                             }
                             searchCounter++;
                         }
