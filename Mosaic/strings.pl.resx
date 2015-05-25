@@ -139,7 +139,7 @@
     <value>Wyszukaj</value>
   </data>
   <data name="CalculateMosaic" xml:space="preserve">
-    <value>Obliczam, zdjęcia do mozaiki. To może potrwać parę minut.</value>
+    <value>Dopasowuje zdjęcia do mozaiki. To może potrwać parę minut.</value>
   </data>
   <data name="ColorsCalculated" xml:space="preserve">
     <value>Kolory obliczone.</value>
@@ -197,6 +197,9 @@
   </data>
   <data name="PrintPreview" xml:space="preserve">
     <value>Pokaż podgląd</value>
+  </data>
+  <data name="Randomizing" xml:space="preserve">
+    <value>Uzupełniam mozaikę</value>
   </data>
   <data name="Ready" xml:space="preserve">
     <value>Gotowy</value>

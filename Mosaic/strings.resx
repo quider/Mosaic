@@ -198,6 +198,9 @@
   <data name="PrintPreview" xml:space="preserve">
     <value>Print preview</value>
   </data>
+  <data name="Randomizing" xml:space="preserve">
+    <value>Filling main picture</value>
+  </data>
   <data name="Ready" xml:space="preserve">
     <value>Ready</value>
   </data>

@@ -134,7 +134,7 @@ namespace Mosaic
                     GC.WaitForPendingFinalizers();
                 }
             }
-            
+
             int tX = bMaster.Width / szTile.Width;
             int tY = bMaster.Height / szTile.Height;
             this.avgsMaster = new Color[tX, tY];
@@ -274,9 +274,7 @@ namespace Mosaic
                 else
                 {
                     log.Debug("Non hue algorythm");
-                    var buffer = 25;
                     worker.ReportProgress(0, strings.CalculateMosaic);
-                    log.DebugFormat("Color buffer set to {0}", buffer);
                     // Don't adjust hue - keep searching for a tile close enough
                     log.DebugFormat("Image divided onto {0}x{1}", tX, tY);
                     var searchCounter = 1;
@@ -285,7 +283,9 @@ namespace Mosaic
                     {
                         for (int y = 0; y < tY; y++)
                         {
-                            Bitmap found = null;
+                            var buffer = 25;
+                            log.DebugFormat("Color buffer set to {0}", buffer);
+                            
                             int i = 0;
                             maximum = tX * tY + 1;
                             var percentage = (int)((searchCounter / maximum) * 100);
@@ -303,17 +303,7 @@ namespace Mosaic
                                     if (GetDifference(this.avgsMaster[x, y], tilesColors[name]) < buffer)
                                     {
                                         colors.Add(name);
-                                        log.InfoFormat("Image fit to average color: {0}", this.avgsMaster[x, y]);
-                                        found = new Bitmap(name);
-                                        log.DebugFormat("Created bitmap from image {0}", name);
-                                        TextureBrush tBrush = new TextureBrush(found);
-                                        Pen blackPen = new Pen(Color.Black);
-                                        using (var g = Graphics.FromImage(image))
-                                        {
-                                            g.FillRectangle(tBrush, new Rectangle(x * width, y * height, width, height));
-                                            i++;
-                                            break;
-                                        }
+                                        log.InfoFormat("added for x={0} y={1} filename: {2}", x, y, name);
                                     }
                                     else
                                     {
@@ -328,9 +318,52 @@ namespace Mosaic
                                 if (tilesColors.Count == i && colors.Count == 0)
                                 {
                                     i = 0;
+                                    buffer += 25;
+                                    log.InfoFormat("buffer set to {0}", buffer);
                                 }
                             }
+                            matchedColors[x, y] = colors;
                             searchCounter++;
+                        }
+                    }
+
+                    //here looking for colors in table and chose from list:
+
+                    var random = new Random();
+                    searchCounter = 0;
+                    for (int x = 0; x < tX; x++)
+                    {
+                        for (int y = 0; y < tY; y++)
+                        {
+                            try
+                            {
+                                searchCounter++;
+                                maximum = tX * tY + 1;
+                                var percentage = (int)((searchCounter / maximum) * 100);
+                                worker.ReportProgress(percentage, "Tiles randomize");
+
+                                Bitmap found = null;
+                                if (matchedColors[x, y].Count > 1)
+                                {
+                                    log.InfoFormat("array do not contain any tile!");
+                                }
+                                var list = matchedColors[x, y].ToArray();
+                                var name = list[random.Next(list.Length)];
+                                log.InfoFormat("Image fit to average color: {0}", this.avgsMaster[x, y]);
+                                found = new Bitmap(name);
+                                log.DebugFormat("Created bitmap from image {0}", name);
+                                TextureBrush tBrush = new TextureBrush(found);
+                                Pen blackPen = new Pen(Color.Black);
+                                using (var g = Graphics.FromImage(image))
+                                {
+                                    g.FillRectangle(tBrush, new Rectangle(x * width, y * height, width, height));
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                log.ErrorFormat("Error during finding x={0} y={1}", x, y);
+                                log.Error(ex.Message, ex);
+                            }
                         }
                     }
                 }

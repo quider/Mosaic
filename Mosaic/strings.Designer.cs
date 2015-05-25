@@ -304,6 +304,15 @@ namespace Mosaic {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Filling main picture.
+        /// </summary>
+        internal static string Randomizing {
+            get {
+                return ResourceManager.GetString("Randomizing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ready.
         /// </summary>
         internal static string Ready {
