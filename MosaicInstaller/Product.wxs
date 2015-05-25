@@ -12,7 +12,7 @@
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
 		<MediaTemplate EmbedCab="yes" />
 
-		<Feature Id="ProductFeature" Title="MosaicInstaller" Level="1" ConfigurableDirectory="INSTALLFOLDER">
+		<Feature Id="ProductFeature" Title="Mosaic" Level="1" ConfigurableDirectory="INSTALLFOLDER">
 			<ComponentGroupRef Id="ProductComponents" />
       <ComponentGroupRef Id="TranslationsGroup"/>
 		</Feature>
@@ -22,7 +22,7 @@
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<Directory Id="ProgramFilesFolder">
 				<Directory Id="INSTALLFOLDER" Name="Mosaic">
-          <Directory Id="pl"></Directory>  
+          <Directory Id="pl" Name="pl"></Directory>  
         </Directory>
 			</Directory>
 		</Directory>
@@ -34,12 +34,12 @@
 				<File Source="$(var.bin)$(var.Configuration)\Mosaic.exe"></File>
         <File Source="$(var.bin)$(var.Configuration)\Mosaic.exe.config"></File>
         <File Source="$(var.bin)$(var.Configuration)\log4net.dll"></File>
+      <CreateFolder Directory="pl" ></CreateFolder>
 			</Component>
 		</ComponentGroup>
   
-  <ComponentGroup Id="TranslationsGroup" Directory="INSTALLFOLDER">
+  <ComponentGroup Id="TranslationsGroup" Directory="pl">
     <Component Id="polish" Guid="{066502E1-A756-4F63-88CF-EF02BAC9EE7A}">
-      <CreateFolder Directory="pl"></CreateFolder>
       <File Source="$(var.bin)$(var.Configuration)\pl\Mosaic.resources.dll"></File>
     </Component>
   </ComponentGroup>

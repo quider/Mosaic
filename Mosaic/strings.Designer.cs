@@ -383,5 +383,14 @@ namespace Mosaic {
                 return ResourceManager.GetString("Width", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Will be in future.
+        /// </summary>
+        internal static string WillBeInFuture {
+            get {
+                return ResourceManager.GetString("WillBeInFuture", resourceCulture);
+            }
+        }
     }
 }

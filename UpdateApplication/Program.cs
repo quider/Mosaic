@@ -16,7 +16,8 @@ namespace UpdateApplication
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Context());
+            new Context().Execute();
+            Application.Run();
         }
     }
 }

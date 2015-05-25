@@ -307,13 +307,13 @@
             // 
             // customizeToolStripMenuItem
             // 
-            this.customizeToolStripMenuItem.Name = "customizeToolStripMenuItem";
             resources.ApplyResources(this.customizeToolStripMenuItem, "customizeToolStripMenuItem");
+            this.customizeToolStripMenuItem.Name = "customizeToolStripMenuItem";
             // 
             // optionsToolStripMenuItem
             // 
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             resources.ApplyResources(this.optionsToolStripMenuItem, "optionsToolStripMenuItem");
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             // 
             // helpToolStripMenuItem
             // 

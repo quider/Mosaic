@@ -35,7 +35,7 @@ namespace Mosaic
             log.InfoFormat("Setting up {0}",strings.AddTilesFirst);
             this.lblAddFirst.Text = strings.AddTilesFirst;
             log.InfoFormat("Setting up {0}",strings.AdjustHue);
-            this.cbxAdjustTiles.Text = strings.AdjustHue;
+            this.cbxAdjustTiles.Text = strings.AdjustHue;            
             log.InfoFormat("Setting up {0}",strings.Height);
             this.lblHeight.Text = strings.Height;
             log.InfoFormat("Setting up {0}",strings.Width);
@@ -49,14 +49,19 @@ namespace Mosaic
             this.newToolStripMenuItem.Text = strings.New;
             this.saveAsToolStripMenuItem.Text = strings.SaveAs;
             this.saveToolStripMenuItem.Text = strings.Save;
+            this.printPreviewToolStripMenuItem.ToolTipText = strings.WillBeInFuture;
             this.printPreviewToolStripMenuItem.Text = strings.PrintPreview;
+            this.printToolStripMenuItem.ToolTipText = strings.WillBeInFuture;
             this.printToolStripMenuItem.Text = strings.Print;
             this.helpToolStripMenuItem.Text = strings.HelpMenu;
             this.toolsToolStripMenuItem.Text = strings.ToolsMenu;
             this.contentsToolStripMenuItem.Text = strings.Contents;
             this.aboutToolStripMenuItem.Text = strings.Aboutbox;
             this.optionsToolStripMenuItem.Text = strings.Options;
+            this.optionsToolStripMenuItem.ToolTipText = strings.WillBeInFuture;
             this.customizeToolStripMenuItem.Text = strings.Customize;
+            this.customizeToolStripMenuItem.ToolTipText = strings.WillBeInFuture;
+            this.checkUpdatesToolStripMenuItem.Text = strings.Update;
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
