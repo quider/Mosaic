@@ -50,13 +50,14 @@ namespace Mosaic
             this.customizeToolStripMenuItem.Text = strings.Customize;
             this.customizeToolStripMenuItem.ToolTipText = strings.WillBeInFuture;
             this.checkUpdatesToolStripMenuItem.Text = strings.Update;
+            this.Text +="-"+ this.ProductVersion;
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
             {
-                this.pictureBox = new PictureBox();
+                //this.pictureBox = new PictureBox();
                 try
                 {
                     OpenFileDialog openDialog = new OpenFileDialog();

@@ -48,9 +48,9 @@
 
     <Component Id="ApplicationShortcutDesktop" Guid="{44FD2228-D8BF-4D71-95FB-93E36C5370C0}" Directory="DesktopFolder">
       <Shortcut Id="ApplicationDesktopShortcut"
-          Name="[ProductName]"
-          Description="Runs [ProductName]"
-          Target="[INSTALLFOLDER]MyApp.exe"
+          Name="Mosaic"
+          Description="Runs mosaic maker"                
+          Target="[INSTALLFOLDER]Mosaic.exe"
           WorkingDirectory="INSTALLFOLDER"/>
       <RemoveFolder Id="DesktopFolder" On="uninstall"/>
       <RegistryValue
