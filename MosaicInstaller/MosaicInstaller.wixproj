@@ -67,7 +67,7 @@
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>
-    <PostBuildEvent>copy !(TargetPath) $(ProjectDir)Msi\$(SolutionName)_$(ConfigurationName)_$(PlatformName).msi</PostBuildEvent>
+    <PostBuildEvent>D:\Programy\Csharp\Mosaic\Bin\Debug\InstallerPackagesApplication.exe $(TargetDir)$(TargetName) $(SolutionDir) $(PlatformName) $(ConfigurationName)</PostBuildEvent>
   </PropertyGroup>
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.

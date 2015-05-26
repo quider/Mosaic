@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.ComponentModel;
 using log4net;
+using System.Threading.Tasks;
 
 namespace Mosaic
 {
@@ -279,13 +280,18 @@ namespace Mosaic
                     log.DebugFormat("Image divided onto {0}x{1}", tX, tY);
                     var searchCounter = 1;
                     List<string>[,] matchedColors = new List<string>[tX, tY];
-                    for (int x = 0; x < tX; x++)
+
+                    Parallel.For(0, tX, x =>
+                    //for (int x = 0; x < tX; x++)
                     {
-                        for (int y = 0; y < tY; y++)
+                        Parallel.For(0, tY, (y) =>
                         {
+
+                            //for (int y = 0; y < tY; y++)
+                            //{
                             var buffer = 25;
                             log.DebugFormat("Color buffer set to {0}", buffer);
-                            
+
                             int i = 0;
                             maximum = tX * tY + 1;
                             var percentage = (int)((searchCounter / maximum) * 100);
@@ -315,7 +321,7 @@ namespace Mosaic
                                     log.Error(ex.Message, ex);
                                 }
                                 i++;
-                                if (tilesColors.Count == i && colors.Count == 0)
+                                if (tilesColors.Count == i && colors.Count < 3)
                                 {
                                     i = 0;
                                     buffer += 25;
@@ -324,16 +330,18 @@ namespace Mosaic
                             }
                             matchedColors[x, y] = colors;
                             searchCounter++;
-                        }
-                    }
+                        });
+                    });
 
                     //here looking for colors in table and chose from list:
 
                     var random = new Random();
                     searchCounter = 0;
-                    for (int x = 0; x < tX; x++)
+                    Parallel.For(0, tX, x =>
+                    //for (int x = 0; x < tX; x++)
                     {
-                        for (int y = 0; y < tY; y++)
+                        Parallel.For(0,tY,y=>
+                        //for (int y = 0; y < tY; y++)
                         {
                             try
                             {
@@ -364,8 +372,8 @@ namespace Mosaic
                                 log.ErrorFormat("Error during finding x={0} y={1}", x, y);
                                 log.Error(ex.Message, ex);
                             }
-                        }
-                    }
+                        });
+                    });
                 }
             }
             log.DebugFormat("Finishig calculate of mosaic");

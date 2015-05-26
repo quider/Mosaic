@@ -3,7 +3,7 @@
 <?define MAINEXE=$(var.Mosaic.TargetFileName)?>
 <?define VERSION=!(bind.FileVersion.$(var.MAINEXE))?> 
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="MosaicInstaller" Language="1033" Version="$(var.VERSION)" Manufacturer="Quider Software" UpgradeCode="624a7393-71ed-45f4-a128-5e9f4cd4ec70">
+	<Product Id="*" Name="Mosaic" Language="1033" Version="$(var.VERSION)" Manufacturer="Quider Software" UpgradeCode="624a7393-71ed-45f4-a128-5e9f4cd4ec70">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
     
     <UIRef Id="WixUI_FeatureTree" />
@@ -15,11 +15,13 @@
 		<Feature Id="ProductFeature" Title="Mosaic" Level="1" ConfigurableDirectory="INSTALLFOLDER">
 			<ComponentGroupRef Id="ProductComponents" />
       <ComponentGroupRef Id="TranslationsGroup"/>
+      <ComponentRef Id="ApplicationShortcutDesktop"/>
 		</Feature>
 	</Product>
 
 	<Fragment>
 		<Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="DesktopFolder" Name="Desktop"/>
 			<Directory Id="ProgramFilesFolder">
 				<Directory Id="INSTALLFOLDER" Name="Mosaic">
           <Directory Id="pl" Name="pl"></Directory>  
@@ -43,5 +45,21 @@
       <File Source="$(var.bin)$(var.Configuration)\pl\Mosaic.resources.dll"></File>
     </Component>
   </ComponentGroup>
+
+    <Component Id="ApplicationShortcutDesktop" Guid="{44FD2228-D8BF-4D71-95FB-93E36C5370C0}" Directory="DesktopFolder">
+      <Shortcut Id="ApplicationDesktopShortcut"
+          Name="[ProductName]"
+          Description="Runs [ProductName]"
+          Target="[INSTALLFOLDER]MyApp.exe"
+          WorkingDirectory="INSTALLFOLDER"/>
+      <RemoveFolder Id="DesktopFolder" On="uninstall"/>
+      <RegistryValue
+          Root="HKCU"
+          Key="Software/[ProductName]"
+          Name="installed"
+          Type="integer"
+          Value="1"
+          KeyPath="yes"/>
+    </Component>
 	</Fragment>
 </Wix>
