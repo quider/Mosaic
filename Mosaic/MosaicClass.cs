@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.ComponentModel;
 using log4net;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace Mosaic
 {
@@ -24,12 +25,15 @@ namespace Mosaic
         /// <returns></returns>
         public static int GetDifference(Color source, Color target)
         {
-            int dR = Math.Abs(source.R - target.R);
-            int dG = Math.Abs(source.G - target.G);
-            int dB = Math.Abs(source.B - target.B);
-            int diff = Math.Max(dR, dG);
-            diff = Math.Max(diff, dB);
-            return diff;
+            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
+            {
+                int dR = Math.Abs(source.R - target.R);
+                int dG = Math.Abs(source.G - target.G);
+                int dB = Math.Abs(source.B - target.B);
+                int diff = Math.Max(dR, dG);
+                diff = Math.Max(diff, dB);
+                return diff; 
+            }
         }
 
         /// <summary>
@@ -43,23 +47,26 @@ namespace Mosaic
         /// <returns></returns>
         public static Color GetTileAverage(Bitmap bSource, int x, int y, int width, int height)
         {
-            long aR = 0;
-            long aG = 0;
-            long aB = 0;
-            for (int w = x; w < x + width; w++)
+            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
             {
-                for (int h = y; h < y + height; h++)
+                long aR = 0;
+                long aG = 0;
+                long aB = 0;
+                for (int w = x; w < x + width; w++)
                 {
-                    Color cP = bSource.GetPixel(w, h);
-                    aR += cP.R;
-                    aG += cP.G;
-                    aB += cP.B;
+                    for (int h = y; h < y + height; h++)
+                    {
+                        Color cP = bSource.GetPixel(w, h);
+                        aR += cP.R;
+                        aG += cP.G;
+                        aB += cP.B;
+                    }
                 }
+                aR = aR / (width * height);
+                aG = aG / (width * height);
+                aB = aB / (width * height);
+                return Color.FromArgb(255, Convert.ToInt32(aR), Convert.ToInt32(aG), Convert.ToInt32(aB)); 
             }
-            aR = aR / (width * height);
-            aG = aG / (width * height);
-            aB = aB / (width * height);
-            return Color.FromArgb(255, Convert.ToInt32(aR), Convert.ToInt32(aG), Convert.ToInt32(aB));
         }
 
         /// <summary>
@@ -70,23 +77,26 @@ namespace Mosaic
         /// <returns></returns>
         public static Bitmap AdjustHue(Bitmap bSource, Color targetColor)
         {
-            Bitmap result = new Bitmap(bSource.Width, bSource.Height);
-            for (int w = 0; w < bSource.Width; w++)
+            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
             {
-                for (int h = 0; h < bSource.Height; h++)
+                Bitmap result = new Bitmap(bSource.Width, bSource.Height);
+                for (int w = 0; w < bSource.Width; w++)
                 {
-                    // Get current output color
-                    Color clSource = bSource.GetPixel(w, h);
-                    int R = Math.Min(255, Math.Max(0, ((clSource.R + targetColor.R) / 2)));
-                    int G = Math.Min(255, Math.Max(0, ((clSource.G + targetColor.G) / 2)));
-                    int B = Math.Min(255, Math.Max(0, ((clSource.B + targetColor.B) / 2)));
-                    Color clAvg = Color.FromArgb(R, G, B);
+                    for (int h = 0; h < bSource.Height; h++)
+                    {
+                        // Get current output color
+                        Color clSource = bSource.GetPixel(w, h);
+                        int R = Math.Min(255, Math.Max(0, ((clSource.R + targetColor.R) / 2)));
+                        int G = Math.Min(255, Math.Max(0, ((clSource.G + targetColor.G) / 2)));
+                        int B = Math.Min(255, Math.Max(0, ((clSource.B + targetColor.B) / 2)));
+                        Color clAvg = Color.FromArgb(R, G, B);
 
-                    result.SetPixel(w, h, clAvg);
-                    Application.DoEvents();
+                        result.SetPixel(w, h, clAvg);
+                        Application.DoEvents();
+                    }
                 }
+                return result; 
             }
-            return result;
         }
 
         /// <summary>
@@ -97,12 +107,15 @@ namespace Mosaic
         /// <returns></returns>
         private static Bitmap ResizeBitmap(Bitmap bSource, Size newSize)
         {
-            Bitmap result = new Bitmap(newSize.Width, newSize.Height);
-            using (Graphics g = Graphics.FromImage(result))
+            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
             {
-                g.DrawImage(bSource, 0, 0, newSize.Width, newSize.Height);
+                Bitmap result = new Bitmap(newSize.Width, newSize.Height);
+                using (Graphics g = Graphics.FromImage(result))
+                {
+                    g.DrawImage(bSource, 0, 0, newSize.Width, newSize.Height);
+                }
+                return result; 
             }
-            return result;
         }
 
         /// <summary>
@@ -112,57 +125,65 @@ namespace Mosaic
         /// <param name="e"></param>
         internal void CalculateColorsWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            var arguments = e.Argument as object[];
-            var worker = sender as BackgroundWorker;
-            var image = arguments[0] as Image;
-            var height = (decimal)arguments[1];
-            var width = (decimal)arguments[2];
-            var szTile = new Size((int)width, (int)height);
-            Boolean bLoaded = false;
-            Bitmap bMaster = null;
-
-            worker.ReportProgress(1, String.Format(strings.LoadingMasterFile));
-
-            while (!bLoaded)
+            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
             {
-                try
+                var arguments = e.Argument as object[];
+                var worker = sender as BackgroundWorker;
+                var image = arguments[0] as Image;
+                var height = (decimal)arguments[1];
+                var width = (decimal)arguments[2];
+                log.InfoFormat("Images size of {0}x{1}", width, height);
+                var szTile = new Size((int)width, (int)height);
+                Boolean bLoaded = false;
+                Bitmap bMaster = null;
+
+                log.Info("Averaging colors");
+
+                worker.ReportProgress(1, String.Format(strings.LoadingMasterFile));
+
+                while (!bLoaded)
                 {
-                    bMaster = new Bitmap((Image)image.Clone());
-                    bLoaded = true;
-                }
-                catch (OutOfMemoryException)
-                {
-                    GC.WaitForPendingFinalizers();
-                }
-            }
-
-            int tX = bMaster.Width / szTile.Width;
-            int tY = bMaster.Height / szTile.Height;
-            this.avgsMaster = new Color[tX, tY];
-
-            worker.ReportProgress(1, String.Format(strings.AveragingMasterBitmap));
-
-            var maximum = tX * tY;
-
-            lock (image)
-            {
-                for (int x = 0; x < tX; x++)
-                {
-                    for (int y = 0; y < tY; y++)
+                    try
                     {
-                        avgsMaster[x, y] = GetTileAverage(bMaster, x * szTile.Width, y * szTile.Height, szTile.Width, szTile.Height);
-                        Rectangle r = new Rectangle(szTile.Width * x, szTile.Height * y, szTile.Width, szTile.Height);
-                        worker.ReportProgress((int)((double)x / tX * 100), String.Format(strings.AveragingMasterBitmap));
+                        bMaster = new Bitmap((Image)image.Clone());
+                        log.InfoFormat("Main image set");
+                        bLoaded = true;
+                    }
+                    catch (OutOfMemoryException ex)
+                    {
+                        log.Error(ex.Message, ex);
+                        GC.WaitForPendingFinalizers();
+                    }
+                }
 
-                        using (Graphics g = Graphics.FromImage(image))
+                int tX = bMaster.Width / szTile.Width;
+                int tY = bMaster.Height / szTile.Height;
+                this.avgsMaster = new Color[tX, tY];
+
+                worker.ReportProgress(1, String.Format(strings.AveragingMasterBitmap));
+
+                var maximum = tX * tY;
+
+                lock (image)
+                {
+                    for (int x = 0; x < tX; x++)
+                    {
+                        for (int y = 0; y < tY; y++)
                         {
-                            g.FillRectangle(new SolidBrush(avgsMaster[x, y]), r);
+                            avgsMaster[x, y] = GetTileAverage(bMaster, x * szTile.Width, y * szTile.Height, szTile.Width, szTile.Height);
+                            Rectangle r = new Rectangle(szTile.Width * x, szTile.Height * y, szTile.Width, szTile.Height);
+                            worker.ReportProgress((int)((double)x / tX * 100), String.Format(strings.AveragingMasterBitmap));
+
+                            using (Graphics g = Graphics.FromImage(image))
+                            {
+                                g.FillRectangle(new SolidBrush(avgsMaster[x, y]), r);
+                            }
                         }
                     }
                 }
-            }
 
-            e.Result = image;
+                e.Result = image; 
+            }
         }
 
         /// <summary>

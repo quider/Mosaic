@@ -24,7 +24,8 @@
       <Directory Id="DesktopFolder" Name="Desktop"/>
 			<Directory Id="ProgramFilesFolder">
 				<Directory Id="INSTALLFOLDER" Name="Mosaic">
-          <Directory Id="pl" Name="pl"></Directory>  
+          <Directory Id="pl" Name="pl"></Directory>
+          <Directory Id="log" Name="log"></Directory>
         </Directory>
 			</Directory>
 		</Directory>
@@ -37,6 +38,7 @@
         <File Source="$(var.bin)$(var.Configuration)\Mosaic.exe.config"></File>
         <File Source="$(var.bin)$(var.Configuration)\log4net.dll"></File>
       <CreateFolder Directory="pl" ></CreateFolder>
+      <CreateFolder Directory="log" ></CreateFolder>
 			</Component>
 		</ComponentGroup>
   
