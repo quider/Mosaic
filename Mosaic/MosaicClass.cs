@@ -91,8 +91,7 @@ namespace Mosaic
                         int B = Math.Min(255, Math.Max(0, ((clSource.B + targetColor.B) / 2)));
                         Color clAvg = Color.FromArgb(R, G, B);
 
-                        result.SetPixel(w, h, clAvg);
-                        Application.DoEvents();
+                        result.SetPixel(w, h, clAvg);                        
                     }
                 }
                 return result; 

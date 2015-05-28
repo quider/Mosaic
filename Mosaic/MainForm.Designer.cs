@@ -307,8 +307,9 @@
             // 
             // customizeToolStripMenuItem
             // 
-            resources.ApplyResources(this.customizeToolStripMenuItem, "customizeToolStripMenuItem");
             this.customizeToolStripMenuItem.Name = "customizeToolStripMenuItem";
+            resources.ApplyResources(this.customizeToolStripMenuItem, "customizeToolStripMenuItem");
+            this.customizeToolStripMenuItem.Click += new System.EventHandler(this.customizeToolStripMenuItem_Click);
             // 
             // optionsToolStripMenuItem
             // 

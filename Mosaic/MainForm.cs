@@ -274,5 +274,11 @@ namespace Mosaic
             var form = new ContentForm();
             form.ShowDialog();
         }
+
+        private void customizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new SettingsForm();
+            form.ShowDialog();
+        }
     }
 }

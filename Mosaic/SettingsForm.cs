@@ -15,5 +15,15 @@ namespace Mosaic
         {
             InitializeComponent();
         }
+
+        private void nudWidth_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void nudHeight_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
