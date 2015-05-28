@@ -32,7 +32,7 @@ namespace Mosaic
                 int dB = Math.Abs(source.B - target.B);
                 int diff = Math.Max(dR, dG);
                 diff = Math.Max(diff, dB);
-                return diff; 
+                return diff;
             }
         }
 
@@ -65,7 +65,7 @@ namespace Mosaic
                 aR = aR / (width * height);
                 aG = aG / (width * height);
                 aB = aB / (width * height);
-                return Color.FromArgb(255, Convert.ToInt32(aR), Convert.ToInt32(aG), Convert.ToInt32(aB)); 
+                return Color.FromArgb(255, Convert.ToInt32(aR), Convert.ToInt32(aG), Convert.ToInt32(aB));
             }
         }
 
@@ -91,10 +91,10 @@ namespace Mosaic
                         int B = Math.Min(255, Math.Max(0, ((clSource.B + targetColor.B) / 2)));
                         Color clAvg = Color.FromArgb(R, G, B);
 
-                        result.SetPixel(w, h, clAvg);                        
+                        result.SetPixel(w, h, clAvg);
                     }
                 }
-                return result; 
+                return result;
             }
         }
 
@@ -113,7 +113,7 @@ namespace Mosaic
                 {
                     g.DrawImage(bSource, 0, 0, newSize.Width, newSize.Height);
                 }
-                return result; 
+                return result;
             }
         }
 
@@ -165,9 +165,9 @@ namespace Mosaic
 
                 lock (image)
                 {
-                    for (int x = 0; x < tX; x++)
+                    Parallel.For(0, tX, x =>
                     {
-                        for (int y = 0; y < tY; y++)
+                        Parallel.For(0, tY, y =>
                         {
                             avgsMaster[x, y] = GetTileAverage(bMaster, x * szTile.Width, y * szTile.Height, szTile.Width, szTile.Height);
                             Rectangle r = new Rectangle(szTile.Width * x, szTile.Height * y, szTile.Width, szTile.Height);
@@ -177,11 +177,11 @@ namespace Mosaic
                             {
                                 g.FillRectangle(new SolidBrush(avgsMaster[x, y]), r);
                             }
-                        }
-                    }
+                        });
+                    });
                 }
 
-                e.Result = image; 
+                e.Result = image;
             }
         }
 
@@ -216,7 +216,8 @@ namespace Mosaic
 
             double maximum = tilesNames.Count;
             int index = 0;
-            foreach (string tilePath in tilesNames)
+
+            Parallel.ForEach(tilesNames, tilePath =>
             {
                 try
                 {
@@ -247,7 +248,7 @@ namespace Mosaic
                     log.Error(ex.Message, ex);
                     GC.WaitForPendingFinalizers();
                 }
-            }
+            });
 
             if (tilesColors.Count > 0)
             {
@@ -255,42 +256,7 @@ namespace Mosaic
                 //if (bAdjustHue)
                 if (false)
                 {
-                    List<Tile> tileQueue = new List<Tile>();
-                    Tile tFound = null;
-                    int maxQueueLength = Math.Min(1000, Math.Max(0, tilesColors.Count - 50));
-
-                    for (int x = 0; x < tX; x++)
-                    {
-                        for (int y = 0; y < tY; y++)
-                        {
-                            int i = 0;
-                            // Check if it's the same as the last (X)?
-                            if (tileQueue.Count > 1)
-                            {
-                                //while (tileQueue.Contains(tilesColors[i]))
-                                //{
-                                //    i = r.Next(tilesColors.Count);
-                                //}
-                            }
-
-                            // Add to the 'queue'
-                            tFound = null;//tilesColors[i];
-                            if ((tileQueue.Count >= maxQueueLength) && (tileQueue.Count > 0))
-                            {
-                                tileQueue.RemoveAt(0);
-                            }
-                            tileQueue.Add(tFound);
-
-                            // Apply found tile to section
-                            for (int w = 0; w < sizeTile.Width; w++)
-                            {
-                                for (int h = 0; h < sizeTile.Height; h++)
-                                {
-                                    // bOut.SetPixel(x * szTile.Width + w, y * szTile.Height + h, bAdjusted.GetPixel(w, h));
-                                }
-                            }
-                        }
-                    }
+                   
                 }
                 else
                 {
@@ -302,13 +268,9 @@ namespace Mosaic
                     List<string>[,] matchedColors = new List<string>[tX, tY];
 
                     Parallel.For(0, tX, x =>
-                    //for (int x = 0; x < tX; x++)
                     {
                         Parallel.For(0, tY, (y) =>
                         {
-
-                            //for (int y = 0; y < tY; y++)
-                            //{
                             var buffer = 25;
                             log.DebugFormat("Color buffer set to {0}", buffer);
 
@@ -358,10 +320,8 @@ namespace Mosaic
                     var random = new Random();
                     searchCounter = 0;
                     Parallel.For(0, tX, x =>
-                    //for (int x = 0; x < tX; x++)
                     {
-                        Parallel.For(0,tY,y=>
-                        //for (int y = 0; y < tY; y++)
+                        Parallel.For(0, tY, y =>
                         {
                             try
                             {
@@ -398,37 +358,6 @@ namespace Mosaic
             }
             log.DebugFormat("Finishig calculate of mosaic");
             e.Result = image;
-        }
-    }
-
-    public class Tile
-    {
-        private Bitmap bitmap;
-        private Color color;
-
-        public Bitmap getBitmap()
-        {
-            return bitmap;
-        }
-        public Color getColor()
-        {
-            return color;
-        }
-        public void setColor(Color average)
-        {
-            color = average;
-        }
-
-        public Tile(Bitmap bSource, Color cSource)
-        {
-            bitmap = bSource;
-            color = cSource;
-        }
-
-        public void Close()
-        {
-            bitmap.Dispose();
-            bitmap = null;
         }
     }
 }
