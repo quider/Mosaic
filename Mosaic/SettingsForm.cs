@@ -25,5 +25,15 @@ namespace Mosaic
         {
 
         }
+
+        private void rbtSepia_MouseEnter(object sender, EventArgs e)
+        {
+            lblSepia.Visible = true;
+        }
+
+        private void rbtSepia_MouseLeave(object sender, EventArgs e)
+        {
+            lblSepia.Visible = false;
+        }
     }
 }

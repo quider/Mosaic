@@ -12,6 +12,11 @@ namespace UpdateApplication
 {
     public class Context : ApplicationContext
     {
+        public Context()
+        {
+            Execute();
+        }
+
         public void Execute()
         {
             
