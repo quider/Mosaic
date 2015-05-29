@@ -256,7 +256,7 @@ namespace Mosaic
                 //if (bAdjustHue)
                 if (false)
                 {
-                   
+                   // hue algorithm
                 }
                 else
                 {
@@ -295,6 +295,7 @@ namespace Mosaic
                                     }
                                     else
                                     {
+                                        // in case of buffer is not enough
                                     }
                                 }
                                 catch (Exception ex)
@@ -342,10 +343,11 @@ namespace Mosaic
                                 log.DebugFormat("Created bitmap from image {0}", name);
                                 TextureBrush tBrush = new TextureBrush(found);
                                 Pen blackPen = new Pen(Color.Black);
+                                
                                 using (var g = Graphics.FromImage(image))
                                 {
                                     g.FillRectangle(tBrush, new Rectangle(x * width, y * height, width, height));
-                                }
+                                }    
                             }
                             catch (Exception ex)
                             {

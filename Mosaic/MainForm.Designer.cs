@@ -66,6 +66,7 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btCancelCalculate = new System.Windows.Forms.Button();
             this.gbxTiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudWidth)).BeginInit();
@@ -214,6 +215,7 @@
             // 
             // gbxMosaic
             // 
+            this.gbxMosaic.Controls.Add(this.btCancelCalculate);
             this.gbxMosaic.Controls.Add(this.lblAddFirst);
             this.gbxMosaic.Controls.Add(this.pictureBox);
             this.gbxMosaic.Controls.Add(this.btnGo);
@@ -348,6 +350,13 @@
             this.checkUpdatesToolStripMenuItem.Name = "checkUpdatesToolStripMenuItem";
             resources.ApplyResources(this.checkUpdatesToolStripMenuItem, "checkUpdatesToolStripMenuItem");
             // 
+            // btCancelCalculate
+            // 
+            resources.ApplyResources(this.btCancelCalculate, "btCancelCalculate");
+            this.btCancelCalculate.Name = "btCancelCalculate";
+            this.btCancelCalculate.UseVisualStyleBackColor = true;
+            this.btCancelCalculate.Click += new System.EventHandler(this.btCancelCalculate_Click);
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -415,6 +424,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem checkUpdatesToolStripMenuItem;
+        private System.Windows.Forms.Button btCancelCalculate;
     }
 }
 

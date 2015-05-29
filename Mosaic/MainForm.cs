@@ -16,6 +16,7 @@ namespace Mosaic
     {
         private MosaicClass mosaicClass;
         private static ILog log = LogManager.GetLogger(typeof(MainForm));
+        private BackgroundWorker calculateMosaicBackgroundWorker;
 
         public MainForm()
         {
@@ -50,6 +51,7 @@ namespace Mosaic
             this.customizeToolStripMenuItem.Text = strings.Customize;
             this.customizeToolStripMenuItem.ToolTipText = strings.WillBeInFuture;
             this.checkUpdatesToolStripMenuItem.Text = strings.Update;
+            this.btCancelCalculate.Text = strings.Cancel;
             this.Text +="-"+ this.ProductVersion;
         }
 
@@ -193,21 +195,17 @@ namespace Mosaic
                     {
                         items.Add(item);
                     }
+
                     Cursor = Cursors.WaitCursor;
                     Size szTile = new Size(Convert.ToInt16(nudWidth.Value), Convert.ToInt16(nudHeight.Value));
-                    var calculateMosaicBackgroundWorker = new BackgroundWorker();
-                    calculateMosaicBackgroundWorker.ProgressChanged += CalculateColorsProgressChanged;
-                    calculateMosaicBackgroundWorker.RunWorkerCompleted += calculateMosaicBackgroundWorker_RunWorkerCompleted;
-                    calculateMosaicBackgroundWorker.DoWork += this.mosaicClass.CalculateMosaic;
-
-                    calculateMosaicBackgroundWorker.WorkerReportsProgress = true;
-
-                    calculateMosaicBackgroundWorker.RunWorkerAsync(new object[] { this.AverageImage, items, (int)this.nudHeight.Value, (int)this.nudWidth.Value });
-
-
-                    //LockBitmap test = MosaicClass.GenerateMosaic(tbxBrowse.Text, lbxTiles.Items.Cast<String>().ToArray(), szTile, lblOperation, pgbOperation, cbxAdjustTiles.Checked, tbxCache.Text, this.pictureBox);
-                    //test.Save("test.bmp");
-                    //pictureBox.Image = test.source;
+                    this.calculateMosaicBackgroundWorker = new BackgroundWorker();
+                    this.calculateMosaicBackgroundWorker.ProgressChanged += CalculateColorsProgressChanged;
+                    this.calculateMosaicBackgroundWorker.RunWorkerCompleted += calculateMosaicBackgroundWorker_RunWorkerCompleted;
+                    this.calculateMosaicBackgroundWorker.DoWork += this.mosaicClass.CalculateMosaic;
+                    this.calculateMosaicBackgroundWorker.WorkerReportsProgress = true;
+                    this.calculateMosaicBackgroundWorker.WorkerSupportsCancellation = true;
+                    btCancelCalculate.Visible = true;                    
+                    this.calculateMosaicBackgroundWorker.RunWorkerAsync(new object[] { this.AverageImage, items, (int)this.nudHeight.Value, (int)this.nudWidth.Value });
                     btnGo.Enabled = false;
                 }
                 catch (Exception x)
@@ -279,6 +277,15 @@ namespace Mosaic
         {
             var form = new SettingsForm();
             form.ShowDialog();
+        }
+
+        private void btCancelCalculate_Click(object sender, EventArgs e)
+        {
+            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
+            {
+                this.calculateMosaicBackgroundWorker.CancelAsync();
+                btnGo.Enabled = true;
+            }
         }
     }
 }

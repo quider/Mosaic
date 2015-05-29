@@ -141,6 +141,9 @@
   <data name="CalculateMosaic" xml:space="preserve">
     <value>I'm calculating mosaic. This may take a while...</value>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
   <data name="ColorsCalculated" xml:space="preserve">
     <value>Colors calculated.</value>
   </data>

@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
-MinimumVisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mosaic", "Mosaic\Mosaic.csproj", "{D4BE187E-FA10-4417-95FC-98BF0D3A5528}"
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "MosaicInstaller", "MosaicInstaller\MosaicInstaller.wixproj", "{A455FEB7-DAAE-4C61-AA16-EE82F345431F}"

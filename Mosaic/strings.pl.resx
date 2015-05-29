@@ -141,6 +141,9 @@
   <data name="CalculateMosaic" xml:space="preserve">
     <value>Dopasowuje zdjęcia do mozaiki. To może potrwać parę minut.</value>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Anuluj</value>
+  </data>
   <data name="ColorsCalculated" xml:space="preserve">
     <value>Kolory obliczone.</value>
   </data>
