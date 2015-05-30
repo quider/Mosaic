@@ -111,7 +111,8 @@ namespace Mosaic
                 this.pictureBox.Refresh();
                 this.pgbOperation.Value = 0;
                 this.lblOperation.Text = strings.Finished;
-                this.btnGo.Enabled = true; 
+                this.btnGo.Enabled = true;
+                this.btCancelCalculate.Visible = false;
             }
         }
 

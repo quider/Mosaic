@@ -1,57 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?define bin = ..\..\..\bin\ ?>
 <?define MAINEXE=$(var.Mosaic.TargetFileName)?>
-<?define VERSION=!(bind.FileVersion.$(var.MAINEXE))?> 
+<?define VERSION=!(bind.FileVersion.$(var.MAINEXE))?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="Mosaic" Language="1033" Version="$(var.VERSION)" Manufacturer="Quider Software" UpgradeCode="624a7393-71ed-45f4-a128-5e9f4cd4ec70">
-		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
-    
-    <UIRef Id="WixUI_FeatureTree" />
-    
-    
-		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
-		<MediaTemplate EmbedCab="yes" />
+  <Product Id="*" Name="Mosaic $(var.Version)" Language="1033" Version="$(var.VERSION)" Manufacturer="Quider Software" UpgradeCode="624a7393-71ed-45f4-a128-5e9f4cd4ec70">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
-		<Feature Id="ProductFeature" Title="Mosaic" Level="1" ConfigurableDirectory="INSTALLFOLDER">
-			<ComponentGroupRef Id="ProductComponents" />
+    <UIRef Id="WixUI_FeatureTree" />
+    <MediaTemplate EmbedCab="yes" />
+
+    <Property Id="PREVIOUSVERSIONSINSTALLED" Secure="yes" />
+    <Upgrade Id ="624a7393-71ed-45f4-a128-5e9f4cd4ec70">
+      <UpgradeVersion
+         Minimum="0.1.0.0" Maximum="99.0.0.0"
+         Property="PREVIOUSVERSIONSINSTALLED"
+         IncludeMinimum="yes" IncludeMaximum="no" />
+    </Upgrade>
+
+    <Feature Id="ProductFeature" Title="Mosaic" Level="1" ConfigurableDirectory="INSTALLFOLDER">
+      <ComponentGroupRef Id="ProductComponents" />
       <ComponentGroupRef Id="TranslationsGroup"/>
       <ComponentRef Id="ApplicationShortcutDesktop"/>
-		</Feature>
-	</Product>
+    </Feature>
+    
+  <InstallExecuteSequence>
+      <RemoveExistingProducts Before="InstallInitialize" /> 
+  </InstallExecuteSequence>
+  
+  </Product>
 
-	<Fragment>
-		<Directory Id="TARGETDIR" Name="SourceDir">
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="DesktopFolder" Name="Desktop"/>
-			<Directory Id="ProgramFilesFolder">
-				<Directory Id="INSTALLFOLDER" Name="Mosaic">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="Mosaic">
           <Directory Id="pl" Name="pl"></Directory>
           <Directory Id="log" Name="log"></Directory>
         </Directory>
-			</Directory>
-		</Directory>
-	</Fragment>
+      </Directory>
+    </Directory>
+  </Fragment>
 
-	<Fragment>
-		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
-			<Component Id="ProductComponent" Guid="{3B9C53F9-B0F1-47F5-A124-AEA2FB00E863}"> 
-				<File Source="$(var.bin)$(var.Configuration)\Mosaic.exe"></File>
+  <Fragment>
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <Component Id="ProductComponent" Guid="{3B9C53F9-B0F1-47F5-A124-AEA2FB00E863}">
+        <File Source="$(var.bin)$(var.Configuration)\Mosaic.exe"></File>
         <File Source="$(var.bin)$(var.Configuration)\Mosaic.exe.config"></File>
         <File Source="$(var.bin)$(var.Configuration)\log4net.dll"></File>
-      <CreateFolder Directory="pl" ></CreateFolder>
-      <CreateFolder Directory="log" ></CreateFolder>
-			</Component>
-		</ComponentGroup>
-  
-  <ComponentGroup Id="TranslationsGroup" Directory="pl">
-    <Component Id="polish" Guid="{066502E1-A756-4F63-88CF-EF02BAC9EE7A}">
-      <File Source="$(var.bin)$(var.Configuration)\pl\Mosaic.resources.dll"></File>
-    </Component>
-  </ComponentGroup>
+        <CreateFolder Directory="pl" ></CreateFolder>
+        <CreateFolder Directory="log" ></CreateFolder>
+      </Component>
+    </ComponentGroup>
+
+    <ComponentGroup Id="TranslationsGroup" Directory="pl">
+      <Component Id="polish" Guid="{066502E1-A756-4F63-88CF-EF02BAC9EE7A}">
+        <File Source="$(var.bin)$(var.Configuration)\pl\Mosaic.resources.dll"></File>
+      </Component>
+    </ComponentGroup>
 
     <Component Id="ApplicationShortcutDesktop" Guid="{44FD2228-D8BF-4D71-95FB-93E36C5370C0}" Directory="DesktopFolder">
       <Shortcut Id="ApplicationDesktopShortcut"
           Name="Mosaic"
-          Description="Runs mosaic maker"                
+          Description="Runs mosaic maker"
           Target="[INSTALLFOLDER]Mosaic.exe"
           WorkingDirectory="INSTALLFOLDER"/>
       <RemoveFolder Id="DesktopFolder" On="uninstall"/>
@@ -63,5 +73,5 @@
           Value="1"
           KeyPath="yes"/>
     </Component>
-	</Fragment>
+  </Fragment>
 </Wix>

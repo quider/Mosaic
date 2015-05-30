@@ -165,9 +165,9 @@ namespace Mosaic
 
                 lock (image)
                 {
-                    Parallel.For(0, tX, x =>
+                    for (int x = 0; x < tX; x++)
                     {
-                        Parallel.For(0, tY, y =>
+                        for (int y = 0; y < tY; y++)
                         {
                             avgsMaster[x, y] = GetTileAverage(bMaster, x * szTile.Width, y * szTile.Height, szTile.Width, szTile.Height);
                             Rectangle r = new Rectangle(szTile.Width * x, szTile.Height * y, szTile.Width, szTile.Height);
@@ -177,8 +177,8 @@ namespace Mosaic
                             {
                                 g.FillRectangle(new SolidBrush(avgsMaster[x, y]), r);
                             }
-                        });
-                    });
+                        };
+                    };
                 }
 
                 e.Result = image;
@@ -217,7 +217,7 @@ namespace Mosaic
             double maximum = tilesNames.Count;
             int index = 0;
 
-            Parallel.ForEach(tilesNames, tilePath =>
+            foreach (var tilePath in tilesNames)
             {
                 try
                 {
@@ -248,7 +248,7 @@ namespace Mosaic
                     log.Error(ex.Message, ex);
                     GC.WaitForPendingFinalizers();
                 }
-            });
+            }
 
             if (tilesColors.Count > 0)
             {
