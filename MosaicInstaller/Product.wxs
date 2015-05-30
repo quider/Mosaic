@@ -3,7 +3,7 @@
 <?define MAINEXE=$(var.Mosaic.TargetFileName)?>
 <?define VERSION=!(bind.FileVersion.$(var.MAINEXE))?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="*" Name="Mosaic $(var.Version)" Language="1033" Version="$(var.VERSION)" Manufacturer="Quider Software" UpgradeCode="624a7393-71ed-45f4-a128-5e9f4cd4ec70">
+  <Product Id="*" Name="Mosaic $(var.VERSION)" Language="1033" Version="$(var.VERSION)" Manufacturer="Quider Software" UpgradeCode="624a7393-71ed-45f4-a128-5e9f4cd4ec70">
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
 
     <UIRef Id="WixUI_FeatureTree" />
@@ -16,6 +16,10 @@
          Property="PREVIOUSVERSIONSINSTALLED"
          IncludeMinimum="yes" IncludeMaximum="no" />
     </Upgrade>
+
+    <Property Id="INSTALLFOLDER">
+      <RegistrySearch Id="Installpath" Type="directory" Root="HKLM" Key="Software\Quider Software\Mosaic" Name="Installed" />
+    </Property>
 
     <Feature Id="ProductFeature" Title="Mosaic" Level="1" ConfigurableDirectory="INSTALLFOLDER">
       <ComponentGroupRef Id="ProductComponents" />
@@ -49,6 +53,17 @@
         <File Source="$(var.bin)$(var.Configuration)\log4net.dll"></File>
         <CreateFolder Directory="pl" ></CreateFolder>
         <CreateFolder Directory="log" ></CreateFolder>
+      </Component>
+
+      <Component Id="RegistryEntriesInst" Guid="{65960CF9-152D-4A84-9F54-FE7708F5647A}">
+        <RegistryKey Root="HKLM" Key="Software\Quider Software\Mosaic" Action="createAndRemoveOnUninstall">
+          <RegistryValue Type="string" Name="installed"  Value="[INSTALLFOLDER]" KeyPath="yes"/>
+        </RegistryKey>
+      </Component>
+      <Component Id="RegistryEntriesVer" Guid="{9D184035-883E-4353-9D8C-D0CCCFBE4709}">
+        <RegistryKey Root="HKLM" Key="Software\Quider Software\Mosaic" Action="createAndRemoveOnUninstall">
+          <RegistryValue Type="string" Name="version" Value="$(var.VERSION)" KeyPath="yes"/>
+        </RegistryKey>
       </Component>
     </ComponentGroup>
 
