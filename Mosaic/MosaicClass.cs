@@ -49,23 +49,31 @@ namespace Mosaic
         {
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
             {
-                long aR = 0;
-                long aG = 0;
-                long aB = 0;
-                for (int w = x; w < x + width; w++)
+                try
                 {
-                    for (int h = y; h < y + height; h++)
+                    long aR = 0;
+                    long aG = 0;
+                    long aB = 0;
+                    for (int w = x; w < x + width; w++)
                     {
-                        Color cP = bSource.GetPixel(w, h);
-                        aR += cP.R;
-                        aG += cP.G;
-                        aB += cP.B;
+                        for (int h = y; h < y + height; h++)
+                        {
+                            Color cP = bSource.GetPixel(w, h);
+                            aR += cP.R;
+                            aG += cP.G;
+                            aB += cP.B;
+                        }
                     }
+                    aR = aR / (width * height);
+                    aG = aG / (width * height);
+                    aB = aB / (width * height);
+                    return Color.FromArgb(255, Convert.ToInt32(aR), Convert.ToInt32(aG), Convert.ToInt32(aB));
                 }
-                aR = aR / (width * height);
-                aG = aG / (width * height);
-                aB = aB / (width * height);
-                return Color.FromArgb(255, Convert.ToInt32(aR), Convert.ToInt32(aG), Convert.ToInt32(aB));
+                catch (Exception ex)
+                {
+                    log.Fatal(ex.Message, ex);
+                    throw;
+                }
             }
         }
 
@@ -163,22 +171,32 @@ namespace Mosaic
 
                 var maximum = tX * tY;
 
-                lock (image)
+                try
                 {
-                    for (int x = 0; x < tX; x++)
+                    lock (image)
                     {
-                        for (int y = 0; y < tY; y++)
+                        for (int x = 0; x < tX; x++)
                         {
-                            avgsMaster[x, y] = GetTileAverage(bMaster, x * szTile.Width, y * szTile.Height, szTile.Width, szTile.Height);
-                            Rectangle r = new Rectangle(szTile.Width * x, szTile.Height * y, szTile.Width, szTile.Height);
-                            worker.ReportProgress((int)((double)x / tX * 100), String.Format(strings.AveragingMasterBitmap));
-
-                            using (Graphics g = Graphics.FromImage(image))
+                            for (int y = 0; y < tY; y++)
                             {
-                                g.FillRectangle(new SolidBrush(avgsMaster[x, y]), r);
-                            }
+                                avgsMaster[x, y] = GetTileAverage(bMaster, x * szTile.Width, y * szTile.Height, szTile.Width, szTile.Height);
+                                Rectangle r = new Rectangle(szTile.Width * x, szTile.Height * y, szTile.Width, szTile.Height);
+                                worker.ReportProgress((int)((double)x / tX * 100), String.Format(strings.AveragingMasterBitmap));
+
+                                using (Graphics g = Graphics.FromImage(image))
+                                {
+                                    g.FillRectangle(new SolidBrush(avgsMaster[x, y]), r);
+                                }
+                            };
                         };
-                    };
+                    }
+                }
+                catch (Exception ex)
+                {
+                    log.FatalFormat("Fatal error during putting images into big image");
+                    log.Fatal(ex.Message, ex);
+                    worker.CancelAsync();
+                    return;
                 }
 
                 e.Result = image;

@@ -55,6 +55,11 @@ namespace Mosaic
             this.Text +="-"+ this.ProductVersion;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
@@ -88,6 +93,11 @@ namespace Mosaic
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CalculateColorsCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
@@ -102,6 +112,11 @@ namespace Mosaic
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void calculateMosaicBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
@@ -116,6 +131,11 @@ namespace Mosaic
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CalculateColorsProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
@@ -127,6 +147,11 @@ namespace Mosaic
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAdd_Click(object sender, EventArgs e)
         {
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
@@ -185,6 +210,11 @@ namespace Mosaic
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnGo_Click(object sender, EventArgs e)
         {
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
@@ -221,24 +251,42 @@ namespace Mosaic
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainForm_Shown(object sender, EventArgs e)
         {
             btnGo.Enabled = false;
             lblAddFirst.Visible = true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var about = new AboutBox();
             about.ShowDialog();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Image AverageImage
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
@@ -257,29 +305,54 @@ namespace Mosaic
             }
         }
 
-        void sfd_FileOk(object sender, CancelEventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        internal void sfd_FileOk(object sender, CancelEventArgs e)
         {
             var sfd = sender as SaveFileDialog;
             this.pictureBox.Image.Save(sfd.FileName);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Restart();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void contentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = new ContentForm();
             form.ShowDialog();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void customizeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = new SettingsForm();
             form.ShowDialog();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btCancelCalculate_Click(object sender, EventArgs e)
         {
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
