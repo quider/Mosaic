@@ -210,6 +210,9 @@
   <data name="Remove" xml:space="preserve">
     <value>Remove</value>
   </data>
+  <data name="Rescale" xml:space="preserve">
+    <value>Rescale</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Save picture</value>
   </data>

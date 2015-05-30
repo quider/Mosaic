@@ -46,6 +46,7 @@
             this.btnGo = new System.Windows.Forms.Button();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.gbxMosaic = new System.Windows.Forms.GroupBox();
+            this.btCancelCalculate = new System.Windows.Forms.Button();
             this.lblAddFirst = new System.Windows.Forms.Label();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,7 +67,8 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btCancelCalculate = new System.Windows.Forms.Button();
+            this.btRescale = new System.Windows.Forms.Button();
+            this.lblPercentage = new System.Windows.Forms.Label();
             this.gbxTiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudWidth)).BeginInit();
@@ -86,6 +88,7 @@
             // gbxTiles
             // 
             resources.ApplyResources(this.gbxTiles, "gbxTiles");
+            this.gbxTiles.Controls.Add(this.lblPercentage);
             this.gbxTiles.Controls.Add(this.lblHeight);
             this.gbxTiles.Controls.Add(this.lblWidth);
             this.gbxTiles.Controls.Add(this.nudHeight);
@@ -175,6 +178,7 @@
             // gbxMaster
             // 
             resources.ApplyResources(this.gbxMaster, "gbxMaster");
+            this.gbxMaster.Controls.Add(this.btRescale);
             this.gbxMaster.Controls.Add(this.cbxAdjustTiles);
             this.gbxMaster.Controls.Add(this.btnBrowse);
             this.gbxMaster.Controls.Add(this.tbxBrowse);
@@ -198,6 +202,8 @@
             // 
             resources.ApplyResources(this.tbxBrowse, "tbxBrowse");
             this.tbxBrowse.Name = "tbxBrowse";
+            this.tbxBrowse.ReadOnly = true;
+            this.tbxBrowse.TextChanged += new System.EventHandler(this.tbxBrowse_TextChanged);
             // 
             // btnGo
             // 
@@ -222,6 +228,13 @@
             resources.ApplyResources(this.gbxMosaic, "gbxMosaic");
             this.gbxMosaic.Name = "gbxMosaic";
             this.gbxMosaic.TabStop = false;
+            // 
+            // btCancelCalculate
+            // 
+            resources.ApplyResources(this.btCancelCalculate, "btCancelCalculate");
+            this.btCancelCalculate.Name = "btCancelCalculate";
+            this.btCancelCalculate.UseVisualStyleBackColor = true;
+            this.btCancelCalculate.Click += new System.EventHandler(this.btCancelCalculate_Click);
             // 
             // lblAddFirst
             // 
@@ -350,12 +363,17 @@
             this.checkUpdatesToolStripMenuItem.Name = "checkUpdatesToolStripMenuItem";
             resources.ApplyResources(this.checkUpdatesToolStripMenuItem, "checkUpdatesToolStripMenuItem");
             // 
-            // btCancelCalculate
+            // btRescale
             // 
-            resources.ApplyResources(this.btCancelCalculate, "btCancelCalculate");
-            this.btCancelCalculate.Name = "btCancelCalculate";
-            this.btCancelCalculate.UseVisualStyleBackColor = true;
-            this.btCancelCalculate.Click += new System.EventHandler(this.btCancelCalculate_Click);
+            resources.ApplyResources(this.btRescale, "btRescale");
+            this.btRescale.Name = "btRescale";
+            this.btRescale.UseVisualStyleBackColor = true;
+            this.btRescale.Click += new System.EventHandler(this.btRescale_Click);
+            // 
+            // lblPercentage
+            // 
+            resources.ApplyResources(this.lblPercentage, "lblPercentage");
+            this.lblPercentage.Name = "lblPercentage";
             // 
             // MainForm
             // 
@@ -425,6 +443,8 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem checkUpdatesToolStripMenuItem;
         private System.Windows.Forms.Button btCancelCalculate;
+        private System.Windows.Forms.Button btRescale;
+        private System.Windows.Forms.Label lblPercentage;
     }
 }
 

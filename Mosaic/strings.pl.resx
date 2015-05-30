@@ -210,6 +210,9 @@
   <data name="Remove" xml:space="preserve">
     <value>Usuń</value>
   </data>
+  <data name="Rescale" xml:space="preserve">
+    <value>Przelicz kolory</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Zapisz mozaikę</value>
   </data>

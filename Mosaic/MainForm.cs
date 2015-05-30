@@ -29,7 +29,7 @@ namespace Mosaic
             this.btnRemove.Text = strings.Remove;
             this.btnGo.Text = strings.Go;
             this.lblAddFirst.Text = strings.AddTilesFirst;
-            this.cbxAdjustTiles.Text = strings.AdjustHue;            
+            this.cbxAdjustTiles.Text = strings.AdjustHue;
             this.lblHeight.Text = strings.Height;
             this.lblWidth.Text = strings.Width;
             this.gbxTiles.Text = strings.Tiles;
@@ -52,7 +52,8 @@ namespace Mosaic
             this.customizeToolStripMenuItem.ToolTipText = strings.WillBeInFuture;
             this.checkUpdatesToolStripMenuItem.Text = strings.Update;
             this.btCancelCalculate.Text = strings.Cancel;
-            this.Text +="-"+ this.ProductVersion;
+            this.btRescale.Text = strings.Rescale;
+            this.Text += "-" + this.ProductVersion;
         }
 
         /// <summary>
@@ -64,17 +65,13 @@ namespace Mosaic
         {
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
             {
-                //this.pictureBox = new PictureBox();
                 try
                 {
+                    this.pictureBox.Image = null;
+                    this.pictureBox.Refresh();
                     OpenFileDialog openDialog = new OpenFileDialog();
                     openDialog.Multiselect = false;
                     this.mosaicClass = new MosaicClass();
-                    var backgroundCalculateColorsOnPicture = new BackgroundWorker();
-                    backgroundCalculateColorsOnPicture.WorkerReportsProgress = true;
-                    backgroundCalculateColorsOnPicture.DoWork += this.mosaicClass.CalculateColorsWork;
-                    backgroundCalculateColorsOnPicture.ProgressChanged += this.CalculateColorsProgressChanged;
-                    backgroundCalculateColorsOnPicture.RunWorkerCompleted += this.CalculateColorsCompleted;
 
                     if (openDialog.ShowDialog() == DialogResult.OK)
                     {
@@ -82,8 +79,8 @@ namespace Mosaic
                         this.pictureBox.Image = Image.FromFile(openDialog.FileName);
                     }
 
-                    backgroundCalculateColorsOnPicture.RunWorkerAsync(new object[] { Image.FromFile(openDialog.FileName), this.nudHeight.Value, nudWidth.Value });
-                    
+                    this.RunBackgroundWorkerForCalculateColorsOfMosaic(openDialog.FileName);
+
                     gbxTiles.Enabled = true;
                 }
                 catch (Exception ex)
@@ -93,8 +90,21 @@ namespace Mosaic
             }
         }
 
+        private void RunBackgroundWorkerForCalculateColorsOfMosaic(string fileName)
+        {
+            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
+            {
+                var backgroundCalculateColorsOnPicture = new BackgroundWorker();
+                backgroundCalculateColorsOnPicture.WorkerReportsProgress = true;
+                backgroundCalculateColorsOnPicture.DoWork += this.mosaicClass.CalculateColorsWork;
+                backgroundCalculateColorsOnPicture.ProgressChanged += this.CalculateColorsProgressChanged;
+                backgroundCalculateColorsOnPicture.RunWorkerCompleted += this.CalculateColorsCompleted;
+                backgroundCalculateColorsOnPicture.RunWorkerAsync(new object[] { Image.FromFile(fileName), this.nudHeight.Value, nudWidth.Value }); 
+            }
+        }
+
         /// <summary>
-        /// 
+        /// Set values to 0 for all settings
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -104,11 +114,12 @@ namespace Mosaic
             {
                 //Set all to 0;
                 pgbOperation.Value = 0;
+                this.lblPercentage.Text = "0%";
                 lblOperation.Text = strings.ColorsCalculated;
                 this.AverageImage = e.Result as Image;
                 this.pictureBox.Image = this.AverageImage;
                 this.pictureBox.Refresh();
-                this.btnGo.Enabled = true; 
+                this.btnGo.Enabled = true;
             }
         }
 
@@ -126,6 +137,7 @@ namespace Mosaic
                 this.pictureBox.Refresh();
                 this.pgbOperation.Value = 0;
                 this.lblOperation.Text = strings.Finished;
+                this.lblPercentage.Text = "0%";
                 this.btnGo.Enabled = true;
                 this.btCancelCalculate.Visible = false;
             }
@@ -143,7 +155,8 @@ namespace Mosaic
                 var progres = e.ProgressPercentage;
                 var v = e.UserState as String;
                 this.pgbOperation.Value = progres;
-                this.lblOperation.Text = v; 
+                this.lblPercentage.Text = string.Format("{0}%", progres);
+                this.lblOperation.Text = v;
             }
         }
 
@@ -189,10 +202,15 @@ namespace Mosaic
                     btnGo.Enabled = false;
                     lblAddFirst.Visible = true;
                     lblAddFirst.Text = strings.AddAtLeast15Tiles;
-                } 
+                }
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnRemove_Click(object sender, EventArgs e)
         {
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
@@ -206,7 +224,7 @@ namespace Mosaic
                     }
                 }
                 lbxTiles.Items.Clear();
-                lbxTiles.Items.AddRange(fNS.ToArray()); 
+                lbxTiles.Items.AddRange(fNS.ToArray());
             }
         }
 
@@ -235,7 +253,7 @@ namespace Mosaic
                     this.calculateMosaicBackgroundWorker.DoWork += this.mosaicClass.CalculateMosaic;
                     this.calculateMosaicBackgroundWorker.WorkerReportsProgress = true;
                     this.calculateMosaicBackgroundWorker.WorkerSupportsCancellation = true;
-                    btCancelCalculate.Visible = true;                    
+                    btCancelCalculate.Visible = true;
                     this.calculateMosaicBackgroundWorker.RunWorkerAsync(new object[] { this.AverageImage, items, (int)this.nudHeight.Value, (int)this.nudWidth.Value });
                     btnGo.Enabled = false;
                 }
@@ -247,7 +265,7 @@ namespace Mosaic
                 finally
                 {
                     Cursor = Cursors.Default;
-                } 
+                }
             }
         }
 
@@ -301,7 +319,7 @@ namespace Mosaic
                 {
 
                     throw;
-                } 
+                }
             }
         }
 
@@ -359,6 +377,37 @@ namespace Mosaic
             {
                 this.calculateMosaicBackgroundWorker.CancelAsync();
                 btnGo.Enabled = true;
+            }
+        }
+
+        /// <summary>
+        /// When text changed and lenght of text is longer than nothing
+        /// btrescale shohuld be ebabled or disabled.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tbxBrowse_TextChanged(object sender, EventArgs e)
+        {
+            if (tbxBrowse.Text.Length > 0)
+            {
+                btRescale.Enabled = true;
+            }
+            else
+            {
+                btRescale.Enabled = false;
+            }
+        }
+
+        /// <summary>
+        /// Action for clicking button rescale
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btRescale_Click(object sender, EventArgs e)
+        {
+            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
+            {
+                RunBackgroundWorkerForCalculateColorsOfMosaic(this.tbxBrowse.Text); 
             }
         }
     }
