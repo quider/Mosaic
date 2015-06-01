@@ -219,6 +219,9 @@
   <data name="SaveAs" xml:space="preserve">
     <value>Zapisz projekt</value>
   </data>
+  <data name="TerminatedByUser" xml:space="preserve">
+    <value>Proces przerwany przez użytkownika!</value>
+  </data>
   <data name="Tiles" xml:space="preserve">
     <value>Miniaurki</value>
   </data>
@@ -227,6 +230,9 @@
   </data>
   <data name="Update" xml:space="preserve">
     <value>Sprawdź aktualizacje</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Uwaga!</value>
   </data>
   <data name="Width" xml:space="preserve">
     <value>Szerokość</value>

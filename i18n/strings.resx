@@ -219,6 +219,9 @@
   <data name="SaveAs" xml:space="preserve">
     <value>Save project</value>
   </data>
+  <data name="TerminatedByUser" xml:space="preserve">
+    <value>Procedure terminated by user.</value>
+  </data>
   <data name="Tiles" xml:space="preserve">
     <value>Tiles</value>
   </data>
@@ -227,6 +230,9 @@
   </data>
   <data name="Update" xml:space="preserve">
     <value>Check update</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warning</value>
   </data>
   <data name="Width" xml:space="preserve">
     <value>Width</value>

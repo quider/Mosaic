@@ -244,6 +244,14 @@ namespace Mosaic
         {
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
             {
+                var settingsForm = new SettingsForm();
+                var result = settingsForm.ShowDialog();
+                if (result != System.Windows.Forms.DialogResult.OK)
+                {
+                    MessageBox.Show(strings.TerminatedByUser, strings.Warning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    log.InfoFormat("Procedure terminated by user");
+                    return;
+                }
                 var mosaicClass = new ClassicMosaic.ClassicMosaicCalculation();
 
                 try

@@ -367,6 +367,15 @@ namespace i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Procedure terminated by user..
+        /// </summary>
+        public static string TerminatedByUser {
+            get {
+                return ResourceManager.GetString("TerminatedByUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tiles.
         /// </summary>
         public static string Tiles {
@@ -390,6 +399,15 @@ namespace i18n {
         public static string Update {
             get {
                 return ResourceManager.GetString("Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning.
+        /// </summary>
+        public static string Warning {
+            get {
+                return ResourceManager.GetString("Warning", resourceCulture);
             }
         }
         
