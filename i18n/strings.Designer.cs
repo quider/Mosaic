@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Mosaic {
+namespace i18n {
     using System;
     
     
@@ -22,7 +22,7 @@ namespace Mosaic {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class strings {
+    public class strings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,10 +36,10 @@ namespace Mosaic {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Mosaic.strings", typeof(strings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("i18n.strings", typeof(strings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace Mosaic {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to About.
         /// </summary>
-        internal static string Aboutbox {
+        public static string Aboutbox {
             get {
                 return ResourceManager.GetString("Aboutbox", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Add.
         /// </summary>
-        internal static string Add {
+        public static string Add {
             get {
                 return ResourceManager.GetString("Add", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to At least you have to add 15 tiles..
         /// </summary>
-        internal static string AddAtLeast15Tiles {
+        public static string AddAtLeast15Tiles {
             get {
                 return ResourceManager.GetString("AddAtLeast15Tiles", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to You have to add some tiles first..
         /// </summary>
-        internal static string AddTilesFirst {
+        public static string AddTilesFirst {
             get {
                 return ResourceManager.GetString("AddTilesFirst", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Adjust tile hue.
         /// </summary>
-        internal static string AdjustHue {
+        public static string AdjustHue {
             get {
                 return ResourceManager.GetString("AdjustHue", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Averaging Master Bitmap....
         /// </summary>
-        internal static string AveragingMasterBitmap {
+        public static string AveragingMasterBitmap {
             get {
                 return ResourceManager.GetString("AveragingMasterBitmap", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Browse.
         /// </summary>
-        internal static string Browse {
+        public static string Browse {
             get {
                 return ResourceManager.GetString("Browse", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to I&apos;m calculating mosaic. This may take a while....
         /// </summary>
-        internal static string CalculateMosaic {
+        public static string CalculateMosaic {
             get {
                 return ResourceManager.GetString("CalculateMosaic", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
-        internal static string Cancel {
+        public static string Cancel {
             get {
                 return ResourceManager.GetString("Cancel", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Colors calculated..
         /// </summary>
-        internal static string ColorsCalculated {
+        public static string ColorsCalculated {
             get {
                 return ResourceManager.GetString("ColorsCalculated", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Contents.
         /// </summary>
-        internal static string Contents {
+        public static string Contents {
             get {
                 return ResourceManager.GetString("Contents", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Customize.
         /// </summary>
-        internal static string Customize {
+        public static string Customize {
             get {
                 return ResourceManager.GetString("Customize", resourceCulture);
             }
@@ -171,7 +171,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Directory does not exist..
         /// </summary>
-        internal static string DirectoryDoesNotExist {
+        public static string DirectoryDoesNotExist {
             get {
                 return ResourceManager.GetString("DirectoryDoesNotExist", resourceCulture);
             }
@@ -180,7 +180,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Exit.
         /// </summary>
-        internal static string Exit {
+        public static string Exit {
             get {
                 return ResourceManager.GetString("Exit", resourceCulture);
             }
@@ -189,7 +189,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to File.
         /// </summary>
-        internal static string FileMenu {
+        public static string FileMenu {
             get {
                 return ResourceManager.GetString("FileMenu", resourceCulture);
             }
@@ -198,7 +198,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Done!.
         /// </summary>
-        internal static string Finished {
+        public static string Finished {
             get {
                 return ResourceManager.GetString("Finished", resourceCulture);
             }
@@ -207,7 +207,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Go.
         /// </summary>
-        internal static string Go {
+        public static string Go {
             get {
                 return ResourceManager.GetString("Go", resourceCulture);
             }
@@ -216,7 +216,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Height.
         /// </summary>
-        internal static string Height {
+        public static string Height {
             get {
                 return ResourceManager.GetString("Height", resourceCulture);
             }
@@ -225,7 +225,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Help.
         /// </summary>
-        internal static string HelpMenu {
+        public static string HelpMenu {
             get {
                 return ResourceManager.GetString("HelpMenu", resourceCulture);
             }
@@ -234,7 +234,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Loading and Resizing Tile Images....
         /// </summary>
-        internal static string LoadingAndResizingTiles {
+        public static string LoadingAndResizingTiles {
             get {
                 return ResourceManager.GetString("LoadingAndResizingTiles", resourceCulture);
             }
@@ -243,7 +243,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Loading maser file....
         /// </summary>
-        internal static string LoadingMasterFile {
+        public static string LoadingMasterFile {
             get {
                 return ResourceManager.GetString("LoadingMasterFile", resourceCulture);
             }
@@ -252,7 +252,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Master image.
         /// </summary>
-        internal static string MasterImage {
+        public static string MasterImage {
             get {
                 return ResourceManager.GetString("MasterImage", resourceCulture);
             }
@@ -261,7 +261,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Mosaic.
         /// </summary>
-        internal static string Mosaic {
+        public static string Mosaic {
             get {
                 return ResourceManager.GetString("Mosaic", resourceCulture);
             }
@@ -270,7 +270,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to New.
         /// </summary>
-        internal static string New {
+        public static string New {
             get {
                 return ResourceManager.GetString("New", resourceCulture);
             }
@@ -279,7 +279,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Open.
         /// </summary>
-        internal static string Open {
+        public static string Open {
             get {
                 return ResourceManager.GetString("Open", resourceCulture);
             }
@@ -288,7 +288,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Options.
         /// </summary>
-        internal static string Options {
+        public static string Options {
             get {
                 return ResourceManager.GetString("Options", resourceCulture);
             }
@@ -297,7 +297,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Print.
         /// </summary>
-        internal static string Print {
+        public static string Print {
             get {
                 return ResourceManager.GetString("Print", resourceCulture);
             }
@@ -306,7 +306,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Print preview.
         /// </summary>
-        internal static string PrintPreview {
+        public static string PrintPreview {
             get {
                 return ResourceManager.GetString("PrintPreview", resourceCulture);
             }
@@ -315,7 +315,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Filling main picture.
         /// </summary>
-        internal static string Randomizing {
+        public static string Randomizing {
             get {
                 return ResourceManager.GetString("Randomizing", resourceCulture);
             }
@@ -324,7 +324,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Ready.
         /// </summary>
-        internal static string Ready {
+        public static string Ready {
             get {
                 return ResourceManager.GetString("Ready", resourceCulture);
             }
@@ -333,7 +333,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Remove.
         /// </summary>
-        internal static string Remove {
+        public static string Remove {
             get {
                 return ResourceManager.GetString("Remove", resourceCulture);
             }
@@ -342,7 +342,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Rescale.
         /// </summary>
-        internal static string Rescale {
+        public static string Rescale {
             get {
                 return ResourceManager.GetString("Rescale", resourceCulture);
             }
@@ -351,7 +351,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Save picture.
         /// </summary>
-        internal static string Save {
+        public static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
             }
@@ -360,7 +360,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Save project.
         /// </summary>
-        internal static string SaveAs {
+        public static string SaveAs {
             get {
                 return ResourceManager.GetString("SaveAs", resourceCulture);
             }
@@ -369,7 +369,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Tiles.
         /// </summary>
-        internal static string Tiles {
+        public static string Tiles {
             get {
                 return ResourceManager.GetString("Tiles", resourceCulture);
             }
@@ -378,7 +378,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Tools.
         /// </summary>
-        internal static string ToolsMenu {
+        public static string ToolsMenu {
             get {
                 return ResourceManager.GetString("ToolsMenu", resourceCulture);
             }
@@ -387,7 +387,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Check update.
         /// </summary>
-        internal static string Update {
+        public static string Update {
             get {
                 return ResourceManager.GetString("Update", resourceCulture);
             }
@@ -396,7 +396,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Width.
         /// </summary>
-        internal static string Width {
+        public static string Width {
             get {
                 return ResourceManager.GetString("Width", resourceCulture);
             }
@@ -405,7 +405,7 @@ namespace Mosaic {
         /// <summary>
         ///   Looks up a localized string similar to Will be in future.
         /// </summary>
-        internal static string WillBeInFuture {
+        public static string WillBeInFuture {
             get {
                 return ResourceManager.GetString("WillBeInFuture", resourceCulture);
             }

@@ -51,6 +51,10 @@
         <File Source="$(var.bin)$(var.Configuration)\Mosaic.exe"></File>
         <File Source="$(var.bin)$(var.Configuration)\Mosaic.exe.config"></File>
         <File Source="$(var.bin)$(var.Configuration)\log4net.dll"></File>
+        <File Source="$(var.bin)$(var.Configuration)\ClassicMosaic.dll"></File>
+        <File Source="$(var.bin)$(var.Configuration)\ColorsCalculation.dll"></File>
+        <File Source="$(var.bin)$(var.Configuration)\i18n.dll"></File>
+        <File Source="$(var.bin)$(var.Configuration)\Utilities.dll"></File>
         <CreateFolder Directory="pl" ></CreateFolder>
         <CreateFolder Directory="log" ></CreateFolder>
       </Component>
@@ -69,7 +73,7 @@
 
     <ComponentGroup Id="TranslationsGroup" Directory="pl">
       <Component Id="polish" Guid="{066502E1-A756-4F63-88CF-EF02BAC9EE7A}">
-        <File Source="$(var.bin)$(var.Configuration)\pl\Mosaic.resources.dll"></File>
+        <File Source="$(var.bin)$(var.Configuration)\pl\i18n.resources.dll"></File>
       </Component>
     </ComponentGroup>
 

@@ -1,4 +1,6 @@
-﻿using log4net;
+﻿using ColorsCalculation;
+using i18n;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,10 +15,15 @@ using System.Windows.Forms;
 namespace Mosaic
 {
     public partial class MainForm : Form
-    {
-        private MosaicClass mosaicClass;
+    {        
         private static ILog log = LogManager.GetLogger(typeof(MainForm));
         private BackgroundWorker calculateMosaicBackgroundWorker;
+        
+        public ColorCalculation mosaicColors
+        {
+            get;
+            set;
+        }
 
         public MainForm()
         {
@@ -71,7 +78,6 @@ namespace Mosaic
                     this.pictureBox.Refresh();
                     OpenFileDialog openDialog = new OpenFileDialog();
                     openDialog.Multiselect = false;
-                    this.mosaicClass = new MosaicClass();
 
                     if (openDialog.ShowDialog() == DialogResult.OK)
                     {
@@ -94,9 +100,10 @@ namespace Mosaic
         {
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
             {
+                this.mosaicColors = new ColorCalculation();
                 var backgroundCalculateColorsOnPicture = new BackgroundWorker();
                 backgroundCalculateColorsOnPicture.WorkerReportsProgress = true;
-                backgroundCalculateColorsOnPicture.DoWork += this.mosaicClass.CalculateColorsWork;
+                backgroundCalculateColorsOnPicture.DoWork += mosaicColors.CalculateColorsWork;
                 backgroundCalculateColorsOnPicture.ProgressChanged += this.CalculateColorsProgressChanged;
                 backgroundCalculateColorsOnPicture.RunWorkerCompleted += this.CalculateColorsCompleted;
                 backgroundCalculateColorsOnPicture.RunWorkerAsync(new object[] { Image.FromFile(fileName), this.nudHeight.Value, nudWidth.Value }); 
@@ -237,6 +244,8 @@ namespace Mosaic
         {
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
             {
+                var mosaicClass = new ClassicMosaic.ClassicMosaicCalculation();
+
                 try
                 {
                     List<string> items = new List<string>();
@@ -250,11 +259,11 @@ namespace Mosaic
                     this.calculateMosaicBackgroundWorker = new BackgroundWorker();
                     this.calculateMosaicBackgroundWorker.ProgressChanged += CalculateColorsProgressChanged;
                     this.calculateMosaicBackgroundWorker.RunWorkerCompleted += calculateMosaicBackgroundWorker_RunWorkerCompleted;
-                    this.calculateMosaicBackgroundWorker.DoWork += this.mosaicClass.CalculateMosaic;
+                    this.calculateMosaicBackgroundWorker.DoWork += mosaicClass.CalculateMosaic;
                     this.calculateMosaicBackgroundWorker.WorkerReportsProgress = true;
                     this.calculateMosaicBackgroundWorker.WorkerSupportsCancellation = true;
                     btCancelCalculate.Visible = true;
-                    this.calculateMosaicBackgroundWorker.RunWorkerAsync(new object[] { this.AverageImage, items, (int)this.nudHeight.Value, (int)this.nudWidth.Value });
+                    this.calculateMosaicBackgroundWorker.RunWorkerAsync(new object[] { this.AverageImage, items, (int)this.nudHeight.Value, (int)this.nudWidth.Value, this.mosaicColors.avgsMaster});
                     btnGo.Enabled = false;
                 }
                 catch (Exception x)
@@ -312,6 +321,7 @@ namespace Mosaic
                 try
                 {
                     SaveFileDialog sfd = new SaveFileDialog();
+                    sfd.Filter = "Bitmapa | *.bmp";
                     sfd.FileOk += sfd_FileOk;
                     sfd.ShowDialog();
                 }
@@ -410,5 +420,7 @@ namespace Mosaic
                 RunBackgroundWorkerForCalculateColorsOfMosaic(this.tbxBrowse.Text); 
             }
         }
+
+        
     }
 }
