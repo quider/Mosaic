@@ -225,6 +225,9 @@
   <data name="Tiles" xml:space="preserve">
     <value>Tiles</value>
   </data>
+  <data name="TilesRandomize" xml:space="preserve">
+    <value>Tiles randomize</value>
+  </data>
   <data name="ToolsMenu" xml:space="preserve">
     <value>Tools</value>
   </data>

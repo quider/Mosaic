@@ -385,6 +385,15 @@ namespace i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tiles randomize.
+        /// </summary>
+        public static string TilesRandomize {
+            get {
+                return ResourceManager.GetString("TilesRandomize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tools.
         /// </summary>
         public static string ToolsMenu {

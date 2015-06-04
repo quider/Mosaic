@@ -1,6 +1,7 @@
 ﻿using ColorsCalculation;
 using i18n;
 using log4net;
+using Mosaic.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -252,7 +253,7 @@ namespace Mosaic
                     log.InfoFormat("Procedure terminated by user");
                     return;
                 }
-                var mosaicClass = new ClassicMosaic.ClassicMosaicCalculation();
+                var mosaicClass = new ClassicMosaic.ClassicMosaicCalculation(Settings.Default.Hue);
 
                 try
                 {
