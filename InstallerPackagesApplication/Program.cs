@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -28,7 +29,15 @@ namespace InstallerPackagesApplication
             string ftpPassword = "!nichuja.1990";
 
             FileInfo objFile = new FileInfo(filename+".msi");
-            objFile.MoveTo(filename+"_"+args[3]+"_"+args[2]+"_"+version.ToString(4)+".msi");
+            string movedFile = filename + "_" + args[3] + "_" + args[2] + "_" + version.ToString(4) + ".msi";
+            try
+            {
+                objFile.MoveTo(movedFile);
+            }
+            catch (Exception ex)
+            {
+                var s = ex.Message;               
+            }
             FtpWebRequest objFTPRequest;
 
             // Create FtpWebRequest object 
@@ -90,14 +99,14 @@ namespace InstallerPackagesApplication
             using (MySqlCommand cmd = connection.CreateCommand())
             {    //watch out for this SQL injection vulnerability below
                 cmd.CommandText = 
-                    "INSERT INTO actual_mosaic (address, major, minor, release, build, date) VALUES ( @address, @major, @minor, @release, @build, @date)";
+                    "INSERT INTO actual_mosaic (address, major, minor, `release`, build, date) VALUES ( @address, @major, @minor, @release, @build, @date)";
 
-                cmd.Parameters.AddWithValue("@address", objFile.Name);
+                cmd.Parameters.AddWithValue("@address", Path.GetFileName(movedFile));
                 cmd.Parameters.AddWithValue("@major", version.Major);
                 cmd.Parameters.AddWithValue("@minor", version.Minor);
                 cmd.Parameters.AddWithValue("@release", version.MinorRevision);
                 cmd.Parameters.AddWithValue("@build", version.Build);
-                cmd.Parameters.AddWithValue("@date", DateTime.Now);
+                cmd.Parameters.AddWithValue("@date", DateTime.Now.ToString("yyyyMMddHHmmss"));
                 
                 var reader = cmd.ExecuteNonQuery();
                 
