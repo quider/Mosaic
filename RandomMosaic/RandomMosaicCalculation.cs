@@ -71,8 +71,6 @@ namespace RandomMosaic
                             bitmapTile = Utils.ResizeBitmap(bitmapTile, sizeTile);
                             bitmapTile.Save(tilename);
                             log.DebugFormat("Tile saved");
-                            tilesColors.Add(tilename, Utils.GetTileAverage(bitmapTile, 0, 0, sizeTile.Width, sizeTile.Height));
-                            log.DebugFormat("Color added to collection {0}", tilesColors[tilename]);
                             worker.ReportProgress((int)((index / maximum) * 100), String.Format(strings.LoadingAndResizingTiles));
                         }
                         index++;
@@ -90,112 +88,48 @@ namespace RandomMosaic
                 }
             }
 
-            if (tilesColors.Count > 0)
+            worker.ReportProgress(0, strings.CalculateMosaic);
+
+            log.DebugFormat("Image divided onto {0}x{1}", tX, tY);
+            var searchCounter = 1;
+            List<string>[,] matchedColors = new List<string>[tX, tY];
+            Random random = new Random();
+            Parallel.For(0, tX, x =>
             {
-                //TODO: get as parameter
-                //if (bAdjustHue)
-                log.Debug("Non hue algorythm");
-                worker.ReportProgress(0, strings.CalculateMosaic);
-                // Don't adjust hue - keep searching for a tile close enough
-                log.DebugFormat("Image divided onto {0}x{1}", tX, tY);
-                var searchCounter = 1;
-                List<string>[,] matchedColors = new List<string>[tX, tY];
-
-                Parallel.For(0, tX, x =>
+                Parallel.For(0, tY, (y) =>
                 {
-                    Parallel.For(0, tY, (y) =>
+                    Bitmap found = null;
+                    maximum = tX * tY + 1;
+                    var percentage = (int)((searchCounter / maximum) * 100);
+                    worker.ReportProgress(percentage, strings.CalculateMosaic);
+                    var i = random.Next(tilesNames.Count - 1);
+                    log.DebugFormat("Used image: {0}, index: {1}", searchCounter, i);
+                    string name = "tiles\\" + i.ToString() + ".bmp";
+                    log.DebugFormat("Tile name {0}", name);
+                    try
                     {
-                        var buffer = 25;
-                        log.DebugFormat("Color buffer set to {0}", buffer);
+                        found = new Bitmap(name);
+                        log.DebugFormat("Created bitmap from image {0}", name);
 
-                        int i = 0;
-                        maximum = tX * tY + 1;
-                        var percentage = (int)((searchCounter / maximum) * 100);
-                        worker.ReportProgress(percentage, strings.CalculateMosaic);
+                        TextureBrush tBrush = new TextureBrush(Utils.AdjustHue(found, avgsMaster[x, y]));
 
-                        var colors = new List<string>();
+                        Pen blackPen = new Pen(Color.Black);
 
-                        while (tilesColors.Count - 1 >= i)
+                        using (var g = Graphics.FromImage(image))
                         {
-                            log.DebugFormat("Searchcounter: {0}, index: {1}", searchCounter, i);
-                            string name = "tiles\\" + i.ToString() + ".bmp";
-                            log.DebugFormat("Tile name {0}", name);
-                            try
-                            {
-                                if (Utils.GetDifference(avgsMaster[x, y], tilesColors[name]) < buffer)
-                                {
-                                    colors.Add(name);
-                                    log.InfoFormat("added for x={0} y={1} filename: {2}", x, y, name);
-                                }
-                                else
-                                {
-                                    // in case of buffer is not enough
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                log.ErrorFormat("Name of tile during error {0}", name);
-                                log.Error(ex.Message, ex);
-                            }
-                            i++;
-                            if (tilesColors.Count == i && colors.Count < 3)
-                            {
-                                i = 0;
-                                buffer += 25;
-                                log.InfoFormat("buffer set to {0}", buffer);
-                            }
+                            g.FillRectangle(tBrush, new Rectangle(x * width, y * height, width, height));
                         }
-                        matchedColors[x, y] = colors;
-                        searchCounter++;
-                    });
-                });
-
-                //here looking for colors in table and chose from list:
-
-                var random = new Random();
-                searchCounter = 0;
-                Parallel.For(0, tX, x =>
-                {
-                    Parallel.For(0, tY, y =>
+                    }
+                    catch (Exception ex)
                     {
-                        try
-                        {
-                            searchCounter++;
-                            maximum = tX * tY + 1;
-                            var percentage = (int)((searchCounter / maximum) * 100);
-                            worker.ReportProgress(percentage, strings.TilesRandomize);
-
-                            Bitmap found = null;
-                            if (matchedColors[x, y].Count > 1)
-                            {
-                                log.InfoFormat("array do not contain any tile!");
-                            }
-                            var list = matchedColors[x, y].ToArray();
-                            var name = list[random.Next(list.Length)];
-                            log.InfoFormat("Image fit to average color: {0}", avgsMaster[x, y]);
-                            found = new Bitmap(name);
-                            log.DebugFormat("Created bitmap from image {0}", name);
-                            TextureBrush tBrush = new TextureBrush(found);
-
-
-                            Pen blackPen = new Pen(Color.Black);
-
-                            using (var g = Graphics.FromImage(image))
-                            {
-                                g.FillRectangle(tBrush, new Rectangle(x * width, y * height, width, height));
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            log.ErrorFormat("Error during finding x={0} y={1}", x, y);
-                            log.Error(ex.Message, ex);
-                        }
-                    });
+                        log.ErrorFormat("Name of tile during error {0}", name);
+                        log.Error(ex.Message, ex);
+                    }
+                    i++;
+                    searchCounter++;
                 });
-            }
-            if (this.useHue)
-            {
-            }
+            });
+            
             log.DebugFormat("Finishig calculate of mosaic");
             e.Result = image;
         }

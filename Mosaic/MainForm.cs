@@ -2,6 +2,7 @@
 using i18n;
 using log4net;
 using Mosaic.Properties;
+using RandomMosaic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -253,37 +254,84 @@ namespace Mosaic
                     log.InfoFormat("Procedure terminated by user");
                     return;
                 }
-                var mosaicClass = new ClassicMosaic.ClassicMosaicCalculation(Settings.Default.Hue);
+                switch (Settings.Default.TilesPlaced)
+                {
+                    case 0:
+                        RandomMosaic(); break;
+                    case 1:
+                        ClassicMosaic();break;
+                }
+               
+            }
+        }
 
-                try
-                {
-                    List<string> items = new List<string>();
-                    foreach (string item in this.lbxTiles.Items)
-                    {
-                        items.Add(item);
-                    }
+        private void RandomMosaic()
+        {
+            var mosaicClass = new RandomMosaicCalculation(Settings.Default.Hue);
 
-                    Cursor = Cursors.WaitCursor;
-                    Size szTile = new Size(Convert.ToInt16(nudWidth.Value), Convert.ToInt16(nudHeight.Value));
-                    this.calculateMosaicBackgroundWorker = new BackgroundWorker();
-                    this.calculateMosaicBackgroundWorker.ProgressChanged += CalculateColorsProgressChanged;
-                    this.calculateMosaicBackgroundWorker.RunWorkerCompleted += calculateMosaicBackgroundWorker_RunWorkerCompleted;
-                    this.calculateMosaicBackgroundWorker.DoWork += mosaicClass.CalculateMosaic;
-                    this.calculateMosaicBackgroundWorker.WorkerReportsProgress = true;
-                    this.calculateMosaicBackgroundWorker.WorkerSupportsCancellation = true;
-                    btCancelCalculate.Visible = true;
-                    this.calculateMosaicBackgroundWorker.RunWorkerAsync(new object[] { this.AverageImage, items, (int)this.nudHeight.Value, (int)this.nudWidth.Value, this.mosaicColors.avgsMaster});
-                    btnGo.Enabled = false;
-                }
-                catch (Exception x)
+            try
+            {
+                List<string> items = new List<string>();
+                foreach (string item in this.lbxTiles.Items)
                 {
-                    log.Fatal(x.Message, x);
-                    MessageBox.Show(this, x.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    items.Add(item);
                 }
-                finally
+
+                Cursor = Cursors.WaitCursor;
+                Size szTile = new Size(Convert.ToInt16(nudWidth.Value), Convert.ToInt16(nudHeight.Value));
+                this.calculateMosaicBackgroundWorker = new BackgroundWorker();
+                this.calculateMosaicBackgroundWorker.ProgressChanged += CalculateColorsProgressChanged;
+                this.calculateMosaicBackgroundWorker.RunWorkerCompleted += calculateMosaicBackgroundWorker_RunWorkerCompleted;
+                this.calculateMosaicBackgroundWorker.DoWork += mosaicClass.CalculateRandomMosaic;
+                this.calculateMosaicBackgroundWorker.WorkerReportsProgress = true;
+                this.calculateMosaicBackgroundWorker.WorkerSupportsCancellation = true;
+                btCancelCalculate.Visible = true;
+                this.calculateMosaicBackgroundWorker.RunWorkerAsync(new object[] { this.AverageImage, items, (int)this.nudHeight.Value, (int)this.nudWidth.Value, this.mosaicColors.avgsMaster });
+                btnGo.Enabled = false;
+            }
+            catch (Exception x)
+            {
+                log.Fatal(x.Message, x);
+                MessageBox.Show(this, x.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
+            }
+        }       
+
+        private void ClassicMosaic()
+        {
+            var mosaicClass = new ClassicMosaic.ClassicMosaicCalculation(Settings.Default.Hue);
+
+            try
+            {
+                List<string> items = new List<string>();
+                foreach (string item in this.lbxTiles.Items)
                 {
-                    Cursor = Cursors.Default;
+                    items.Add(item);
                 }
+
+                Cursor = Cursors.WaitCursor;
+                Size szTile = new Size(Convert.ToInt16(nudWidth.Value), Convert.ToInt16(nudHeight.Value));
+                this.calculateMosaicBackgroundWorker = new BackgroundWorker();
+                this.calculateMosaicBackgroundWorker.ProgressChanged += CalculateColorsProgressChanged;
+                this.calculateMosaicBackgroundWorker.RunWorkerCompleted += calculateMosaicBackgroundWorker_RunWorkerCompleted;
+                this.calculateMosaicBackgroundWorker.DoWork += mosaicClass.CalculateMosaic;
+                this.calculateMosaicBackgroundWorker.WorkerReportsProgress = true;
+                this.calculateMosaicBackgroundWorker.WorkerSupportsCancellation = true;
+                btCancelCalculate.Visible = true;
+                this.calculateMosaicBackgroundWorker.RunWorkerAsync(new object[] { this.AverageImage, items, (int)this.nudHeight.Value, (int)this.nudWidth.Value, this.mosaicColors.avgsMaster });
+                btnGo.Enabled = false;
+            }
+            catch (Exception x)
+            {
+                log.Fatal(x.Message, x);
+                MessageBox.Show(this, x.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Cursor = Cursors.Default;
             }
         }
 
