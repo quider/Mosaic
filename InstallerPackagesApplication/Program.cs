@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -76,6 +77,30 @@ namespace InstallerPackagesApplication
             catch (Exception ex)
             {
                 throw ex;
+            }
+
+            MySqlConnectionStringBuilder connString = new MySqlConnectionStringBuilder();
+            connString.Server = "sql7.netmark.pl";
+            connString.UserID = "quiderpl_transac";
+            connString.Password = "!nichuja";
+            connString.Database = "quiderpl_biblioteka_actual";
+
+            MySql.Data.MySqlClient.MySqlConnection connection = new MySql.Data.MySqlClient.MySqlConnection(connString.ToString());
+            connection.Open();
+            using (MySqlCommand cmd = connection.CreateCommand())
+            {    //watch out for this SQL injection vulnerability below
+                cmd.CommandText = 
+                    "INSERT INTO actual_mosaic (address, major, minor, release, build, date) VALUES ( @address, @major, @minor, @release, @build, @date)";
+
+                cmd.Parameters.AddWithValue("@address", objFile.Name);
+                cmd.Parameters.AddWithValue("@major", version.Major);
+                cmd.Parameters.AddWithValue("@minor", version.Minor);
+                cmd.Parameters.AddWithValue("@release", version.MinorRevision);
+                cmd.Parameters.AddWithValue("@build", version.Build);
+                cmd.Parameters.AddWithValue("@date", DateTime.Now);
+                
+                var reader = cmd.ExecuteNonQuery();
+                
             }
         }
     }
