@@ -55,6 +55,7 @@
         <File Source="$(var.bin)$(var.Configuration)\ColorsCalculation.dll"></File>
         <File Source="$(var.bin)$(var.Configuration)\i18n.dll"></File>
         <File Source="$(var.bin)$(var.Configuration)\Utilities.dll"></File>
+        <File Source="$(var.bin)$(var.Configuration)\RandomMosaic.dll"></File>
         <CreateFolder Directory="pl" ></CreateFolder>
         <CreateFolder Directory="log" ></CreateFolder>
       </Component>
