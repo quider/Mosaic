@@ -385,6 +385,15 @@ namespace i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to It&apos;s not possible to use main image as tile. Do you want to make a copy of and use it as tile?.
+        /// </summary>
+        public static string SamePictureFound {
+            get {
+                return ResourceManager.GetString("SamePictureFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save picture.
         /// </summary>
         public static string Save {

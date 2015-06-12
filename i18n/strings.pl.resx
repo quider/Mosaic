@@ -225,6 +225,9 @@
   <data name="Rescale" xml:space="preserve">
     <value>Przelicz kolory</value>
   </data>
+  <data name="SamePictureFound" xml:space="preserve">
+    <value>Nie można użyć zdjęcia głownego jako kawałka mozaiki. Czy chcesz zrobić kopię obrazka i użyć go?</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Zapisz mozaikę</value>
   </data>

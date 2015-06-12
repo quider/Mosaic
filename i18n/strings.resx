@@ -225,6 +225,9 @@
   <data name="Rescale" xml:space="preserve">
     <value>Rescale</value>
   </data>
+  <data name="SamePictureFound" xml:space="preserve">
+    <value>It's not possible to use main image as tile. Do you want to make a copy of and use it as tile?</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Save picture</value>
   </data>

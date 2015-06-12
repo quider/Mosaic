@@ -18,10 +18,10 @@ using System.Windows.Forms;
 namespace Mosaic
 {
     public partial class MainForm : Form
-    {        
+    {
         private static ILog log = LogManager.GetLogger(typeof(MainForm));
         private BackgroundWorker calculateMosaicBackgroundWorker;
-        
+
         public ColorCalculation mosaicColors
         {
             get;
@@ -109,7 +109,7 @@ namespace Mosaic
                 backgroundCalculateColorsOnPicture.DoWork += mosaicColors.CalculateColorsWork;
                 backgroundCalculateColorsOnPicture.ProgressChanged += this.CalculateColorsProgressChanged;
                 backgroundCalculateColorsOnPicture.RunWorkerCompleted += this.CalculateColorsCompleted;
-                backgroundCalculateColorsOnPicture.RunWorkerAsync(new object[] { Image.FromFile(fileName), this.nudHeight.Value, nudWidth.Value }); 
+                backgroundCalculateColorsOnPicture.RunWorkerAsync(new object[] { Image.FromFile(fileName), this.nudHeight.Value, nudWidth.Value });
             }
         }
 
@@ -188,9 +188,23 @@ namespace Mosaic
                         DirectoryInfo di = new DirectoryInfo(oD.SelectedPath);
                         foreach (FileInfo fN in di.GetFiles())
                         {
-                            if (!(lbxTiles.Items.Contains(fN.FullName)))
+                            var name = fN.FullName;
+                            if (name.Equals(this.tbxBrowse.Text))
                             {
-                                lbxTiles.Items.Add(fN.FullName);
+                                var result = MessageBox.Show(strings.SamePictureFound, strings.Warning, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                                if (result == System.Windows.Forms.DialogResult.Yes)
+                                {
+                                    do
+                                    {
+                                        name = Path.Combine(Path.GetDirectoryName(name), Path.GetFileNameWithoutExtension(name) + "_Copy" + Path.GetExtension(name));
+                                    } while (File.Exists(name));
+
+                                    File.Copy(this.tbxBrowse.Text, name);
+                                }
+                            }
+                            if (!(lbxTiles.Items.Contains(name)))
+                            {
+                                lbxTiles.Items.Add(name);
                             }
                         }
                     }
@@ -258,14 +272,19 @@ namespace Mosaic
                 switch (Settings.Default.TilesPlaced)
                 {
                     case 0:
-                        RandomMosaic(); break;
+                        RandomMosaic();
+                        break;
                     case 1:
-                        ClassicMosaic();break;
+                        ClassicMosaic();
+                        break;
                 }
-               
+
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void RandomMosaic()
         {
             var mosaicClass = new RandomMosaicCalculation(Settings.Default.Hue);
@@ -299,8 +318,11 @@ namespace Mosaic
             {
                 Cursor = Cursors.Default;
             }
-        }       
+        }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void ClassicMosaic()
         {
             var mosaicClass = new ClassicMosaic.ClassicMosaicCalculation(Settings.Default.Hue);
@@ -411,11 +433,17 @@ namespace Mosaic
             ImageFormat imageFormat = ImageFormat.Bmp;
             switch (extension)
             {
-                case ".BMP": imageFormat = ImageFormat.Bmp;break;
-                case ".PNG": imageFormat = ImageFormat.Png;break;
-                case ".GIF": imageFormat = ImageFormat.Gif;break;
+                case ".BMP":
+                    imageFormat = ImageFormat.Bmp;
+                    break;
+                case ".PNG":
+                    imageFormat = ImageFormat.Png;
+                    break;
+                case ".GIF":
+                    imageFormat = ImageFormat.Gif;
+                    break;
             }
-            this.pictureBox.Image.Save(sfd.FileName,imageFormat);
+            this.pictureBox.Image.Save(sfd.FileName, imageFormat);
         }
 
         /// <summary>
@@ -491,10 +519,10 @@ namespace Mosaic
         {
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
             {
-                RunBackgroundWorkerForCalculateColorsOfMosaic(this.tbxBrowse.Text); 
+                RunBackgroundWorkerForCalculateColorsOfMosaic(this.tbxBrowse.Text);
             }
         }
 
-        
+
     }
 }
