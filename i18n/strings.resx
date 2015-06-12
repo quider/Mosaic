@@ -135,6 +135,9 @@
   <data name="AveragingMasterBitmap" xml:space="preserve">
     <value>Averaging Master Bitmap...</value>
   </data>
+  <data name="Bitmap" xml:space="preserve">
+    <value>Bitmap</value>
+  </data>
   <data name="Browse" xml:space="preserve">
     <value>Browse</value>
   </data>
@@ -165,6 +168,9 @@
   <data name="Finished" xml:space="preserve">
     <value>Done!</value>
   </data>
+  <data name="GIFPicture" xml:space="preserve">
+    <value>GIF image</value>
+  </data>
   <data name="Go" xml:space="preserve">
     <value>Go</value>
   </data>
@@ -194,6 +200,9 @@
   </data>
   <data name="Options" xml:space="preserve">
     <value>Options</value>
+  </data>
+  <data name="PNGPicture" xml:space="preserve">
+    <value>PNG image</value>
   </data>
   <data name="Print" xml:space="preserve">
     <value>Print</value>

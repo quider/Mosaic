@@ -135,6 +135,9 @@
   <data name="AveragingMasterBitmap" xml:space="preserve">
     <value>Uśredniam kolory obrazu...</value>
   </data>
+  <data name="Bitmap" xml:space="preserve">
+    <value>Bitmapa</value>
+  </data>
   <data name="Browse" xml:space="preserve">
     <value>Wyszukaj</value>
   </data>
@@ -165,6 +168,9 @@
   <data name="Finished" xml:space="preserve">
     <value>Gotowe, możesz zapisać (Ctrl + S) obraz.</value>
   </data>
+  <data name="GIFPicture" xml:space="preserve">
+    <value>Obraz GIF</value>
+  </data>
   <data name="Go" xml:space="preserve">
     <value>Oblicz</value>
   </data>
@@ -194,6 +200,9 @@
   </data>
   <data name="Options" xml:space="preserve">
     <value>Opcje </value>
+  </data>
+  <data name="PNGPicture" xml:space="preserve">
+    <value>Obraz PNG</value>
   </data>
   <data name="Print" xml:space="preserve">
     <value>Drukuj</value>

@@ -378,7 +378,15 @@ namespace Mosaic
                 try
                 {
                     SaveFileDialog sfd = new SaveFileDialog();
-                    sfd.Filter = "Bitmapa | *.bmp";
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append(strings.Bitmap);
+                    sb.Append("|*.bmp|");
+                    sb.Append(strings.PNGPicture);
+                    sb.Append("|*.png|");
+                    sb.Append(strings.GIFPicture);
+                    sb.Append("|*.gif");
+
+                    sfd.Filter = sb.ToString();
                     sfd.FileOk += sfd_FileOk;
                     sfd.ShowDialog();
                 }
