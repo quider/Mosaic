@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -390,10 +391,10 @@ namespace Mosaic
                     sfd.FileOk += sfd_FileOk;
                     sfd.ShowDialog();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-
-                    throw;
+                    log.Error(ex.Message, ex);
+                    MessageBox.Show(ex.Message, strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -406,7 +407,15 @@ namespace Mosaic
         internal void sfd_FileOk(object sender, CancelEventArgs e)
         {
             var sfd = sender as SaveFileDialog;
-            this.pictureBox.Image.Save(sfd.FileName);
+            var extension = Path.GetExtension(sfd.FileName).ToUpper();
+            ImageFormat imageFormat = ImageFormat.Bmp;
+            switch (extension)
+            {
+                case ".BMP": imageFormat = ImageFormat.Bmp;break;
+                case ".PNG": imageFormat = ImageFormat.Png;break;
+                case ".GIF": imageFormat = ImageFormat.Gif;break;
+            }
+            this.pictureBox.Image.Save(sfd.FileName,imageFormat);
         }
 
         /// <summary>
