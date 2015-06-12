@@ -201,6 +201,10 @@ namespace Mosaic
 
                                     File.Copy(this.tbxBrowse.Text, name);
                                 }
+                                else
+                                {
+                                    continue;
+                                }
                             }
                             if (!(lbxTiles.Items.Contains(name)))
                             {
