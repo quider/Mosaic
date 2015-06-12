@@ -88,6 +88,15 @@ namespace i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add hue to each tile.
+        /// </summary>
+        public static string AddHue {
+            get {
+                return ResourceManager.GetString("AddHue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You have to add some tiles first..
         /// </summary>
         public static string AddTilesFirst {
@@ -133,6 +142,15 @@ namespace i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Buffer.
+        /// </summary>
+        public static string Buffer {
+            get {
+                return ResourceManager.GetString("Buffer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to I&apos;m calculating mosaic. This may take a while....
         /// </summary>
         public static string CalculateMosaic {
@@ -147,6 +165,15 @@ namespace i18n {
         public static string Cancel {
             get {
                 return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Color tiles.
+        /// </summary>
+        public static string ColorPlacedTiles {
+            get {
+                return ResourceManager.GetString("ColorPlacedTiles", resourceCulture);
             }
         }
         
@@ -358,6 +385,33 @@ namespace i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Random tiles.
+        /// </summary>
+        public static string RandomPlacedTiles {
+            get {
+                return ResourceManager.GetString("RandomPlacedTiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ratio.
+        /// </summary>
+        public static string Ratio {
+            get {
+                return ResourceManager.GetString("Ratio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This is ratio of longer edge of main picture to longer edge of tile..
+        /// </summary>
+        public static string RatioExplanation {
+            get {
+                return ResourceManager.GetString("RatioExplanation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ready.
         /// </summary>
         public static string Ready {
@@ -426,6 +480,15 @@ namespace i18n {
         public static string Tiles {
             get {
                 return ResourceManager.GetString("Tiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tiles in group.
+        /// </summary>
+        public static string TilesInGroup {
+            get {
+                return ResourceManager.GetString("TilesInGroup", resourceCulture);
             }
         }
         

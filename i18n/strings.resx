@@ -126,6 +126,9 @@
   <data name="AddAtLeast15Tiles" xml:space="preserve">
     <value>At least you have to add 15 tiles.</value>
   </data>
+  <data name="AddHue" xml:space="preserve">
+    <value>Add hue to each tile</value>
+  </data>
   <data name="AddTilesFirst" xml:space="preserve">
     <value>You have to add some tiles first.</value>
   </data>
@@ -141,11 +144,17 @@
   <data name="Browse" xml:space="preserve">
     <value>Browse</value>
   </data>
+  <data name="Buffer" xml:space="preserve">
+    <value>Buffer</value>
+  </data>
   <data name="CalculateMosaic" xml:space="preserve">
     <value>I'm calculating mosaic. This may take a while...</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
+  </data>
+  <data name="ColorPlacedTiles" xml:space="preserve">
+    <value>Color tiles</value>
   </data>
   <data name="ColorsCalculated" xml:space="preserve">
     <value>Colors calculated.</value>
@@ -216,6 +225,15 @@
   <data name="Randomizing" xml:space="preserve">
     <value>Filling main picture</value>
   </data>
+  <data name="RandomPlacedTiles" xml:space="preserve">
+    <value>Random tiles</value>
+  </data>
+  <data name="Ratio" xml:space="preserve">
+    <value>Ratio</value>
+  </data>
+  <data name="RatioExplanation" xml:space="preserve">
+    <value>This is ratio of longer edge of main picture to longer edge of tile.</value>
+  </data>
   <data name="Ready" xml:space="preserve">
     <value>Ready</value>
   </data>
@@ -239,6 +257,9 @@
   </data>
   <data name="Tiles" xml:space="preserve">
     <value>Tiles</value>
+  </data>
+  <data name="TilesInGroup" xml:space="preserve">
+    <value>Tiles in group</value>
   </data>
   <data name="TilesRandomize" xml:space="preserve">
     <value>Tiles randomize</value>

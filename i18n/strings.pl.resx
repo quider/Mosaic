@@ -126,6 +126,9 @@
   <data name="AddAtLeast15Tiles" xml:space="preserve">
     <value>Musisz dodać co najmniej 15 obrazków.</value>
   </data>
+  <data name="AddHue" xml:space="preserve">
+    <value>Dodaj odcień</value>
+  </data>
   <data name="AddTilesFirst" xml:space="preserve">
     <value>Najpierw dodaj zdjęcia miniaturek</value>
   </data>
@@ -141,11 +144,17 @@
   <data name="Browse" xml:space="preserve">
     <value>Wyszukaj</value>
   </data>
+  <data name="Buffer" xml:space="preserve">
+    <value>Próg dopasowania</value>
+  </data>
   <data name="CalculateMosaic" xml:space="preserve">
     <value>Dopasowuje zdjęcia do mozaiki. To może potrwać parę minut.</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Anuluj</value>
+  </data>
+  <data name="ColorPlacedTiles" xml:space="preserve">
+    <value>Rozmieszczenie wg pasujących kolorów.</value>
   </data>
   <data name="ColorsCalculated" xml:space="preserve">
     <value>Kolory obliczone.</value>
@@ -216,6 +225,15 @@
   <data name="Randomizing" xml:space="preserve">
     <value>Uzupełniam mozaikę</value>
   </data>
+  <data name="RandomPlacedTiles" xml:space="preserve">
+    <value>Tylko losowe rozmeszczenie</value>
+  </data>
+  <data name="Ratio" xml:space="preserve">
+    <value>Współczynnik wielkości obrazków.</value>
+  </data>
+  <data name="RatioExplanation" xml:space="preserve">
+    <value>Współczynnik wielkości obrazków to stosunek dłuższego boku dużego zdjęcia do dłuższego boku małego zdjęcia.</value>
+  </data>
   <data name="Ready" xml:space="preserve">
     <value>Gotowy</value>
   </data>
@@ -239,6 +257,9 @@
   </data>
   <data name="Tiles" xml:space="preserve">
     <value>Miniaurki</value>
+  </data>
+  <data name="TilesInGroup" xml:space="preserve">
+    <value>Obrazków w grupie</value>
   </data>
   <data name="TilesRandomize" xml:space="preserve">
     <value>Mieszanie obrazków</value>
