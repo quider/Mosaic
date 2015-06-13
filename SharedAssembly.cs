@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyVersion("0.3.*")]
+[assembly: AssemblyVersion("0.4.*")]
 
 [assembly: AssemblyCompany("Adrian Kozłowski")]
 [assembly: AssemblyProduct("Mosaic - mosaic maker")]
