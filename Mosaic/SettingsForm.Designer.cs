@@ -36,9 +36,10 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cbxHueSetting = new System.Windows.Forms.CheckBox();
             this.gbxMosaicDimensions = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.nudTilesInGroup = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblTilesInGroup = new System.Windows.Forms.Label();
+            this.lblBuffer = new System.Windows.Forms.Label();
             this.nudTreshold = new System.Windows.Forms.NumericUpDown();
             this.lblRatioExplanation = new System.Windows.Forms.Label();
             this.tbRatio = new System.Windows.Forms.TextBox();
@@ -59,7 +60,6 @@
             this.rbtNone = new System.Windows.Forms.RadioButton();
             this.btMosaicSettingsOK = new System.Windows.Forms.Button();
             this.btnMosaicSettingsCancel = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
             this.tabSettings.SuspendLayout();
             this.tabPageMainSettings.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -152,8 +152,8 @@
             // 
             this.gbxMosaicDimensions.Controls.Add(this.label3);
             this.gbxMosaicDimensions.Controls.Add(this.nudTilesInGroup);
-            this.gbxMosaicDimensions.Controls.Add(this.label2);
-            this.gbxMosaicDimensions.Controls.Add(this.label1);
+            this.gbxMosaicDimensions.Controls.Add(this.lblTilesInGroup);
+            this.gbxMosaicDimensions.Controls.Add(this.lblBuffer);
             this.gbxMosaicDimensions.Controls.Add(this.nudTreshold);
             this.gbxMosaicDimensions.Controls.Add(this.lblRatioExplanation);
             this.gbxMosaicDimensions.Controls.Add(this.tbRatio);
@@ -164,6 +164,15 @@
             this.gbxMosaicDimensions.TabIndex = 0;
             this.gbxMosaicDimensions.TabStop = false;
             this.gbxMosaicDimensions.Text = "Dimensions";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(107, 43);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(15, 13);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "%";
             // 
             // nudTilesInGroup
             // 
@@ -177,23 +186,23 @@
             0,
             0});
             // 
-            // label2
+            // lblTilesInGroup
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 101);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 13);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Tiles in group";
+            this.lblTilesInGroup.AutoSize = true;
+            this.lblTilesInGroup.Location = new System.Drawing.Point(6, 101);
+            this.lblTilesInGroup.Name = "lblTilesInGroup";
+            this.lblTilesInGroup.Size = new System.Drawing.Size(70, 13);
+            this.lblTilesInGroup.TabIndex = 9;
+            this.lblTilesInGroup.Text = "Tiles in group";
             // 
-            // label1
+            // lblBuffer
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 72);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Buffer";
+            this.lblBuffer.AutoSize = true;
+            this.lblBuffer.Location = new System.Drawing.Point(6, 72);
+            this.lblBuffer.Name = "lblBuffer";
+            this.lblBuffer.Size = new System.Drawing.Size(35, 13);
+            this.lblBuffer.TabIndex = 8;
+            this.lblBuffer.Text = "Buffer";
             // 
             // nudTreshold
             // 
@@ -214,7 +223,6 @@
             this.lblRatioExplanation.Size = new System.Drawing.Size(210, 46);
             this.lblRatioExplanation.TabIndex = 6;
             this.lblRatioExplanation.Text = "label1";
-            this.lblRatioExplanation.Visible = false;
             // 
             // tbRatio
             // 
@@ -397,15 +405,6 @@
             this.btnMosaicSettingsCancel.Text = "Cancel";
             this.btnMosaicSettingsCancel.UseVisualStyleBackColor = true;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(107, 43);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(15, 13);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "%";
-            // 
             // SettingsForm
             // 
             this.AcceptButton = this.btMosaicSettingsOK;
@@ -452,8 +451,8 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox cbxHueSetting;
         private System.Windows.Forms.NumericUpDown nudTilesInGroup;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblTilesInGroup;
+        private System.Windows.Forms.Label lblBuffer;
         private System.Windows.Forms.NumericUpDown nudTreshold;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.GroupBox gbxEffects;

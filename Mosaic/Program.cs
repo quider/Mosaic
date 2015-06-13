@@ -31,11 +31,11 @@ namespace Mosaic
             log.InfoFormat("Culture info:{0}", CultureInfo.CurrentCulture);
 
 
-
+            var context = new Context();
             
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Application.Run(context.CreateMainForm());
         }
     }
 }

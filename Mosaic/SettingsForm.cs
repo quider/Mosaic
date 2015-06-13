@@ -1,4 +1,5 @@
-﻿using Mosaic.Properties;
+﻿using i18n;
+using Mosaic.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,13 @@ namespace Mosaic
         public SettingsForm()
         {
             InitializeComponent();
+            this.rbtRandomTiles.Text = strings.RandomPlacedTiles;
+            this.rdbtFindColors.Text = strings.ColorPlacedTiles;
+            this.cbxHueSetting.Text = strings.AddHue;
+            this.lblTilesInGroup.Text = strings.TilesInGroup;
+            this.lblBuffer.Text = strings.Buffer;
+            this.lblPercentage.Text = strings.Ratio;
+            this.lblRatioExplanation.Text = strings.RatioExplanation;
         }
 
         private void nudWidth_ValueChanged(object sender, EventArgs e)
