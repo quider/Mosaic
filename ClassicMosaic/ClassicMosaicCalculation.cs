@@ -16,10 +16,14 @@ namespace ClassicMosaic
     {
         private static ILog log = LogManager.GetLogger(typeof(ClassicMosaicCalculation));
         private bool useHue;
+        private int buffer;
+        private int tilesInGroup;
 
-        public ClassicMosaicCalculation(bool applyHue)
+        public ClassicMosaicCalculation(bool applyHue, int buffer, int tilesInGroup)
         {
+            this.buffer = buffer;
             this.useHue = applyHue;
+            this.tilesInGroup = tilesInGroup;
         }
 
         /// <summary>
@@ -104,8 +108,7 @@ namespace ClassicMosaic
                 {
                     Parallel.For(0, tY, (y) =>
                     {
-                        var buffer = 25;
-                        log.DebugFormat("Color buffer set to {0}", buffer);
+                       log.DebugFormat("Color buffer set to {0}", buffer);
 
                         int i = 0;
                         maximum = tX * tY + 1;
@@ -137,7 +140,7 @@ namespace ClassicMosaic
                                 log.Error(ex.Message, ex);
                             }
                             i++;
-                            if (tilesColors.Count == i && colors.Count < 3)
+                            if (tilesColors.Count == i && colors.Count < this.tilesInGroup)
                             {
                                 i = 0;
                                 buffer += 25;
@@ -176,6 +179,10 @@ namespace ClassicMosaic
                             log.DebugFormat("Created bitmap from image {0}", name);
                             TextureBrush tBrush = new TextureBrush(found);
 
+                            if (this.useHue)
+                            {
+                                found = Utilities.Utils.AdjustHue(found, avgsMaster[x, y]);
+                            }
 
                             Pen blackPen = new Pen(Color.Black);
 

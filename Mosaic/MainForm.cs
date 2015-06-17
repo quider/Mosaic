@@ -329,7 +329,7 @@ namespace Mosaic
         /// </summary>
         private void ClassicMosaic()
         {
-            var mosaicClass = new ClassicMosaic.ClassicMosaicCalculation(Settings.Default.Hue);
+            var mosaicClass = new ClassicMosaic.ClassicMosaicCalculation(Settings.Default.Hue, Settings.Default.Treshold, Settings.Default.TilesInGroup);
 
             try
             {

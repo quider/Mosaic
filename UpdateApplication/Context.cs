@@ -16,7 +16,9 @@ namespace UpdateApplication
     {
         public Context()
         {
-            Execute();
+#if !DEBUG
+            Execute(); 
+#endif
         }
 
         public void Execute()

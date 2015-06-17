@@ -5,10 +5,10 @@
     <Setting Name="Ratio" Type="System.Double" Scope="User">
       <Value Profile="(Default)">2.5</Value>
     </Setting>
-    <Setting Name="Treshold" Type="System.Decimal" Scope="User">
+    <Setting Name="Treshold" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">25</Value>
     </Setting>
-    <Setting Name="TilesInGroup" Type="System.Decimal" Scope="User">
+    <Setting Name="TilesInGroup" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">5</Value>
     </Setting>
     <Setting Name="Hue" Type="System.Boolean" Scope="User">

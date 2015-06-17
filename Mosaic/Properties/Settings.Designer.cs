@@ -38,9 +38,9 @@ namespace Mosaic.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("25")]
-        public decimal Treshold {
+        public int Treshold {
             get {
-                return ((decimal)(this["Treshold"]));
+                return ((int)(this["Treshold"]));
             }
             set {
                 this["Treshold"] = value;
@@ -50,9 +50,9 @@ namespace Mosaic.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("5")]
-        public decimal TilesInGroup {
+        public int TilesInGroup {
             get {
-                return ((decimal)(this["TilesInGroup"]));
+                return ((int)(this["TilesInGroup"]));
             }
             set {
                 this["TilesInGroup"] = value;

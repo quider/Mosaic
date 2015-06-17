@@ -48,7 +48,7 @@ namespace Mosaic
         private void btMosaicSettingsOK_Click(object sender, EventArgs e)
         {
             Settings.Default.Ratio = double.Parse(tbRatio.Text);
-            Settings.Default.Treshold = nudTreshold.Value;
+            Settings.Default.Treshold = (int)nudTreshold.Value;
             if (rdbtFindColors.Checked)
             {
                 Settings.Default.TilesPlaced = 1;
@@ -57,7 +57,7 @@ namespace Mosaic
             {
                 Settings.Default.TilesPlaced = 0;
             }
-            Settings.Default.TilesInGroup = nudTilesInGroup.Value;
+            Settings.Default.TilesInGroup = (int)nudTilesInGroup.Value;
             Settings.Default.Hue = cbxHueSetting.Checked;
             Settings.Default.Save();
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
