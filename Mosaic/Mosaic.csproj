@@ -53,6 +53,12 @@
     <Prefer32Bit>false</Prefer32Bit>
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>SignFile.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net">
       <HintPath>..\3rdParty\log4net.dll</HintPath>
@@ -131,6 +137,7 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="SignFile.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\Settings.settings">
