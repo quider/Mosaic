@@ -64,6 +64,7 @@ namespace Mosaic
             this.btCancelCalculate.Text = strings.Cancel;
             this.btRescale.Text = strings.Rescale;
             this.Text += "-" + this.ProductVersion;
+            
         }
 
         /// <summary>
@@ -86,6 +87,10 @@ namespace Mosaic
                     {
                         tbxBrowse.Text = openDialog.FileName;
                         this.pictureBox.Image = Image.FromFile(openDialog.FileName);
+                        var w = this.pictureBox.Image.Width;
+                        var h = this.pictureBox.Image.Height;
+                        this.nudHeight.Value = new Decimal(h * (Settings.Default.Ratio/100));
+                        this.nudWidth.Value = new Decimal(w* (Settings.Default.Ratio/100));
                     }
 
                     this.RunBackgroundWorkerForCalculateColorsOfMosaic(openDialog.FileName);
@@ -99,6 +104,10 @@ namespace Mosaic
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
         private void RunBackgroundWorkerForCalculateColorsOfMosaic(string fileName)
         {
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
