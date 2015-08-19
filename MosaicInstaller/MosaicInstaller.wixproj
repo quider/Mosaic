@@ -69,6 +69,9 @@
   <PropertyGroup>
     <PostBuildEvent>D:\Programy\Csharp\Mosaic\Bin\Debug\InstallerPackagesApplication.exe $(TargetDir)$(TargetName) $(SolutionDir) $(PlatformName) $(ConfigurationName)</PostBuildEvent>
   </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>D:\Programy\Csharp\Mosaic\Bin\Debug\InstallerPackagesApplication.exe assembly $(SolutionDir)</PreBuildEvent>
+  </PropertyGroup>
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.
 	Other similar extension points exist, see Wix.targets.
