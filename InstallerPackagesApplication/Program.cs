@@ -14,12 +14,15 @@ namespace InstallerPackagesApplication
 {
     class Program
     {
+        /// <summary>
+        ///  arg0: $(TargetDir)$(TargetName) 
+        ///  arg1: $(SolutionDir) 
+        ///  arg2: $(PlatformName) 
+        ///  arg3: $(ConfigurationName)
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
-        {
-            Console.WriteLine(args[0]);
-            Console.WriteLine(args[1]);
-            Console.WriteLine(args[2]);
-            Console.WriteLine(args[3]);
+        {            
             Assembly assembly = Assembly.LoadFile(Path.Combine(args[1], "Bin", args[3], "Mosaic.exe"));
             var version = assembly.GetName().Version;
 
