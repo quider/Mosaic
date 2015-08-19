@@ -47,30 +47,12 @@
       <Name>WixFirewallExtension</Name>
     </WixExtension>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Mosaic\Mosaic.csproj">
-      <Name>Mosaic</Name>
-      <Project>{d4be187e-fa10-4417-95fc-98bf0d3a5528}</Project>
-      <Private>True</Private>
-      <DoNotHarvest>True</DoNotHarvest>
-      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
-      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
-    </ProjectReference>
-    <ProjectReference Include="..\UpdateApplication\UpdateApplication.csproj">
-      <Name>UpdateApplication</Name>
-      <Project>{ea4d3bfe-6dfd-41bc-a26b-2a75120fa48a}</Project>
-      <Private>True</Private>
-      <DoNotHarvest>True</DoNotHarvest>
-      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
-      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>
-    <PostBuildEvent>D:\Programy\Csharp\Mosaic\Bin\Debug\InstallerPackagesApplication.exe $(TargetDir)$(TargetName) $(SolutionDir) $(PlatformName) $(ConfigurationName)</PostBuildEvent>
+    <PreBuildEvent />
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>D:\Programy\Csharp\Mosaic\Bin\Debug\InstallerPackagesApplication.exe assembly $(SolutionDir)</PreBuildEvent>
+    <PostBuildEvent />
   </PropertyGroup>
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?define bin = ..\..\..\bin\ ?>
-<?define MAINEXE=$(var.Mosaic.TargetFileName)?>
-<?define VERSION=!(bind.FileVersion.$(var.MAINEXE))?>
+<?define VERSION=!(bind.FileVersion.MainExe)?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <Product Id="*" Name="Mosaic $(var.VERSION)" Language="1033" Version="$(var.VERSION)" Manufacturer="Quider Software" UpgradeCode="624a7393-71ed-45f4-a128-5e9f4cd4ec70">
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
@@ -48,7 +47,7 @@
   <Fragment>
     <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
       <Component Id="ProductComponent" Guid="{3B9C53F9-B0F1-47F5-A124-AEA2FB00E863}">
-        <File Source="$(var.bin)$(var.Configuration)\Mosaic.exe"></File>
+        <File Id="MainExe" Source="$(var.bin)$(var.Configuration)\Mosaic.exe"></File>
         <File Source="$(var.bin)$(var.Configuration)\Mosaic.exe.config"></File>
         <File Source="$(var.bin)$(var.Configuration)\log4net.dll"></File>
         <File Source="$(var.bin)$(var.Configuration)\ClassicMosaic.dll"></File>
