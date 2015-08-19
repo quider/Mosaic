@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -73,7 +74,38 @@ namespace Utilities
             }
         }
 
-
+        /// <summary>
+        /// Chnage opacity of image passed in parameter. New image is being returned.
+        /// </summary>
+        /// <param name="img">Image to change opacity</param>
+        /// <param name="opacityvalue">Visibility 0-not visible 100-visible</param>
+        /// <returns></returns>
+        public static Bitmap ChangeOpacity(Image img, float opacityvalue)
+        {
+            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
+            {
+                try
+                {
+                    Bitmap bmp = new Bitmap(img.Width, img.Height); // Determining Width and Height of Source Image
+                    using (Graphics graphics = Graphics.FromImage(bmp))
+                    {
+                        ColorMatrix colormatrix = new ColorMatrix();
+                        colormatrix.Matrix33 = opacityvalue;
+                        ImageAttributes imgAttribute = new ImageAttributes();
+                        imgAttribute.SetColorMatrix(colormatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+                        graphics.DrawImage(img, new Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0, img.Width, img.Height, GraphicsUnit.Pixel, imgAttribute);
+                        graphics.Dispose();
+                        colormatrix = null;
+                    }
+                    return bmp;
+                }
+                catch (Exception ex)
+                {
+                    log.Error(ex.Message, ex);
+                    return null;
+                } 
+            }
+        }
 
         /// <summary>
         /// 
@@ -123,6 +155,6 @@ namespace Utilities
             }
         }
 
-         
+
     }
 }

@@ -279,4 +279,7 @@
   <data name="WillBeInFuture" xml:space="preserve">
     <value>Zostanie zaimplementowane w kolejnej wersji.</value>
   </data>
+  <data name="Opacity" xml:space="preserve">
+    <value>Przeźroczystość</value>
+  </data>
 </root>

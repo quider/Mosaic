@@ -279,4 +279,7 @@
   <data name="WillBeInFuture" xml:space="preserve">
     <value>Will be in future</value>
   </data>
+  <data name="Opacity" xml:space="preserve">
+    <value>Opacity</value>
+  </data>
 </root>

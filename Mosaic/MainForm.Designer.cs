@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.lbxTiles = new System.Windows.Forms.ListBox();
             this.gbxTiles = new System.Windows.Forms.GroupBox();
+            this.lblPercentage = new System.Windows.Forms.Label();
             this.lblHeight = new System.Windows.Forms.Label();
             this.lblWidth = new System.Windows.Forms.Label();
             this.nudHeight = new System.Windows.Forms.NumericUpDown();
@@ -40,6 +41,7 @@
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.gbxMaster = new System.Windows.Forms.GroupBox();
+            this.btRescale = new System.Windows.Forms.Button();
             this.cbxAdjustTiles = new System.Windows.Forms.CheckBox();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.tbxBrowse = new System.Windows.Forms.TextBox();
@@ -67,8 +69,9 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btRescale = new System.Windows.Forms.Button();
-            this.lblPercentage = new System.Windows.Forms.Label();
+            this.trackBar = new System.Windows.Forms.TrackBar();
+            this.cbOpacity = new System.Windows.Forms.CheckBox();
+            this.lblOpacity = new System.Windows.Forms.Label();
             this.gbxTiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudWidth)).BeginInit();
@@ -76,6 +79,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.gbxMosaic.SuspendLayout();
             this.menuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
             this.SuspendLayout();
             // 
             // lbxTiles
@@ -100,6 +104,11 @@
             this.gbxTiles.Controls.Add(this.lbxTiles);
             this.gbxTiles.Name = "gbxTiles";
             this.gbxTiles.TabStop = false;
+            // 
+            // lblPercentage
+            // 
+            resources.ApplyResources(this.lblPercentage, "lblPercentage");
+            this.lblPercentage.Name = "lblPercentage";
             // 
             // lblHeight
             // 
@@ -185,6 +194,13 @@
             this.gbxMaster.Name = "gbxMaster";
             this.gbxMaster.TabStop = false;
             // 
+            // btRescale
+            // 
+            resources.ApplyResources(this.btRescale, "btRescale");
+            this.btRescale.Name = "btRescale";
+            this.btRescale.UseVisualStyleBackColor = true;
+            this.btRescale.Click += new System.EventHandler(this.btRescale_Click);
+            // 
             // cbxAdjustTiles
             // 
             resources.ApplyResources(this.cbxAdjustTiles, "cbxAdjustTiles");
@@ -221,6 +237,9 @@
             // 
             // gbxMosaic
             // 
+            this.gbxMosaic.Controls.Add(this.lblOpacity);
+            this.gbxMosaic.Controls.Add(this.cbOpacity);
+            this.gbxMosaic.Controls.Add(this.trackBar);
             this.gbxMosaic.Controls.Add(this.btCancelCalculate);
             this.gbxMosaic.Controls.Add(this.lblAddFirst);
             this.gbxMosaic.Controls.Add(this.pictureBox);
@@ -363,17 +382,25 @@
             this.checkUpdatesToolStripMenuItem.Name = "checkUpdatesToolStripMenuItem";
             resources.ApplyResources(this.checkUpdatesToolStripMenuItem, "checkUpdatesToolStripMenuItem");
             // 
-            // btRescale
+            // trackBar
             // 
-            resources.ApplyResources(this.btRescale, "btRescale");
-            this.btRescale.Name = "btRescale";
-            this.btRescale.UseVisualStyleBackColor = true;
-            this.btRescale.Click += new System.EventHandler(this.btRescale_Click);
+            resources.ApplyResources(this.trackBar, "trackBar");
+            this.trackBar.Maximum = 100;
+            this.trackBar.Name = "trackBar";
+            this.trackBar.Value = 25;
+            this.trackBar.ValueChanged += new System.EventHandler(this.trackBar_ValueChanged);
             // 
-            // lblPercentage
+            // cbOpacity
             // 
-            resources.ApplyResources(this.lblPercentage, "lblPercentage");
-            this.lblPercentage.Name = "lblPercentage";
+            resources.ApplyResources(this.cbOpacity, "cbOpacity");
+            this.cbOpacity.Name = "cbOpacity";
+            this.cbOpacity.UseVisualStyleBackColor = true;
+            this.cbOpacity.CheckedChanged += new System.EventHandler(this.cbOpacity_CheckedChanged);
+            // 
+            // lblOpacity
+            // 
+            resources.ApplyResources(this.lblOpacity, "lblOpacity");
+            this.lblOpacity.Name = "lblOpacity";
             // 
             // MainForm
             // 
@@ -398,6 +425,7 @@
             this.gbxMosaic.PerformLayout();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -445,6 +473,9 @@
         private System.Windows.Forms.Button btCancelCalculate;
         private System.Windows.Forms.Button btRescale;
         private System.Windows.Forms.Label lblPercentage;
+        private System.Windows.Forms.TrackBar trackBar;
+        private System.Windows.Forms.Label lblOpacity;
+        private System.Windows.Forms.CheckBox cbOpacity;
     }
 }
 

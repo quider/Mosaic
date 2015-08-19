@@ -14,6 +14,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
+using Utilities;
 
 namespace Mosaic
 {
@@ -21,6 +22,7 @@ namespace Mosaic
     {
         private static ILog log = LogManager.GetLogger(typeof(MainForm));
         private BackgroundWorker calculateMosaicBackgroundWorker;
+        private Image orginalImage;
 
         public ColorCalculation mosaicColors
         {
@@ -63,8 +65,9 @@ namespace Mosaic
             this.checkUpdatesToolStripMenuItem.Text = strings.Update;
             this.btCancelCalculate.Text = strings.Cancel;
             this.btRescale.Text = strings.Rescale;
+            this.cbOpacity.Text = strings.Opacity;
             this.Text += "-" + this.ProductVersion;
-            
+
         }
 
         /// <summary>
@@ -89,8 +92,8 @@ namespace Mosaic
                         this.pictureBox.Image = Image.FromFile(openDialog.FileName);
                         var w = this.pictureBox.Image.Width;
                         var h = this.pictureBox.Image.Height;
-                        this.nudHeight.Value = new Decimal(h * (Settings.Default.Ratio/100));
-                        this.nudWidth.Value = new Decimal(w* (Settings.Default.Ratio/100));
+                        this.nudHeight.Value = new Decimal(h * (Settings.Default.Ratio / 100));
+                        this.nudWidth.Value = new Decimal(w * (Settings.Default.Ratio / 100));
                     }
 
                     this.RunBackgroundWorkerForCalculateColorsOfMosaic(openDialog.FileName);
@@ -136,6 +139,7 @@ namespace Mosaic
                 this.lblPercentage.Text = "0%";
                 lblOperation.Text = strings.ColorsCalculated;
                 this.AverageImage = e.Result as Image;
+                this.orginalImage = e.Result as Image;
                 this.pictureBox.Image = this.AverageImage;
                 this.pictureBox.Refresh();
                 this.btnGo.Enabled = true;
@@ -152,6 +156,7 @@ namespace Mosaic
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
             {
                 var image = e.Result as Image;
+                this.orginalImage = e.Result as Image;
                 this.pictureBox.Image = image;
                 this.pictureBox.Refresh();
                 this.pgbOperation.Value = 0;
@@ -159,6 +164,11 @@ namespace Mosaic
                 this.lblPercentage.Text = "0%";
                 this.btnGo.Enabled = true;
                 this.btCancelCalculate.Visible = false;
+
+                if (this.cbOpacity.Checked)
+                {
+                    this.trackBar_ValueChanged(this.trackBar, new EventArgs());
+                }
             }
         }
 
@@ -533,6 +543,64 @@ namespace Mosaic
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
             {
                 RunBackgroundWorkerForCalculateColorsOfMosaic(this.tbxBrowse.Text);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void trackBar_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                this.lblOpacity.Text = trackBar.Value.ToString();
+                this.pictureBox.Image = null;
+                this.pictureBox.Refresh();
+                if (this.orginalImage != null)
+                {
+                    //using (
+                    var image = new Bitmap(this.orginalImage);//)
+                  //  {
+                        var tmpImage = Image.FromFile(this.tbxBrowse.Text);
+                        TextureBrush tBrush = new TextureBrush(Utils.ChangeOpacity(tmpImage, (float)((float)this.trackBar.Value / 100f)));
+
+                        Pen blackPen = new Pen(Color.Black);
+
+                        using (var g = Graphics.FromImage(image))
+                        {
+                            g.FillRectangle(tBrush, new Rectangle(0, 0, image.Width, image.Height));
+                        }
+                        this.pictureBox.Image = image;
+                        this.pictureBox.Refresh();
+                 //   }
+                }
+            }
+            catch (OutOfMemoryException ex)
+            {
+                log.Error("Out of memory!", ex);
+
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cbOpacity_CheckedChanged(object sender, EventArgs e)
+        {
+            this.trackBar.Enabled = this.cbOpacity.Checked;
+
+            if (this.cbOpacity.Checked)
+            {
+                this.trackBar.Value = 25;
+                this.trackBar_ValueChanged(this.trackBar, new EventArgs());
+            }
+            else
+            {
+                this.trackBar.Value = 0;
             }
         }
 
