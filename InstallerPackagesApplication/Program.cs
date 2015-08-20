@@ -23,7 +23,7 @@ namespace InstallerPackagesApplication
         /// <param name="args"></param>
         static void Main(string[] args)
         {            
-            Assembly assembly = Assembly.LoadFile(Path.Combine(args[1], "Bin", args[3], "Mosaic.exe"));
+            Assembly assembly = Assembly.LoadFile(Path.Combine(args[1], "Bin", args[3], "Release", "Mosaic.exe"));
             var version = assembly.GetName().Version;
 
             string filename = args[0];
