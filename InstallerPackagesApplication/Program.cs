@@ -36,6 +36,8 @@ namespace InstallerPackagesApplication
             try
             {
                 objFile.MoveTo(movedFile);
+                var signtool = "E:\\Windows Kits\\10\\bin\\x64\\signtool.exe";
+                
             }
             catch (Exception ex)
             {
