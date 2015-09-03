@@ -9,10 +9,11 @@ This application is for creating mosaic from pictures you have on your machine.
 * 
 
 ### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
+* Download MSI
+or
+* Download sources
+* Compile
+* enjoy
 
 ### Contribution guidelines ###
 
