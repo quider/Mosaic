@@ -1,12 +1,17 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyVersion("0.4.*")]
+#if WIN64
+    [assembly: AssemblyProduct("Mosaic Platform x64- Mosaic")]    
+#else
+    [assembly: AssemblyProduct("Mosaic - mosaic maker")]
+#endif
 
+[assembly: AssemblyVersion("0.5.*")]
 [assembly: AssemblyCompany("Adrian Kozłowski")]
-[assembly: AssemblyProduct("Mosaic - mosaic maker")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("Copyright © 2015")]
+[assembly: AssemblyTrademark("Adrian Kozłowski")]
+[assembly: AssemblyDescription("Mosaic maker. Makes mosaic from small pictures. Big photo is replaced by small pictures.")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
