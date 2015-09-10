@@ -8,8 +8,6 @@ using System.Runtime.InteropServices;
 [assembly: log4net.Config.XmlConfigurator(Watch = true)]
 
 [assembly: AssemblyTitle("Mosaic")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
 
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
