@@ -126,7 +126,7 @@
     <value>17, 19</value>
   </data>
   <data name="lbxTiles.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 303</value>
+    <value>243, 147</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lbxTiles.TabIndex" type="System.Int32, mscorlib">
@@ -142,148 +142,34 @@
     <value>gbxTiles</value>
   </data>
   <data name="&gt;&gt;lbxTiles.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="gbxTiles.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Bottom, Left, Right</value>
   </data>
-  <data name="&gt;&gt;lblPercentage.Name" xml:space="preserve">
-    <value>lblPercentage</value>
+  <data name="lvTiles.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 172</value>
   </data>
-  <data name="&gt;&gt;lblPercentage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="lvTiles.Size" type="System.Drawing.Size, System.Drawing">
+    <value>322, 268</value>
   </data>
-  <data name="&gt;&gt;lblPercentage.Parent" xml:space="preserve">
+  <data name="lvTiles.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;lvTiles.Name" xml:space="preserve">
+    <value>lvTiles</value>
+  </data>
+  <data name="&gt;&gt;lvTiles.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lvTiles.Parent" xml:space="preserve">
     <value>gbxTiles</value>
   </data>
-  <data name="&gt;&gt;lblPercentage.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lvTiles.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;lblHeight.Name" xml:space="preserve">
-    <value>lblHeight</value>
-  </data>
-  <data name="&gt;&gt;lblHeight.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblHeight.Parent" xml:space="preserve">
-    <value>gbxTiles</value>
-  </data>
-  <data name="&gt;&gt;lblHeight.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;lblWidth.Name" xml:space="preserve">
-    <value>lblWidth</value>
-  </data>
-  <data name="&gt;&gt;lblWidth.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblWidth.Parent" xml:space="preserve">
-    <value>gbxTiles</value>
-  </data>
-  <data name="&gt;&gt;lblWidth.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;nudHeight.Name" xml:space="preserve">
-    <value>nudHeight</value>
-  </data>
-  <data name="&gt;&gt;nudHeight.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;nudHeight.Parent" xml:space="preserve">
-    <value>gbxTiles</value>
-  </data>
-  <data name="&gt;&gt;nudHeight.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;nudWidth.Name" xml:space="preserve">
-    <value>nudWidth</value>
-  </data>
-  <data name="&gt;&gt;nudWidth.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;nudWidth.Parent" xml:space="preserve">
-    <value>gbxTiles</value>
-  </data>
-  <data name="&gt;&gt;nudWidth.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;lblOperation.Name" xml:space="preserve">
-    <value>lblOperation</value>
-  </data>
-  <data name="&gt;&gt;lblOperation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblOperation.Parent" xml:space="preserve">
-    <value>gbxTiles</value>
-  </data>
-  <data name="&gt;&gt;lblOperation.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;pgbOperation.Name" xml:space="preserve">
-    <value>pgbOperation</value>
-  </data>
-  <data name="&gt;&gt;pgbOperation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pgbOperation.Parent" xml:space="preserve">
-    <value>gbxTiles</value>
-  </data>
-  <data name="&gt;&gt;pgbOperation.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;btnRemove.Name" xml:space="preserve">
-    <value>btnRemove</value>
-  </data>
-  <data name="&gt;&gt;btnRemove.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnRemove.Parent" xml:space="preserve">
-    <value>gbxTiles</value>
-  </data>
-  <data name="&gt;&gt;btnRemove.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;btnAdd.Name" xml:space="preserve">
-    <value>btnAdd</value>
-  </data>
-  <data name="&gt;&gt;btnAdd.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnAdd.Parent" xml:space="preserve">
-    <value>gbxTiles</value>
-  </data>
-  <data name="&gt;&gt;btnAdd.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="gbxTiles.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="gbxTiles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 116</value>
-  </data>
-  <data name="gbxTiles.Size" type="System.Drawing.Size, System.Drawing">
-    <value>348, 416</value>
-  </data>
-  <data name="gbxTiles.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="gbxTiles.Text" xml:space="preserve">
-    <value>Tiles</value>
-  </data>
-  <data name="&gt;&gt;gbxTiles.Name" xml:space="preserve">
-    <value>gbxTiles</value>
-  </data>
-  <data name="&gt;&gt;gbxTiles.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gbxTiles.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;gbxTiles.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="lblPercentage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>303, 366</value>
+    <value>303, 443</value>
   </data>
   <data name="lblPercentage.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>Yes</value>
@@ -307,7 +193,7 @@
     <value>gbxTiles</value>
   </data>
   <data name="&gt;&gt;lblPercentage.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="lblHeight.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -337,7 +223,7 @@
     <value>gbxTiles</value>
   </data>
   <data name="&gt;&gt;lblHeight.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="lblWidth.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -367,7 +253,7 @@
     <value>gbxTiles</value>
   </data>
   <data name="&gt;&gt;lblWidth.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="nudHeight.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -391,7 +277,7 @@
     <value>gbxTiles</value>
   </data>
   <data name="&gt;&gt;nudHeight.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="nudWidth.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -415,7 +301,7 @@
     <value>gbxTiles</value>
   </data>
   <data name="&gt;&gt;nudWidth.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="lblOperation.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left</value>
@@ -424,7 +310,7 @@
     <value>True</value>
   </data>
   <data name="lblOperation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 366</value>
+    <value>14, 443</value>
   </data>
   <data name="lblOperation.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 13</value>
@@ -445,13 +331,13 @@
     <value>gbxTiles</value>
   </data>
   <data name="&gt;&gt;lblOperation.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="pgbOperation.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Bottom, Left, Right</value>
   </data>
   <data name="pgbOperation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 382</value>
+    <value>17, 459</value>
   </data>
   <data name="pgbOperation.Size" type="System.Drawing.Size, System.Drawing">
     <value>325, 23</value>
@@ -469,7 +355,7 @@
     <value>gbxTiles</value>
   </data>
   <data name="&gt;&gt;pgbOperation.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="btnRemove.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -496,7 +382,7 @@
     <value>gbxTiles</value>
   </data>
   <data name="&gt;&gt;btnRemove.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="btnAdd.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -523,82 +409,37 @@
     <value>gbxTiles</value>
   </data>
   <data name="&gt;&gt;btnAdd.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
+  </data>
+  <data name="gbxTiles.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="gbxTiles.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 116</value>
+  </data>
+  <data name="gbxTiles.Size" type="System.Drawing.Size, System.Drawing">
+    <value>348, 493</value>
+  </data>
+  <data name="gbxTiles.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="gbxTiles.Text" xml:space="preserve">
+    <value>Tiles</value>
+  </data>
+  <data name="&gt;&gt;gbxTiles.Name" xml:space="preserve">
+    <value>gbxTiles</value>
+  </data>
+  <data name="&gt;&gt;gbxTiles.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gbxTiles.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;gbxTiles.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="gbxMaster.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
-  </data>
-  <data name="&gt;&gt;btRescale.Name" xml:space="preserve">
-    <value>btRescale</value>
-  </data>
-  <data name="&gt;&gt;btRescale.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btRescale.Parent" xml:space="preserve">
-    <value>gbxMaster</value>
-  </data>
-  <data name="&gt;&gt;btRescale.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;cbxAdjustTiles.Name" xml:space="preserve">
-    <value>cbxAdjustTiles</value>
-  </data>
-  <data name="&gt;&gt;cbxAdjustTiles.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbxAdjustTiles.Parent" xml:space="preserve">
-    <value>gbxMaster</value>
-  </data>
-  <data name="&gt;&gt;cbxAdjustTiles.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;btnBrowse.Name" xml:space="preserve">
-    <value>btnBrowse</value>
-  </data>
-  <data name="&gt;&gt;btnBrowse.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnBrowse.Parent" xml:space="preserve">
-    <value>gbxMaster</value>
-  </data>
-  <data name="&gt;&gt;btnBrowse.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;tbxBrowse.Name" xml:space="preserve">
-    <value>tbxBrowse</value>
-  </data>
-  <data name="&gt;&gt;tbxBrowse.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbxBrowse.Parent" xml:space="preserve">
-    <value>gbxMaster</value>
-  </data>
-  <data name="&gt;&gt;tbxBrowse.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="gbxMaster.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 30</value>
-  </data>
-  <data name="gbxMaster.Size" type="System.Drawing.Size, System.Drawing">
-    <value>348, 80</value>
-  </data>
-  <data name="gbxMaster.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="gbxMaster.Text" xml:space="preserve">
-    <value>Master Image</value>
-  </data>
-  <data name="&gt;&gt;gbxMaster.Name" xml:space="preserve">
-    <value>gbxMaster</value>
-  </data>
-  <data name="&gt;&gt;gbxMaster.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gbxMaster.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;gbxMaster.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="btRescale.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -707,6 +548,30 @@
   </data>
   <data name="&gt;&gt;tbxBrowse.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="gbxMaster.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 30</value>
+  </data>
+  <data name="gbxMaster.Size" type="System.Drawing.Size, System.Drawing">
+    <value>348, 80</value>
+  </data>
+  <data name="gbxMaster.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="gbxMaster.Text" xml:space="preserve">
+    <value>Master Image</value>
+  </data>
+  <data name="&gt;&gt;gbxMaster.Name" xml:space="preserve">
+    <value>gbxMaster</value>
+  </data>
+  <data name="&gt;&gt;gbxMaster.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gbxMaster.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;gbxMaster.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="btnGo.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
@@ -895,7 +760,7 @@
     <value>366, 30</value>
   </data>
   <data name="gbxMosaic.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 502</value>
+    <value>534, 579</value>
   </data>
   <data name="gbxMosaic.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -918,33 +783,6 @@
   <metadata name="menuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="menuStrip.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="menuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>901, 24</value>
-  </data>
-  <data name="menuStrip.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;menuStrip.Name" xml:space="preserve">
-    <value>menuStrip</value>
-  </data>
-  <data name="&gt;&gt;menuStrip.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;menuStrip.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;menuStrip.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 20</value>
-  </data>
-  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;File</value>
-  </data>
   <data name="newToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -1075,11 +913,11 @@
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>E&amp;xit</value>
   </data>
-  <data name="toolsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 20</value>
+  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 20</value>
   </data>
-  <data name="toolsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Tools</value>
+  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;File</value>
   </data>
   <data name="customizeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 22</value>
@@ -1096,11 +934,11 @@
   <data name="optionsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Options</value>
   </data>
-  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 20</value>
+  <data name="toolsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 20</value>
   </data>
-  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Help</value>
+  <data name="toolsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Tools</value>
   </data>
   <data name="contentsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 22</value>
@@ -1123,6 +961,33 @@
   <data name="checkUpdatesToolStripMenuItem.Text" xml:space="preserve">
     <value>Check updates</value>
   </data>
+  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 20</value>
+  </data>
+  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Help</value>
+  </data>
+  <data name="menuStrip.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="menuStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>901, 24</value>
+  </data>
+  <data name="menuStrip.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;menuStrip.Name" xml:space="preserve">
+    <value>menuStrip</value>
+  </data>
+  <data name="&gt;&gt;menuStrip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;menuStrip.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;menuStrip.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1130,7 +995,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>901, 544</value>
+    <value>901, 621</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
