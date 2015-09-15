@@ -72,7 +72,7 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lvTiles = new System.Windows.Forms.ListView();
+            this.listView = new System.Windows.Forms.ListView();
             this.gbxTiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudWidth)).BeginInit();
@@ -93,7 +93,7 @@
             // gbxTiles
             // 
             resources.ApplyResources(this.gbxTiles, "gbxTiles");
-            this.gbxTiles.Controls.Add(this.lvTiles);
+            this.gbxTiles.Controls.Add(this.listView);
             this.gbxTiles.Controls.Add(this.lblPercentage);
             this.gbxTiles.Controls.Add(this.lblHeight);
             this.gbxTiles.Controls.Add(this.lblWidth);
@@ -404,12 +404,11 @@
             this.checkUpdatesToolStripMenuItem.Name = "checkUpdatesToolStripMenuItem";
             resources.ApplyResources(this.checkUpdatesToolStripMenuItem, "checkUpdatesToolStripMenuItem");
             // 
-            // lvTiles
+            // listView
             // 
-            resources.ApplyResources(this.lvTiles, "lvTiles");
-            this.lvTiles.Name = "lvTiles";
-            this.lvTiles.UseCompatibleStateImageBehavior = false;
-            this.lvTiles.View = System.Windows.Forms.View.SmallIcon;
+            resources.ApplyResources(this.listView, "listView");
+            this.listView.Name = "listView";
+            this.listView.UseCompatibleStateImageBehavior = false;
             // 
             // MainForm
             // 
@@ -485,7 +484,7 @@
         private System.Windows.Forms.TrackBar trackBar;
         private System.Windows.Forms.Label lblOpacity;
         private System.Windows.Forms.CheckBox cbOpacity;
-        private System.Windows.Forms.ListView lvTiles;
+        private System.Windows.Forms.ListView listView;
     }
 }
 

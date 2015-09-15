@@ -23,6 +23,7 @@ namespace Mosaic
         private static ILog log = LogManager.GetLogger(typeof(MainForm));
         private BackgroundWorker calculateMosaicBackgroundWorker;
         private Image orginalImage;
+        private ImageList imageList;
 
         public ColorCalculation mosaicColors
         {
@@ -228,6 +229,7 @@ namespace Mosaic
                             if (!(lbxTiles.Items.Contains(name)))
                             {
                                 lbxTiles.Items.Add(name);
+                                //this.imageList.Images.Add();
                             }
                         }
                     }
