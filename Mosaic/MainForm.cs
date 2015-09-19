@@ -25,7 +25,7 @@ namespace Mosaic
         private static ILog log = LogManager.GetLogger(typeof(MainForm));
         private BackgroundWorker calculateMosaicBackgroundWorker;
         private Image orginalImage;
-        private ImageList imageList;
+        private ImageList imageList = new ImageList();
 
         public ColorCalculation mosaicColors
         {
@@ -230,8 +230,16 @@ namespace Mosaic
                             }
                             if (!(lbxTiles.Items.Contains(name)))
                             {
-                                lbxTiles.Items.Add(name);
-                                //this.imageList.Images.Add(Image.FromFile(name));
+                                try
+                                {
+                                    lbxTiles.Items.Add(name);
+                                    this.imageList.Images.Add(Image.FromFile(name));
+                                }
+                                catch (Exception ex)
+                                {
+                                    log.Error(ex.Message, ex);
+                                    
+                                }
                             }
                         }
                     }
@@ -240,6 +248,7 @@ namespace Mosaic
                         log.InfoFormat(strings.DirectoryDoesNotExist);
                         MessageBox.Show(strings.DirectoryDoesNotExist);
                     }
+                    //this.listView
                 }
 
                 log.DebugFormat("Count tiles {0}", this.lbxTiles.Items.Count);
