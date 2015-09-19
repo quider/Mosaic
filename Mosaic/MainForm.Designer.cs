@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.lbxTiles = new System.Windows.Forms.ListBox();
             this.gbxTiles = new System.Windows.Forms.GroupBox();
+            this.listView = new System.Windows.Forms.ListView();
             this.lblPercentage = new System.Windows.Forms.Label();
             this.lblHeight = new System.Windows.Forms.Label();
             this.lblWidth = new System.Windows.Forms.Label();
@@ -72,7 +73,7 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listView = new System.Windows.Forms.ListView();
+            this.Personalize = new System.Windows.Forms.ToolStripMenuItem();
             this.gbxTiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudWidth)).BeginInit();
@@ -106,6 +107,12 @@
             this.gbxTiles.Controls.Add(this.lbxTiles);
             this.gbxTiles.Name = "gbxTiles";
             this.gbxTiles.TabStop = false;
+            // 
+            // listView
+            // 
+            resources.ApplyResources(this.listView, "listView");
+            this.listView.Name = "listView";
+            this.listView.UseCompatibleStateImageBehavior = false;
             // 
             // lblPercentage
             // 
@@ -287,7 +294,8 @@
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.toolsToolStripMenuItem,
-            this.helpToolStripMenuItem});
+            this.helpToolStripMenuItem,
+            this.Personalize});
             resources.ApplyResources(this.menuStrip, "menuStrip");
             this.menuStrip.Name = "menuStrip";
             // 
@@ -404,11 +412,10 @@
             this.checkUpdatesToolStripMenuItem.Name = "checkUpdatesToolStripMenuItem";
             resources.ApplyResources(this.checkUpdatesToolStripMenuItem, "checkUpdatesToolStripMenuItem");
             // 
-            // listView
+            // Personalize
             // 
-            resources.ApplyResources(this.listView, "listView");
-            this.listView.Name = "listView";
-            this.listView.UseCompatibleStateImageBehavior = false;
+            this.Personalize.Name = "Personalize";
+            resources.ApplyResources(this.Personalize, "Personalize");
             // 
             // MainForm
             // 
@@ -485,6 +492,7 @@
         private System.Windows.Forms.Label lblOpacity;
         private System.Windows.Forms.CheckBox cbOpacity;
         private System.Windows.Forms.ListView listView;
+        private System.Windows.Forms.ToolStripMenuItem Personalize;
     }
 }
 

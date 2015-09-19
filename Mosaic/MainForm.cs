@@ -11,8 +11,10 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utilities;
 
@@ -229,7 +231,7 @@ namespace Mosaic
                             if (!(lbxTiles.Items.Contains(name)))
                             {
                                 lbxTiles.Items.Add(name);
-                                //this.imageList.Images.Add();
+                                //this.imageList.Images.Add(Image.FromFile(name));
                             }
                         }
                     }
@@ -392,6 +394,18 @@ namespace Mosaic
         {
             btnGo.Enabled = false;
             lblAddFirst.Visible = true;
+
+            Task t = new Task(() =>
+            {
+                WebClient wc = new WebClient();
+                var bytes = wc.DownloadData("http://gravatar.com/avatar/");                
+                FileStream fs = new FileStream("gravatar.jpg", FileMode.Create, FileAccess.Write);
+                fs.Write(bytes, 0, bytes.Length);
+                fs.Close();
+                fs = null;
+                this.Personalize.Image = Image.FromFile("gravatar.jpg");
+            });
+            t.Start();
         }
 
         /// <summary>
@@ -564,19 +578,19 @@ namespace Mosaic
                 {
                     //using (
                     var image = new Bitmap(this.orginalImage);//)
-                  //  {
-                        var tmpImage = Image.FromFile(this.tbxBrowse.Text);
-                        TextureBrush tBrush = new TextureBrush(Utils.ChangeOpacity(tmpImage, (float)((float)this.trackBar.Value / 100f)));
+                    //  {
+                    var tmpImage = Image.FromFile(this.tbxBrowse.Text);
+                    TextureBrush tBrush = new TextureBrush(Utils.ChangeOpacity(tmpImage, (float)((float)this.trackBar.Value / 100f)));
 
-                        Pen blackPen = new Pen(Color.Black);
+                    Pen blackPen = new Pen(Color.Black);
 
-                        using (var g = Graphics.FromImage(image))
-                        {
-                            g.FillRectangle(tBrush, new Rectangle(0, 0, image.Width, image.Height));
-                        }
-                        this.pictureBox.Image = image;
-                        this.pictureBox.Refresh();
-                 //   }
+                    using (var g = Graphics.FromImage(image))
+                    {
+                        g.FillRectangle(tBrush, new Rectangle(0, 0, image.Width, image.Height));
+                    }
+                    this.pictureBox.Image = image;
+                    this.pictureBox.Refresh();
+                    //   }
                 }
             }
             catch (OutOfMemoryException ex)
