@@ -23,9 +23,15 @@ namespace Mosaic
     public partial class MainForm : Form
     {
         private static ILog log = LogManager.GetLogger(typeof(MainForm));
-        private BackgroundWorker calculateMosaicBackgroundWorker;
-        private Image orginalImage;
-        private ImageList imageList = new ImageList();
+        protected BackgroundWorker calculateMosaicBackgroundWorker;
+        protected Image orginalImage;
+        protected ImageList imageList = new ImageList();
+
+        public Context Ctx
+        {
+            get;
+            private set;
+        }
 
         public ColorCalculation mosaicColors
         {
@@ -33,8 +39,9 @@ namespace Mosaic
             set;
         }
 
-        public MainForm()
+        public MainForm(Context applicationContext)
         {
+            this.Ctx = applicationContext;
             this.MaximizeBox = false;
             log.Debug("initializing components");
             InitializeComponent();
@@ -92,11 +99,18 @@ namespace Mosaic
                     if (openDialog.ShowDialog() == DialogResult.OK)
                     {
                         tbxBrowse.Text = openDialog.FileName;
-                        this.pictureBox.Image = Image.FromFile(openDialog.FileName);
-                        var w = this.pictureBox.Image.Width;
-                        var h = this.pictureBox.Image.Height;
-                        this.nudHeight.Value = new Decimal(h * (Settings.Default.Ratio / 100));
-                        this.nudWidth.Value = new Decimal(w * (Settings.Default.Ratio / 100));
+                        this.pictureBox.Image = this.Ctx.LoadPicture(openDialog.FileName);
+                        decimal height, width;
+                        if (this.Ctx.CalculateHeightAndWidthImage(this.pictureBox.Image, out height, out width))
+                        {
+                            this.nudHeight.Value = height;
+                            this.nudWidth.Value = width;
+                        }
+                        else
+                        {
+                            log.FatalFormat("CalculateHeightAndWidthImage method returned false!!");
+                            throw new ArgumentException("CalculateHeightAndWithImage returned false");
+                        }
                     }
 
                     this.RunBackgroundWorkerForCalculateColorsOfMosaic(openDialog.FileName);
@@ -197,7 +211,7 @@ namespace Mosaic
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnAdd_Click(object sender, EventArgs e)
+        protected void btnAdd_Click(object sender, EventArgs e)
         {
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
             {
@@ -228,17 +242,22 @@ namespace Mosaic
                                     continue;
                                 }
                             }
-                            if (!(lbxTiles.Items.Contains(name)))
+                            if (!(listView.Items.Contains(new ListViewItem(name))))
                             {
+                                int index = 0;
                                 try
                                 {
-                                    lbxTiles.Items.Add(name);
+                                    listView.Items.Add(new ListViewItem(name)
+                                    {
+                                        ImageIndex = index++,
+                                        Name = name
+
+                                    });
                                     this.imageList.Images.Add(Image.FromFile(name));
                                 }
                                 catch (Exception ex)
                                 {
                                     log.Error(ex.Message, ex);
-                                    
                                 }
                             }
                         }
@@ -248,11 +267,10 @@ namespace Mosaic
                         log.InfoFormat(strings.DirectoryDoesNotExist);
                         MessageBox.Show(strings.DirectoryDoesNotExist);
                     }
-                    //this.listView
                 }
 
-                log.DebugFormat("Count tiles {0}", this.lbxTiles.Items.Count);
-                if (this.lbxTiles.Items.Count > 15)
+                log.DebugFormat("Count tiles {0}", this.listView.Items.Count);
+                if (this.listView.Items.Count > 15)
                 {
                     btnGo.Enabled = true;
                     lblAddFirst.Visible = false;
@@ -264,6 +282,8 @@ namespace Mosaic
                     lblAddFirst.Text = strings.AddAtLeast15Tiles;
                 }
             }
+            this.listView.SmallImageList = this.imageList;
+            this.listView.LargeImageList = this.imageList;
         }
 
         /// <summary>
@@ -276,15 +296,15 @@ namespace Mosaic
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
             {
                 List<String> fNS = new List<String>();
-                for (int i = 0; i < lbxTiles.Items.Count; i++)
+                for (int i = 0; i < listView.Items.Count; i++)
                 {
-                    if (!(lbxTiles.SelectedIndices.Contains(i)))
+                    if (!(listView.SelectedIndices.Contains(i)))
                     {
-                        fNS.Add((String)lbxTiles.Items[i]);
+                        //fNS.Add(listView.Items[i]);
                     }
                 }
-                lbxTiles.Items.Clear();
-                lbxTiles.Items.AddRange(fNS.ToArray());
+                listView.Items.Clear();
+                //listView.Items.AddRange(fNS.ToArray());
             }
         }
 
@@ -328,7 +348,7 @@ namespace Mosaic
             try
             {
                 List<string> items = new List<string>();
-                foreach (string item in this.lbxTiles.Items)
+                foreach (string item in this.listView.Items)
                 {
                     items.Add(item);
                 }
@@ -366,7 +386,7 @@ namespace Mosaic
             try
             {
                 List<string> items = new List<string>();
-                foreach (string item in this.lbxTiles.Items)
+                foreach (string item in this.listView.Items)
                 {
                     items.Add(item);
                 }
@@ -407,7 +427,7 @@ namespace Mosaic
             Task t = new Task(() =>
             {
                 WebClient wc = new WebClient();
-                var bytes = wc.DownloadData("http://gravatar.com/avatar/");                
+                var bytes = wc.DownloadData("http://gravatar.com/avatar/");
                 FileStream fs = new FileStream("gravatar.jpg", FileMode.Create, FileAccess.Write);
                 fs.Write(bytes, 0, bytes.Length);
                 fs.Close();
@@ -628,6 +648,8 @@ namespace Mosaic
                 this.trackBar.Value = 0;
             }
         }
+
+
 
 
     }

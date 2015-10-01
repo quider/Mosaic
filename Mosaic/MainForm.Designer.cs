@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.lbxTiles = new System.Windows.Forms.ListBox();
             this.gbxTiles = new System.Windows.Forms.GroupBox();
             this.listView = new System.Windows.Forms.ListView();
             this.lblPercentage = new System.Windows.Forms.Label();
@@ -74,6 +73,7 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Personalize = new System.Windows.Forms.ToolStripMenuItem();
+            this.clmnName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.gbxTiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudWidth)).BeginInit();
@@ -83,13 +83,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // lbxTiles
-            // 
-            resources.ApplyResources(this.lbxTiles, "lbxTiles");
-            this.lbxTiles.FormattingEnabled = true;
-            this.lbxTiles.Name = "lbxTiles";
-            this.lbxTiles.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             // 
             // gbxTiles
             // 
@@ -104,12 +97,13 @@
             this.gbxTiles.Controls.Add(this.pgbOperation);
             this.gbxTiles.Controls.Add(this.btnRemove);
             this.gbxTiles.Controls.Add(this.btnAdd);
-            this.gbxTiles.Controls.Add(this.lbxTiles);
             this.gbxTiles.Name = "gbxTiles";
             this.gbxTiles.TabStop = false;
             // 
             // listView
             // 
+            this.listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.clmnName});
             resources.ApplyResources(this.listView, "listView");
             this.listView.Name = "listView";
             this.listView.UseCompatibleStateImageBehavior = false;
@@ -417,6 +411,10 @@
             this.Personalize.Name = "Personalize";
             resources.ApplyResources(this.Personalize, "Personalize");
             // 
+            // clmnName
+            // 
+            resources.ApplyResources(this.clmnName, "clmnName");
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -448,7 +446,6 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox lbxTiles;
         private System.Windows.Forms.GroupBox gbxTiles;
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Button btnAdd;
@@ -493,6 +490,7 @@
         private System.Windows.Forms.CheckBox cbOpacity;
         private System.Windows.Forms.ListView listView;
         private System.Windows.Forms.ToolStripMenuItem Personalize;
+        private System.Windows.Forms.ColumnHeader clmnName;
     }
 }
 
