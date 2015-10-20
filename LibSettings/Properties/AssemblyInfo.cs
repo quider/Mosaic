@@ -6,9 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("LibSettings")]
-[assembly: AssemblyDescription("")]
 
-[assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("9c54921c-a5e3-4bff-a17b-c7dc05d38bcb")]

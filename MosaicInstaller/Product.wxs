@@ -65,6 +65,8 @@
         <File Source="$(var.bin)$(var.Platform)/$(var.Configuration)\Utilities.dll"></File>
         <File Source="$(var.bin)$(var.Platform)/$(var.Configuration)\RandomMosaic.dll"></File>
         <File Source="$(var.bin)$(var.Platform)/$(var.Configuration)\MySql.Data.dll"></File>
+        <File Source="$(var.bin)$(var.Platform)/$(var.Configuration)\LibResources.dll"></File>
+        <File Source="$(var.bin)$(var.Platform)/$(var.Configuration)\LibSettings.dll"></File>
         <CreateFolder Directory="pl" ></CreateFolder>
         <CreateFolder Directory="log" ></CreateFolder>
       </Component>
