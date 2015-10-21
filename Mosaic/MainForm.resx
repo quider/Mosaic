@@ -723,6 +723,9 @@
   <data name="btnGo.Text" xml:space="preserve">
     <value>Go</value>
   </data>
+  <data name="btnGo.TextImageRelation" type="System.Windows.Forms.TextImageRelation, System.Windows.Forms">
+    <value>ImageBeforeText</value>
+  </data>
   <data name="&gt;&gt;btnGo.Name" xml:space="preserve">
     <value>btnGo</value>
   </data>
@@ -761,6 +764,90 @@
   </data>
   <data name="&gt;&gt;pictureBox.ZOrder" xml:space="preserve">
     <value>5</value>
+  </data>
+  <data name="&gt;&gt;lblOpacity.Name" xml:space="preserve">
+    <value>lblOpacity</value>
+  </data>
+  <data name="&gt;&gt;lblOpacity.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblOpacity.Parent" xml:space="preserve">
+    <value>gbxMosaic</value>
+  </data>
+  <data name="&gt;&gt;lblOpacity.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;cbOpacity.Name" xml:space="preserve">
+    <value>cbOpacity</value>
+  </data>
+  <data name="&gt;&gt;cbOpacity.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbOpacity.Parent" xml:space="preserve">
+    <value>gbxMosaic</value>
+  </data>
+  <data name="&gt;&gt;cbOpacity.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;trackBar.Name" xml:space="preserve">
+    <value>trackBar</value>
+  </data>
+  <data name="&gt;&gt;trackBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;trackBar.Parent" xml:space="preserve">
+    <value>gbxMosaic</value>
+  </data>
+  <data name="&gt;&gt;trackBar.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;btCancelCalculate.Name" xml:space="preserve">
+    <value>btCancelCalculate</value>
+  </data>
+  <data name="&gt;&gt;btCancelCalculate.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btCancelCalculate.Parent" xml:space="preserve">
+    <value>gbxMosaic</value>
+  </data>
+  <data name="&gt;&gt;btCancelCalculate.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;lblAddFirst.Name" xml:space="preserve">
+    <value>lblAddFirst</value>
+  </data>
+  <data name="&gt;&gt;lblAddFirst.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblAddFirst.Parent" xml:space="preserve">
+    <value>gbxMosaic</value>
+  </data>
+  <data name="&gt;&gt;lblAddFirst.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="gbxMosaic.Location" type="System.Drawing.Point, System.Drawing">
+    <value>366, 30</value>
+  </data>
+  <data name="gbxMosaic.Size" type="System.Drawing.Size, System.Drawing">
+    <value>534, 502</value>
+  </data>
+  <data name="gbxMosaic.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="gbxMosaic.Text" xml:space="preserve">
+    <value>Mosaic</value>
+  </data>
+  <data name="&gt;&gt;gbxMosaic.Name" xml:space="preserve">
+    <value>gbxMosaic</value>
+  </data>
+  <data name="&gt;&gt;gbxMosaic.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gbxMosaic.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;gbxMosaic.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="lblOpacity.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -891,33 +978,48 @@
   <data name="&gt;&gt;lblAddFirst.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="gbxMosaic.Location" type="System.Drawing.Point, System.Drawing">
-    <value>366, 30</value>
-  </data>
-  <data name="gbxMosaic.Size" type="System.Drawing.Size, System.Drawing">
-    <value>534, 502</value>
-  </data>
-  <data name="gbxMosaic.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="gbxMosaic.Text" xml:space="preserve">
-    <value>Mosaic</value>
-  </data>
-  <data name="&gt;&gt;gbxMosaic.Name" xml:space="preserve">
-    <value>gbxMosaic</value>
-  </data>
-  <data name="&gt;&gt;gbxMosaic.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gbxMosaic.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;gbxMosaic.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <metadata name="menuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 20</value>
+  </data>
+  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;File</value>
+  </data>
+  <data name="toolsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 20</value>
+  </data>
+  <data name="toolsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Tools</value>
+  </data>
+  <data name="contentsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="contentsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Contents</value>
+  </data>
+  <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 6</value>
+  </data>
+  <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="aboutToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;About...</value>
+  </data>
+  <data name="checkUpdatesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 22</value>
+  </data>
+  <data name="checkUpdatesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Check updates</value>
+  </data>
+  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 20</value>
+  </data>
+  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Help</value>
+  </data>
   <data name="menuStrip.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -938,12 +1040,6 @@
   </data>
   <data name="&gt;&gt;menuStrip.ZOrder" xml:space="preserve">
     <value>3</value>
-  </data>
-  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 20</value>
-  </data>
-  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;File</value>
   </data>
   <data name="newToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1075,12 +1171,6 @@
   <data name="exitToolStripMenuItem.Text" xml:space="preserve">
     <value>E&amp;xit</value>
   </data>
-  <data name="toolsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 20</value>
-  </data>
-  <data name="toolsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Tools</value>
-  </data>
   <data name="customizeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 22</value>
   </data>
@@ -1095,33 +1185,6 @@
   </data>
   <data name="optionsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Options</value>
-  </data>
-  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 20</value>
-  </data>
-  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Help</value>
-  </data>
-  <data name="contentsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="contentsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Contents</value>
-  </data>
-  <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 6</value>
-  </data>
-  <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="aboutToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;About...</value>
-  </data>
-  <data name="checkUpdatesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>152, 22</value>
-  </data>
-  <data name="checkUpdatesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Check updates</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

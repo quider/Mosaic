@@ -40,6 +40,7 @@ namespace Mosaic
             this.btnAdd.Text = strings.Add;
             this.btnRemove.Text = strings.Remove;
             this.btnGo.Text = strings.Go;
+            this.btnGo.Image = LibResources.Properties.Resources.send.GetThumbnailImage(16,16,Abort,IntPtr.Zero);
             this.lblAddFirst.Text = strings.AddTilesFirst;
             this.cbxAdjustTiles.Text = strings.AdjustHue;
             this.lblHeight.Text = strings.Height;
@@ -68,6 +69,11 @@ namespace Mosaic
             this.cbOpacity.Text = strings.Opacity;
             this.Text += "-" + this.ProductVersion;
 
+        }
+
+        private bool Abort()
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -602,6 +608,11 @@ namespace Mosaic
             {
                 this.trackBar.Value = 0;
             }
+        }
+
+        private void checkUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(strings.WillBeInFuture, strings.Warning, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
 

@@ -48,6 +48,9 @@
             this.btnGo = new System.Windows.Forms.Button();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.gbxMosaic = new System.Windows.Forms.GroupBox();
+            this.lblOpacity = new System.Windows.Forms.Label();
+            this.cbOpacity = new System.Windows.Forms.CheckBox();
+            this.trackBar = new System.Windows.Forms.TrackBar();
             this.btCancelCalculate = new System.Windows.Forms.Button();
             this.lblAddFirst = new System.Windows.Forms.Label();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
@@ -69,17 +72,14 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.trackBar = new System.Windows.Forms.TrackBar();
-            this.cbOpacity = new System.Windows.Forms.CheckBox();
-            this.lblOpacity = new System.Windows.Forms.Label();
             this.gbxTiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudWidth)).BeginInit();
             this.gbxMaster.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.gbxMosaic.SuspendLayout();
-            this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
+            this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbxTiles
@@ -248,6 +248,26 @@
             this.gbxMosaic.Name = "gbxMosaic";
             this.gbxMosaic.TabStop = false;
             // 
+            // lblOpacity
+            // 
+            resources.ApplyResources(this.lblOpacity, "lblOpacity");
+            this.lblOpacity.Name = "lblOpacity";
+            // 
+            // cbOpacity
+            // 
+            resources.ApplyResources(this.cbOpacity, "cbOpacity");
+            this.cbOpacity.Name = "cbOpacity";
+            this.cbOpacity.UseVisualStyleBackColor = true;
+            this.cbOpacity.CheckedChanged += new System.EventHandler(this.cbOpacity_CheckedChanged);
+            // 
+            // trackBar
+            // 
+            resources.ApplyResources(this.trackBar, "trackBar");
+            this.trackBar.Maximum = 100;
+            this.trackBar.Name = "trackBar";
+            this.trackBar.Value = 25;
+            this.trackBar.ValueChanged += new System.EventHandler(this.trackBar_ValueChanged);
+            // 
             // btCancelCalculate
             // 
             resources.ApplyResources(this.btCancelCalculate, "btCancelCalculate");
@@ -381,26 +401,7 @@
             // 
             this.checkUpdatesToolStripMenuItem.Name = "checkUpdatesToolStripMenuItem";
             resources.ApplyResources(this.checkUpdatesToolStripMenuItem, "checkUpdatesToolStripMenuItem");
-            // 
-            // trackBar
-            // 
-            resources.ApplyResources(this.trackBar, "trackBar");
-            this.trackBar.Maximum = 100;
-            this.trackBar.Name = "trackBar";
-            this.trackBar.Value = 25;
-            this.trackBar.ValueChanged += new System.EventHandler(this.trackBar_ValueChanged);
-            // 
-            // cbOpacity
-            // 
-            resources.ApplyResources(this.cbOpacity, "cbOpacity");
-            this.cbOpacity.Name = "cbOpacity";
-            this.cbOpacity.UseVisualStyleBackColor = true;
-            this.cbOpacity.CheckedChanged += new System.EventHandler(this.cbOpacity_CheckedChanged);
-            // 
-            // lblOpacity
-            // 
-            resources.ApplyResources(this.lblOpacity, "lblOpacity");
-            this.lblOpacity.Name = "lblOpacity";
+            this.checkUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkUpdatesToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -423,9 +424,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.gbxMosaic.ResumeLayout(false);
             this.gbxMosaic.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
