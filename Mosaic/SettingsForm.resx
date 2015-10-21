@@ -117,4 +117,841 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="rdbtFindColors.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="rdbtFindColors.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 81</value>
+  </data>
+  <data name="rdbtFindColors.Size" type="System.Drawing.Size, System.Drawing">
+    <value>104, 17</value>
+  </data>
+  <data name="rdbtFindColors.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rdbtFindColors.Text" xml:space="preserve">
+    <value>Find tiles to color</value>
+  </data>
+  <data name="&gt;&gt;rdbtFindColors.Name" xml:space="preserve">
+    <value>rdbtFindColors</value>
+  </data>
+  <data name="&gt;&gt;rdbtFindColors.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdbtFindColors.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;rdbtFindColors.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rbtRandomTiles.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rbtRandomTiles.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 39</value>
+  </data>
+  <data name="rbtRandomTiles.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 17</value>
+  </data>
+  <data name="rbtRandomTiles.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rbtRandomTiles.Text" xml:space="preserve">
+    <value>Random tiles</value>
+  </data>
+  <data name="&gt;&gt;rbtRandomTiles.Name" xml:space="preserve">
+    <value>rbtRandomTiles</value>
+  </data>
+  <data name="&gt;&gt;rbtRandomTiles.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbtRandomTiles.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;rbtRandomTiles.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 283</value>
+  </data>
+  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>372, 112</value>
+  </data>
+  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>Tiles</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
+    <value>tabPageMainSettings</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="cbxHueSetting.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="cbxHueSetting.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 36</value>
+  </data>
+  <data name="cbxHueSetting.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 17</value>
+  </data>
+  <data name="cbxHueSetting.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="cbxHueSetting.Text" xml:space="preserve">
+    <value>Add hue to each tile</value>
+  </data>
+  <data name="&gt;&gt;cbxHueSetting.Name" xml:space="preserve">
+    <value>cbxHueSetting</value>
+  </data>
+  <data name="&gt;&gt;cbxHueSetting.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbxHueSetting.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;cbxHueSetting.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 173</value>
+  </data>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>372, 88</value>
+  </data>
+  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="groupBox1.Text" xml:space="preserve">
+    <value>Colors</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+    <value>tabPageMainSettings</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>135, 43</value>
+  </data>
+  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>15, 13</value>
+  </data>
+  <data name="label3.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="label3.Text" xml:space="preserve">
+    <value>%</value>
+  </data>
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+    <value>label3</value>
+  </data>
+  <data name="&gt;&gt;label3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+    <value>gbxMosaicDimensions</value>
+  </data>
+  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="nudTilesInGroup.Location" type="System.Drawing.Point, System.Drawing">
+    <value>121, 101</value>
+  </data>
+  <data name="nudTilesInGroup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 20</value>
+  </data>
+  <data name="nudTilesInGroup.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;nudTilesInGroup.Name" xml:space="preserve">
+    <value>nudTilesInGroup</value>
+  </data>
+  <data name="&gt;&gt;nudTilesInGroup.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudTilesInGroup.Parent" xml:space="preserve">
+    <value>gbxMosaicDimensions</value>
+  </data>
+  <data name="&gt;&gt;nudTilesInGroup.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblTilesInGroup.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblTilesInGroup.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 101</value>
+  </data>
+  <data name="lblTilesInGroup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 13</value>
+  </data>
+  <data name="lblTilesInGroup.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="lblTilesInGroup.Text" xml:space="preserve">
+    <value>Tiles in group</value>
+  </data>
+  <data name="&gt;&gt;lblTilesInGroup.Name" xml:space="preserve">
+    <value>lblTilesInGroup</value>
+  </data>
+  <data name="&gt;&gt;lblTilesInGroup.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblTilesInGroup.Parent" xml:space="preserve">
+    <value>gbxMosaicDimensions</value>
+  </data>
+  <data name="&gt;&gt;lblTilesInGroup.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblBuffer.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblBuffer.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 72</value>
+  </data>
+  <data name="lblBuffer.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 13</value>
+  </data>
+  <data name="lblBuffer.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="lblBuffer.Text" xml:space="preserve">
+    <value>Buffer</value>
+  </data>
+  <data name="&gt;&gt;lblBuffer.Name" xml:space="preserve">
+    <value>lblBuffer</value>
+  </data>
+  <data name="&gt;&gt;lblBuffer.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblBuffer.Parent" xml:space="preserve">
+    <value>gbxMosaicDimensions</value>
+  </data>
+  <data name="&gt;&gt;lblBuffer.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="nudTreshold.Location" type="System.Drawing.Point, System.Drawing">
+    <value>121, 70</value>
+  </data>
+  <data name="nudTreshold.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 20</value>
+  </data>
+  <data name="nudTreshold.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;nudTreshold.Name" xml:space="preserve">
+    <value>nudTreshold</value>
+  </data>
+  <data name="&gt;&gt;nudTreshold.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudTreshold.Parent" xml:space="preserve">
+    <value>gbxMosaicDimensions</value>
+  </data>
+  <data name="&gt;&gt;nudTreshold.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lblRatioExplanation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>156, 26</value>
+  </data>
+  <data name="lblRatioExplanation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 46</value>
+  </data>
+  <data name="lblRatioExplanation.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lblRatioExplanation.Text" xml:space="preserve">
+    <value>label1</value>
+  </data>
+  <data name="&gt;&gt;lblRatioExplanation.Name" xml:space="preserve">
+    <value>lblRatioExplanation</value>
+  </data>
+  <data name="&gt;&gt;lblRatioExplanation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblRatioExplanation.Parent" xml:space="preserve">
+    <value>gbxMosaicDimensions</value>
+  </data>
+  <data name="&gt;&gt;lblRatioExplanation.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="tbRatio.Location" type="System.Drawing.Point, System.Drawing">
+    <value>95, 40</value>
+  </data>
+  <data name="tbRatio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 20</value>
+  </data>
+  <data name="tbRatio.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="tbRatio.Text" xml:space="preserve">
+    <value>2,5</value>
+  </data>
+  <data name="&gt;&gt;tbRatio.Name" xml:space="preserve">
+    <value>tbRatio</value>
+  </data>
+  <data name="&gt;&gt;tbRatio.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbRatio.Parent" xml:space="preserve">
+    <value>gbxMosaicDimensions</value>
+  </data>
+  <data name="&gt;&gt;tbRatio.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="lblPercentage.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblPercentage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 43</value>
+  </data>
+  <data name="lblPercentage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 13</value>
+  </data>
+  <data name="lblPercentage.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblPercentage.Text" xml:space="preserve">
+    <value>Ratio</value>
+  </data>
+  <data name="&gt;&gt;lblPercentage.Name" xml:space="preserve">
+    <value>lblPercentage</value>
+  </data>
+  <data name="&gt;&gt;lblPercentage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblPercentage.Parent" xml:space="preserve">
+    <value>gbxMosaicDimensions</value>
+  </data>
+  <data name="&gt;&gt;lblPercentage.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="gbxMosaicDimensions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="gbxMosaicDimensions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>372, 144</value>
+  </data>
+  <data name="gbxMosaicDimensions.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="gbxMosaicDimensions.Text" xml:space="preserve">
+    <value>Dimensions</value>
+  </data>
+  <data name="&gt;&gt;gbxMosaicDimensions.Name" xml:space="preserve">
+    <value>gbxMosaicDimensions</value>
+  </data>
+  <data name="&gt;&gt;gbxMosaicDimensions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gbxMosaicDimensions.Parent" xml:space="preserve">
+    <value>tabPageMainSettings</value>
+  </data>
+  <data name="&gt;&gt;gbxMosaicDimensions.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tabPageMainSettings.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tabPageMainSettings.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPageMainSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>383, 414</value>
+  </data>
+  <data name="tabPageMainSettings.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tabPageMainSettings.Text" xml:space="preserve">
+    <value>Mosaic settings</value>
+  </data>
+  <data name="&gt;&gt;tabPageMainSettings.Name" xml:space="preserve">
+    <value>tabPageMainSettings</value>
+  </data>
+  <data name="&gt;&gt;tabPageMainSettings.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPageMainSettings.Parent" xml:space="preserve">
+    <value>tabSettings</value>
+  </data>
+  <data name="&gt;&gt;tabPageMainSettings.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>123, 248</value>
+  </data>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>235, 35</value>
+  </data>
+  <data name="label6.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="label6.Text" xml:space="preserve">
+    <value>label6</value>
+  </data>
+  <data name="label6.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;label6.Name" xml:space="preserve">
+    <value>label6</value>
+  </data>
+  <data name="&gt;&gt;label6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label6.Parent" xml:space="preserve">
+    <value>gbxEffects</value>
+  </data>
+  <data name="&gt;&gt;label6.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>123, 202</value>
+  </data>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>235, 35</value>
+  </data>
+  <data name="label5.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="label5.Text" xml:space="preserve">
+    <value>label5</value>
+  </data>
+  <data name="label5.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;label5.Name" xml:space="preserve">
+    <value>label5</value>
+  </data>
+  <data name="&gt;&gt;label5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label5.Parent" xml:space="preserve">
+    <value>gbxEffects</value>
+  </data>
+  <data name="&gt;&gt;label5.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblSharp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>123, 155</value>
+  </data>
+  <data name="lblSharp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>235, 35</value>
+  </data>
+  <data name="lblSharp.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="lblSharp.Text" xml:space="preserve">
+    <value>label4</value>
+  </data>
+  <data name="lblSharp.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;lblSharp.Name" xml:space="preserve">
+    <value>lblSharp</value>
+  </data>
+  <data name="&gt;&gt;lblSharp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSharp.Parent" xml:space="preserve">
+    <value>gbxEffects</value>
+  </data>
+  <data name="&gt;&gt;lblSharp.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblMono.Location" type="System.Drawing.Point, System.Drawing">
+    <value>123, 113</value>
+  </data>
+  <data name="lblMono.Size" type="System.Drawing.Size, System.Drawing">
+    <value>235, 35</value>
+  </data>
+  <data name="lblMono.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="lblMono.Text" xml:space="preserve">
+    <value>label3</value>
+  </data>
+  <data name="lblMono.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;lblMono.Name" xml:space="preserve">
+    <value>lblMono</value>
+  </data>
+  <data name="&gt;&gt;lblMono.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMono.Parent" xml:space="preserve">
+    <value>gbxEffects</value>
+  </data>
+  <data name="&gt;&gt;lblMono.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblSepia.Location" type="System.Drawing.Point, System.Drawing">
+    <value>123, 72</value>
+  </data>
+  <data name="lblSepia.Size" type="System.Drawing.Size, System.Drawing">
+    <value>235, 35</value>
+  </data>
+  <data name="lblSepia.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="lblSepia.Text" xml:space="preserve">
+    <value>label2</value>
+  </data>
+  <data name="lblSepia.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;lblSepia.Name" xml:space="preserve">
+    <value>lblSepia</value>
+  </data>
+  <data name="&gt;&gt;lblSepia.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSepia.Parent" xml:space="preserve">
+    <value>gbxEffects</value>
+  </data>
+  <data name="&gt;&gt;lblSepia.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lblNone.Location" type="System.Drawing.Point, System.Drawing">
+    <value>123, 33</value>
+  </data>
+  <data name="lblNone.Size" type="System.Drawing.Size, System.Drawing">
+    <value>235, 35</value>
+  </data>
+  <data name="lblNone.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="lblNone.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;lblNone.Name" xml:space="preserve">
+    <value>lblNone</value>
+  </data>
+  <data name="&gt;&gt;lblNone.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblNone.Parent" xml:space="preserve">
+    <value>gbxEffects</value>
+  </data>
+  <data name="&gt;&gt;lblNone.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="radioButton6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>32, 246</value>
+  </data>
+  <data name="radioButton6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 37</value>
+  </data>
+  <data name="radioButton6.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="radioButton6.Text" xml:space="preserve">
+    <value>radioButton6</value>
+  </data>
+  <data name="radioButton6.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;radioButton6.Name" xml:space="preserve">
+    <value>radioButton6</value>
+  </data>
+  <data name="&gt;&gt;radioButton6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioButton6.Parent" xml:space="preserve">
+    <value>gbxEffects</value>
+  </data>
+  <data name="&gt;&gt;radioButton6.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="radioButton5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>32, 200</value>
+  </data>
+  <data name="radioButton5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 37</value>
+  </data>
+  <data name="radioButton5.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="radioButton5.Text" xml:space="preserve">
+    <value>rbtNew1</value>
+  </data>
+  <data name="radioButton5.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;radioButton5.Name" xml:space="preserve">
+    <value>radioButton5</value>
+  </data>
+  <data name="&gt;&gt;radioButton5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;radioButton5.Parent" xml:space="preserve">
+    <value>gbxEffects</value>
+  </data>
+  <data name="&gt;&gt;radioButton5.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="rbtSharp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>32, 153</value>
+  </data>
+  <data name="rbtSharp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 37</value>
+  </data>
+  <data name="rbtSharp.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="rbtSharp.Text" xml:space="preserve">
+    <value>rbtSharp</value>
+  </data>
+  <data name="&gt;&gt;rbtSharp.Name" xml:space="preserve">
+    <value>rbtSharp</value>
+  </data>
+  <data name="&gt;&gt;rbtSharp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbtSharp.Parent" xml:space="preserve">
+    <value>gbxEffects</value>
+  </data>
+  <data name="&gt;&gt;rbtSharp.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="rbtMono.Location" type="System.Drawing.Point, System.Drawing">
+    <value>32, 113</value>
+  </data>
+  <data name="rbtMono.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 35</value>
+  </data>
+  <data name="rbtMono.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rbtMono.Text" xml:space="preserve">
+    <value>rbtMono</value>
+  </data>
+  <data name="&gt;&gt;rbtMono.Name" xml:space="preserve">
+    <value>rbtMono</value>
+  </data>
+  <data name="&gt;&gt;rbtMono.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbtMono.Parent" xml:space="preserve">
+    <value>gbxEffects</value>
+  </data>
+  <data name="&gt;&gt;rbtMono.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="rbtSepia.Location" type="System.Drawing.Point, System.Drawing">
+    <value>32, 72</value>
+  </data>
+  <data name="rbtSepia.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 35</value>
+  </data>
+  <data name="rbtSepia.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rbtSepia.Text" xml:space="preserve">
+    <value>rbtSepia</value>
+  </data>
+  <data name="&gt;&gt;rbtSepia.Name" xml:space="preserve">
+    <value>rbtSepia</value>
+  </data>
+  <data name="&gt;&gt;rbtSepia.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbtSepia.Parent" xml:space="preserve">
+    <value>gbxEffects</value>
+  </data>
+  <data name="&gt;&gt;rbtSepia.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="rbtNone.Location" type="System.Drawing.Point, System.Drawing">
+    <value>32, 33</value>
+  </data>
+  <data name="rbtNone.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 35</value>
+  </data>
+  <data name="rbtNone.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rbtNone.Text" xml:space="preserve">
+    <value>rbtNone</value>
+  </data>
+  <data name="&gt;&gt;rbtNone.Name" xml:space="preserve">
+    <value>rbtNone</value>
+  </data>
+  <data name="&gt;&gt;rbtNone.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rbtNone.Parent" xml:space="preserve">
+    <value>gbxEffects</value>
+  </data>
+  <data name="&gt;&gt;rbtNone.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="gbxEffects.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="gbxEffects.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 6</value>
+  </data>
+  <data name="gbxEffects.Size" type="System.Drawing.Size, System.Drawing">
+    <value>372, 299</value>
+  </data>
+  <data name="gbxEffects.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="gbxEffects.Text" xml:space="preserve">
+    <value>Effects</value>
+  </data>
+  <data name="&gt;&gt;gbxEffects.Name" xml:space="preserve">
+    <value>gbxEffects</value>
+  </data>
+  <data name="&gt;&gt;gbxEffects.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gbxEffects.Parent" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;gbxEffects.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tabPage1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tabPage1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tabPage1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>383, 414</value>
+  </data>
+  <data name="tabPage1.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tabPage1.Text" xml:space="preserve">
+    <value>Effects</value>
+  </data>
+  <data name="&gt;&gt;tabPage1.Name" xml:space="preserve">
+    <value>tabPage1</value>
+  </data>
+  <data name="&gt;&gt;tabPage1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabPage1.Parent" xml:space="preserve">
+    <value>tabSettings</value>
+  </data>
+  <data name="&gt;&gt;tabPage1.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tabSettings.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="tabSettings.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tabSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>391, 440</value>
+  </data>
+  <data name="tabSettings.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tabSettings.Name" xml:space="preserve">
+    <value>tabSettings</value>
+  </data>
+  <data name="&gt;&gt;tabSettings.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tabSettings.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tabSettings.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="btMosaicSettingsOK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>312, 446</value>
+  </data>
+  <data name="btMosaicSettingsOK.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="btMosaicSettingsOK.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="btMosaicSettingsOK.Text" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="&gt;&gt;btMosaicSettingsOK.Name" xml:space="preserve">
+    <value>btMosaicSettingsOK</value>
+  </data>
+  <data name="&gt;&gt;btMosaicSettingsOK.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btMosaicSettingsOK.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btMosaicSettingsOK.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="btnMosaicSettingsCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 446</value>
+  </data>
+  <data name="btnMosaicSettingsCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
+  </data>
+  <data name="btnMosaicSettingsCancel.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="btnMosaicSettingsCancel.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="&gt;&gt;btnMosaicSettingsCancel.Name" xml:space="preserve">
+    <value>btnMosaicSettingsCancel</value>
+  </data>
+  <data name="&gt;&gt;btnMosaicSettingsCancel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnMosaicSettingsCancel.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnMosaicSettingsCancel.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>391, 481</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>SettingsForm</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>SettingsForm</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

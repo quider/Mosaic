@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             this.tabSettings = new System.Windows.Forms.TabControl();
             this.tabPageMainSettings = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -75,77 +76,52 @@
             // 
             this.tabSettings.Controls.Add(this.tabPageMainSettings);
             this.tabSettings.Controls.Add(this.tabPage1);
-            this.tabSettings.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tabSettings.Location = new System.Drawing.Point(0, 0);
+            resources.ApplyResources(this.tabSettings, "tabSettings");
             this.tabSettings.Name = "tabSettings";
             this.tabSettings.SelectedIndex = 0;
-            this.tabSettings.Size = new System.Drawing.Size(391, 440);
-            this.tabSettings.TabIndex = 0;
             // 
             // tabPageMainSettings
             // 
             this.tabPageMainSettings.Controls.Add(this.groupBox2);
             this.tabPageMainSettings.Controls.Add(this.groupBox1);
             this.tabPageMainSettings.Controls.Add(this.gbxMosaicDimensions);
-            this.tabPageMainSettings.Location = new System.Drawing.Point(4, 22);
+            resources.ApplyResources(this.tabPageMainSettings, "tabPageMainSettings");
             this.tabPageMainSettings.Name = "tabPageMainSettings";
-            this.tabPageMainSettings.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageMainSettings.Size = new System.Drawing.Size(383, 414);
-            this.tabPageMainSettings.TabIndex = 1;
-            this.tabPageMainSettings.Text = "Mosaic settings";
             this.tabPageMainSettings.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.rdbtFindColors);
             this.groupBox2.Controls.Add(this.rbtRandomTiles);
-            this.groupBox2.Location = new System.Drawing.Point(6, 283);
+            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(372, 112);
-            this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Tiles";
             // 
             // rdbtFindColors
             // 
-            this.rdbtFindColors.AutoSize = true;
+            resources.ApplyResources(this.rdbtFindColors, "rdbtFindColors");
             this.rdbtFindColors.Checked = true;
-            this.rdbtFindColors.Location = new System.Drawing.Point(18, 81);
             this.rdbtFindColors.Name = "rdbtFindColors";
-            this.rdbtFindColors.Size = new System.Drawing.Size(104, 17);
-            this.rdbtFindColors.TabIndex = 2;
             this.rdbtFindColors.TabStop = true;
-            this.rdbtFindColors.Text = "Find tiles to color";
             this.rdbtFindColors.UseVisualStyleBackColor = true;
             // 
             // rbtRandomTiles
             // 
-            this.rbtRandomTiles.AutoSize = true;
-            this.rbtRandomTiles.Location = new System.Drawing.Point(18, 39);
+            resources.ApplyResources(this.rbtRandomTiles, "rbtRandomTiles");
             this.rbtRandomTiles.Name = "rbtRandomTiles";
-            this.rbtRandomTiles.Size = new System.Drawing.Size(86, 17);
-            this.rbtRandomTiles.TabIndex = 1;
-            this.rbtRandomTiles.Text = "Random tiles";
             this.rbtRandomTiles.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.cbxHueSetting);
-            this.groupBox1.Location = new System.Drawing.Point(6, 173);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(372, 88);
-            this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Colors";
             // 
             // cbxHueSetting
             // 
-            this.cbxHueSetting.AutoSize = true;
-            this.cbxHueSetting.Location = new System.Drawing.Point(10, 36);
+            resources.ApplyResources(this.cbxHueSetting, "cbxHueSetting");
             this.cbxHueSetting.Name = "cbxHueSetting";
-            this.cbxHueSetting.Size = new System.Drawing.Size(121, 17);
-            this.cbxHueSetting.TabIndex = 0;
-            this.cbxHueSetting.Text = "Add hue to each tile";
             this.cbxHueSetting.UseVisualStyleBackColor = true;
             // 
             // gbxMosaicDimensions
@@ -158,28 +134,19 @@
             this.gbxMosaicDimensions.Controls.Add(this.lblRatioExplanation);
             this.gbxMosaicDimensions.Controls.Add(this.tbRatio);
             this.gbxMosaicDimensions.Controls.Add(this.lblPercentage);
-            this.gbxMosaicDimensions.Location = new System.Drawing.Point(6, 6);
+            resources.ApplyResources(this.gbxMosaicDimensions, "gbxMosaicDimensions");
             this.gbxMosaicDimensions.Name = "gbxMosaicDimensions";
-            this.gbxMosaicDimensions.Size = new System.Drawing.Size(372, 144);
-            this.gbxMosaicDimensions.TabIndex = 0;
             this.gbxMosaicDimensions.TabStop = false;
-            this.gbxMosaicDimensions.Text = "Dimensions";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(107, 43);
+            resources.ApplyResources(this.label3, "label3");
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(15, 13);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "%";
             // 
             // nudTilesInGroup
             // 
-            this.nudTilesInGroup.Location = new System.Drawing.Point(95, 99);
+            resources.ApplyResources(this.nudTilesInGroup, "nudTilesInGroup");
             this.nudTilesInGroup.Name = "nudTilesInGroup";
-            this.nudTilesInGroup.Size = new System.Drawing.Size(46, 20);
-            this.nudTilesInGroup.TabIndex = 10;
             this.nudTilesInGroup.Value = new decimal(new int[] {
             4,
             0,
@@ -188,28 +155,18 @@
             // 
             // lblTilesInGroup
             // 
-            this.lblTilesInGroup.AutoSize = true;
-            this.lblTilesInGroup.Location = new System.Drawing.Point(6, 101);
+            resources.ApplyResources(this.lblTilesInGroup, "lblTilesInGroup");
             this.lblTilesInGroup.Name = "lblTilesInGroup";
-            this.lblTilesInGroup.Size = new System.Drawing.Size(70, 13);
-            this.lblTilesInGroup.TabIndex = 9;
-            this.lblTilesInGroup.Text = "Tiles in group";
             // 
             // lblBuffer
             // 
-            this.lblBuffer.AutoSize = true;
-            this.lblBuffer.Location = new System.Drawing.Point(6, 72);
+            resources.ApplyResources(this.lblBuffer, "lblBuffer");
             this.lblBuffer.Name = "lblBuffer";
-            this.lblBuffer.Size = new System.Drawing.Size(35, 13);
-            this.lblBuffer.TabIndex = 8;
-            this.lblBuffer.Text = "Buffer";
             // 
             // nudTreshold
             // 
-            this.nudTreshold.Location = new System.Drawing.Point(95, 70);
+            resources.ApplyResources(this.nudTreshold, "nudTreshold");
             this.nudTreshold.Name = "nudTreshold";
-            this.nudTreshold.Size = new System.Drawing.Size(46, 20);
-            this.nudTreshold.TabIndex = 7;
             this.nudTreshold.Value = new decimal(new int[] {
             25,
             0,
@@ -218,38 +175,24 @@
             // 
             // lblRatioExplanation
             // 
-            this.lblRatioExplanation.Location = new System.Drawing.Point(156, 26);
+            resources.ApplyResources(this.lblRatioExplanation, "lblRatioExplanation");
             this.lblRatioExplanation.Name = "lblRatioExplanation";
-            this.lblRatioExplanation.Size = new System.Drawing.Size(210, 46);
-            this.lblRatioExplanation.TabIndex = 6;
-            this.lblRatioExplanation.Text = "label1";
             // 
             // tbRatio
             // 
-            this.tbRatio.Location = new System.Drawing.Point(59, 40);
+            resources.ApplyResources(this.tbRatio, "tbRatio");
             this.tbRatio.Name = "tbRatio";
-            this.tbRatio.Size = new System.Drawing.Size(45, 20);
-            this.tbRatio.TabIndex = 5;
-            this.tbRatio.Text = "2,5";
             // 
             // lblPercentage
             // 
-            this.lblPercentage.AutoSize = true;
-            this.lblPercentage.Location = new System.Drawing.Point(6, 43);
+            resources.ApplyResources(this.lblPercentage, "lblPercentage");
             this.lblPercentage.Name = "lblPercentage";
-            this.lblPercentage.Size = new System.Drawing.Size(32, 13);
-            this.lblPercentage.TabIndex = 2;
-            this.lblPercentage.Text = "Ratio";
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.gbxEffects);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            resources.ApplyResources(this.tabPage1, "tabPage1");
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(383, 414);
-            this.tabPage1.TabIndex = 2;
-            this.tabPage1.Text = "Effects";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // gbxEffects
@@ -266,159 +209,103 @@
             this.gbxEffects.Controls.Add(this.rbtMono);
             this.gbxEffects.Controls.Add(this.rbtSepia);
             this.gbxEffects.Controls.Add(this.rbtNone);
-            this.gbxEffects.Enabled = false;
-            this.gbxEffects.Location = new System.Drawing.Point(6, 6);
+            resources.ApplyResources(this.gbxEffects, "gbxEffects");
             this.gbxEffects.Name = "gbxEffects";
-            this.gbxEffects.Size = new System.Drawing.Size(372, 299);
-            this.gbxEffects.TabIndex = 8;
             this.gbxEffects.TabStop = false;
-            this.gbxEffects.Text = "Effects";
             // 
             // label6
             // 
-            this.label6.Location = new System.Drawing.Point(123, 248);
+            resources.ApplyResources(this.label6, "label6");
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(235, 35);
-            this.label6.TabIndex = 12;
-            this.label6.Text = "label6";
-            this.label6.Visible = false;
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(123, 202);
+            resources.ApplyResources(this.label5, "label5");
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(235, 35);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "label5";
-            this.label5.Visible = false;
             // 
             // lblSharp
             // 
-            this.lblSharp.Location = new System.Drawing.Point(123, 155);
+            resources.ApplyResources(this.lblSharp, "lblSharp");
             this.lblSharp.Name = "lblSharp";
-            this.lblSharp.Size = new System.Drawing.Size(235, 35);
-            this.lblSharp.TabIndex = 10;
-            this.lblSharp.Text = "label4";
-            this.lblSharp.Visible = false;
             // 
             // lblMono
             // 
-            this.lblMono.Location = new System.Drawing.Point(123, 113);
+            resources.ApplyResources(this.lblMono, "lblMono");
             this.lblMono.Name = "lblMono";
-            this.lblMono.Size = new System.Drawing.Size(235, 35);
-            this.lblMono.TabIndex = 9;
-            this.lblMono.Text = "label3";
-            this.lblMono.Visible = false;
             // 
             // lblSepia
             // 
-            this.lblSepia.Location = new System.Drawing.Point(123, 72);
+            resources.ApplyResources(this.lblSepia, "lblSepia");
             this.lblSepia.Name = "lblSepia";
-            this.lblSepia.Size = new System.Drawing.Size(235, 35);
-            this.lblSepia.TabIndex = 8;
-            this.lblSepia.Text = "label2";
-            this.lblSepia.Visible = false;
             // 
             // lblNone
             // 
-            this.lblNone.Location = new System.Drawing.Point(123, 33);
+            resources.ApplyResources(this.lblNone, "lblNone");
             this.lblNone.Name = "lblNone";
-            this.lblNone.Size = new System.Drawing.Size(235, 35);
-            this.lblNone.TabIndex = 7;
-            this.lblNone.Visible = false;
             // 
             // radioButton6
             // 
-            this.radioButton6.Location = new System.Drawing.Point(32, 246);
+            resources.ApplyResources(this.radioButton6, "radioButton6");
             this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(85, 37);
-            this.radioButton6.TabIndex = 5;
-            this.radioButton6.Text = "radioButton6";
             this.radioButton6.UseVisualStyleBackColor = true;
-            this.radioButton6.Visible = false;
             // 
             // radioButton5
             // 
-            this.radioButton5.Location = new System.Drawing.Point(32, 200);
+            resources.ApplyResources(this.radioButton5, "radioButton5");
             this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(85, 37);
-            this.radioButton5.TabIndex = 4;
-            this.radioButton5.Text = "rbtNew1";
             this.radioButton5.UseVisualStyleBackColor = true;
-            this.radioButton5.Visible = false;
             // 
             // rbtSharp
             // 
-            this.rbtSharp.Location = new System.Drawing.Point(32, 153);
+            resources.ApplyResources(this.rbtSharp, "rbtSharp");
             this.rbtSharp.Name = "rbtSharp";
-            this.rbtSharp.Size = new System.Drawing.Size(85, 37);
-            this.rbtSharp.TabIndex = 3;
-            this.rbtSharp.Text = "rbtSharp";
             this.rbtSharp.UseVisualStyleBackColor = true;
             // 
             // rbtMono
             // 
-            this.rbtMono.Location = new System.Drawing.Point(32, 113);
+            resources.ApplyResources(this.rbtMono, "rbtMono");
             this.rbtMono.Name = "rbtMono";
-            this.rbtMono.Size = new System.Drawing.Size(85, 35);
-            this.rbtMono.TabIndex = 2;
-            this.rbtMono.Text = "rbtMono";
             this.rbtMono.UseVisualStyleBackColor = true;
             // 
             // rbtSepia
             // 
-            this.rbtSepia.Location = new System.Drawing.Point(32, 72);
+            resources.ApplyResources(this.rbtSepia, "rbtSepia");
             this.rbtSepia.Name = "rbtSepia";
-            this.rbtSepia.Size = new System.Drawing.Size(85, 35);
-            this.rbtSepia.TabIndex = 1;
-            this.rbtSepia.Text = "rbtSepia";
             this.rbtSepia.UseVisualStyleBackColor = true;
             // 
             // rbtNone
             // 
             this.rbtNone.Checked = true;
-            this.rbtNone.Location = new System.Drawing.Point(32, 33);
+            resources.ApplyResources(this.rbtNone, "rbtNone");
             this.rbtNone.Name = "rbtNone";
-            this.rbtNone.Size = new System.Drawing.Size(85, 35);
-            this.rbtNone.TabIndex = 0;
             this.rbtNone.TabStop = true;
-            this.rbtNone.Text = "rbtNone";
             this.rbtNone.UseVisualStyleBackColor = true;
             // 
             // btMosaicSettingsOK
             // 
-            this.btMosaicSettingsOK.Location = new System.Drawing.Point(312, 446);
+            resources.ApplyResources(this.btMosaicSettingsOK, "btMosaicSettingsOK");
             this.btMosaicSettingsOK.Name = "btMosaicSettingsOK";
-            this.btMosaicSettingsOK.Size = new System.Drawing.Size(75, 23);
-            this.btMosaicSettingsOK.TabIndex = 1;
-            this.btMosaicSettingsOK.Text = "Ok";
             this.btMosaicSettingsOK.UseVisualStyleBackColor = true;
             this.btMosaicSettingsOK.Click += new System.EventHandler(this.btMosaicSettingsOK_Click);
             // 
             // btnMosaicSettingsCancel
             // 
             this.btnMosaicSettingsCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnMosaicSettingsCancel.Location = new System.Drawing.Point(4, 446);
+            resources.ApplyResources(this.btnMosaicSettingsCancel, "btnMosaicSettingsCancel");
             this.btnMosaicSettingsCancel.Name = "btnMosaicSettingsCancel";
-            this.btnMosaicSettingsCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnMosaicSettingsCancel.TabIndex = 2;
-            this.btnMosaicSettingsCancel.Text = "Cancel";
             this.btnMosaicSettingsCancel.UseVisualStyleBackColor = true;
             // 
             // SettingsForm
             // 
             this.AcceptButton = this.btMosaicSettingsOK;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnMosaicSettingsCancel;
-            this.ClientSize = new System.Drawing.Size(391, 481);
             this.Controls.Add(this.btMosaicSettingsOK);
             this.Controls.Add(this.btnMosaicSettingsCancel);
             this.Controls.Add(this.tabSettings);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "SettingsForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SettingsForm";
             this.tabSettings.ResumeLayout(false);
             this.tabPageMainSettings.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
