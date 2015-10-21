@@ -12,23 +12,6 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\Bin\x86\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>..\bin\x64\Debug\</OutputPath>
@@ -50,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -72,6 +56,54 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Browse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1445387514_find.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1445387584_photo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1445387607_find.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1445387605_globe.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1445387604_copy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1445387603_download.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1445387602_send.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1445387599_zoom_in.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1445387597_camera.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1445387595_info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1445387593_tick.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1445387592_cross.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1445387589_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1445387588_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1445387586_cloud.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
