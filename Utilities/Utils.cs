@@ -155,6 +155,32 @@ namespace Utilities
             }
         }
 
+        /// <summary>
+        /// Set contrast to image passed in parameter
+        /// </summary>
+        /// <param name="source">source image for which contrast will be applied</param>
+        /// <returns>Image with contrast applied</returns>
+        public static Bitmap SetContrast(Bitmap source)
+        {
+            //Kopiuj obrazek zrodlowy
+            Bitmap bitmap = (Bitmap)source.Clone();
+            byte[] LUT = new byte[256];
+            //Pobierz wartosc wszystkich punktow obrazu
+            BitmapData bmpData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadWrite, bitmap.PixelFormat);
+            byte[] pixelValues = new byte[Math.Abs(bmpData.Stride) * bitmap.Height];
+            System.Runtime.InteropServices.Marshal.Copy(bmpData.Scan0, pixelValues, 0, pixelValues.Length);
+
+            for (int i = 0; i < pixelValues.Length; i++)
+            {
+                pixelValues[i] = LUT[pixelValues[i]];
+            }
+
+            System.Runtime.InteropServices.Marshal.Copy(pixelValues, 0, bmpData.Scan0, pixelValues.Length);
+            bitmap.UnlockBits(bmpData);
+
+            return bitmap;
+        }
+
 
     }
 }
