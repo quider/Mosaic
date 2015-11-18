@@ -282,4 +282,7 @@
   <data name="Opacity" xml:space="preserve">
     <value>Opacity</value>
   </data>
+  <data name="Contrast" xml:space="preserve">
+    <value>Contrast</value>
+  </data>
 </root>

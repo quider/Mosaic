@@ -24,7 +24,7 @@ namespace Mosaic
         private BackgroundWorker calculateMosaicBackgroundWorker;
         private Image orginalImage;
 
-        public ColorCalculation mosaicColors
+        public Context Ctx
         {
             get;
             set;
@@ -68,7 +68,7 @@ namespace Mosaic
             this.btRescale.Text = strings.Rescale;
             this.cbOpacity.Text = strings.Opacity;
             this.Text += "-" + this.ProductVersion;
-
+            this.lblSetContrast.Text = strings.Contrast;
         }
 
         private bool Abort()
@@ -102,7 +102,7 @@ namespace Mosaic
                         this.nudWidth.Value = new Decimal(w * (Settings.Default.Ratio / 100));
                     }
 
-                    this.RunBackgroundWorkerForCalculateColorsOfMosaic(openDialog.FileName);
+                    this.Ctx.RunBackgroundWorkerForCalculateColorsOfMosaic(openDialog.FileName);
 
                     gbxTiles.Enabled = true;
                 }
@@ -113,23 +113,7 @@ namespace Mosaic
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="fileName"></param>
-        private void RunBackgroundWorkerForCalculateColorsOfMosaic(string fileName)
-        {
-            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
-            {
-                this.mosaicColors = new ColorCalculation();
-                var backgroundCalculateColorsOnPicture = new BackgroundWorker();
-                backgroundCalculateColorsOnPicture.WorkerReportsProgress = true;
-                backgroundCalculateColorsOnPicture.DoWork += mosaicColors.CalculateColorsWork;
-                backgroundCalculateColorsOnPicture.ProgressChanged += this.CalculateColorsProgressChanged;
-                backgroundCalculateColorsOnPicture.RunWorkerCompleted += this.CalculateColorsCompleted;
-                backgroundCalculateColorsOnPicture.RunWorkerAsync(new object[] { Image.FromFile(fileName), this.nudHeight.Value, nudWidth.Value });
-            }
-        }
+        
 
         /// <summary>
         /// Set values to 0 for all settings
@@ -178,22 +162,7 @@ namespace Mosaic
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CalculateColorsProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
-            {
-                var progres = e.ProgressPercentage;
-                var v = e.UserState as String;
-                this.pgbOperation.Value = progres;
-                this.lblPercentage.Text = string.Format("{0}%", progres);
-                this.lblOperation.Text = v;
-            }
-        }
+        
 
         /// <summary>
         /// 
@@ -335,7 +304,7 @@ namespace Mosaic
                 this.calculateMosaicBackgroundWorker.WorkerReportsProgress = true;
                 this.calculateMosaicBackgroundWorker.WorkerSupportsCancellation = true;
                 btCancelCalculate.Visible = true;
-                this.calculateMosaicBackgroundWorker.RunWorkerAsync(new object[] { this.AverageImage, items, (int)this.nudHeight.Value, (int)this.nudWidth.Value, this.mosaicColors.avgsMaster });
+                this.calculateMosaicBackgroundWorker.RunWorkerAsync(new object[] { this.AverageImage, items, (int)this.nudHeight.Value, (int)this.nudWidth.Value, this.Ctx.MosaicColors.avgsMaster });
                 btnGo.Enabled = false;
             }
             catch (Exception x)
@@ -373,7 +342,7 @@ namespace Mosaic
                 this.calculateMosaicBackgroundWorker.WorkerReportsProgress = true;
                 this.calculateMosaicBackgroundWorker.WorkerSupportsCancellation = true;
                 btCancelCalculate.Visible = true;
-                this.calculateMosaicBackgroundWorker.RunWorkerAsync(new object[] { this.AverageImage, items, (int)this.nudHeight.Value, (int)this.nudWidth.Value, this.mosaicColors.avgsMaster });
+                this.calculateMosaicBackgroundWorker.RunWorkerAsync(new object[] { this.AverageImage, items, (int)this.nudHeight.Value, (int)this.nudWidth.Value, this.Ctx.MosaicColors.avgsMaster });
                 btnGo.Enabled = false;
             }
             catch (Exception x)
@@ -548,7 +517,7 @@ namespace Mosaic
         {
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
             {
-                RunBackgroundWorkerForCalculateColorsOfMosaic(this.tbxBrowse.Text);
+                Ctx.RunBackgroundWorkerForCalculateColorsOfMosaic(this.tbxBrowse.Text);
             }
         }
 
@@ -559,16 +528,19 @@ namespace Mosaic
         /// <param name="e"></param>
         private void trackBar_ValueChanged(object sender, EventArgs e)
         {
-            try
+            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
             {
-                this.lblOpacity.Text = trackBar.Value.ToString();
-                this.pictureBox.Image = null;
-                this.pictureBox.Refresh();
-                if (this.orginalImage != null)
+
+                try
                 {
-                    //using (
-                    var image = new Bitmap(this.orginalImage);//)
-                  //  {
+                    this.lblOpacity.Text = trackBar.Value.ToString();
+                    this.pictureBox.Image = null;
+                    this.pictureBox.Refresh();
+                    if (this.orginalImage != null)
+                    {
+                        //using (
+                        var image = new Bitmap(this.orginalImage);//)
+                        //  {
                         var tmpImage = Image.FromFile(this.tbxBrowse.Text);
                         TextureBrush tBrush = new TextureBrush(Utils.ChangeOpacity(tmpImage, (float)((float)this.trackBar.Value / 100f)));
 
@@ -580,13 +552,18 @@ namespace Mosaic
                         }
                         this.pictureBox.Image = image;
                         this.pictureBox.Refresh();
-                 //   }
+                        //   }
+                    }
                 }
-            }
-            catch (OutOfMemoryException ex)
-            {
-                log.Error("Out of memory!", ex);
+                catch (OutOfMemoryException ex)
+                {
+                    log.Error("Out of memory!", ex);
 
+                }
+                catch (Exception ex)
+                {
+                    log.ErrorFormat("Generic error {0}", ex.Message, ex);
+                } 
             }
         }
 
@@ -597,22 +574,42 @@ namespace Mosaic
         /// <param name="e"></param>
         private void cbOpacity_CheckedChanged(object sender, EventArgs e)
         {
-            this.trackBar.Enabled = this.cbOpacity.Checked;
+            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
+            {
+                try
+                {
+                    log.DebugFormat("Changing opacity of image. Checkbox opacity is {0}", this.cbOpacity.Checked);
+                    this.trackBar.Enabled = this.cbOpacity.Checked;
 
-            if (this.cbOpacity.Checked)
-            {
-                this.trackBar.Value = 25;
-                this.trackBar_ValueChanged(this.trackBar, new EventArgs());
-            }
-            else
-            {
-                this.trackBar.Value = 0;
+                    if (this.cbOpacity.Checked)
+                    {
+                        log.DebugFormat("Opacity Trackbar value: {0}", this.trackBar.Value);
+                        this.trackBar.Value = 25;
+                        log.DebugFormat("Value changed delegate fired");
+                        this.trackBar_ValueChanged(this.trackBar, new EventArgs());
+                    }
+                    else
+                    {
+                        log.DebugFormat("Changing opacity is disabled");
+                        this.trackBar.Value = 0;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    log.Error(ex);
+                }
             }
         }
 
         private void checkUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(strings.WillBeInFuture, strings.Warning, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void nudContrast_ValueChanged(object sender, EventArgs e)
+        {
+            var contrastedimage = Utilities.Utils.SetContrast(new Bitmap(this.tbxBrowse.Text), (double)nudContrast.Value);
+            //Ctx.RunBackgroundWorkerForCalculateColorsOfMosaic()
         }
 
 

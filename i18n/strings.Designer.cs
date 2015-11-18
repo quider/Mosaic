@@ -196,6 +196,15 @@ namespace i18n {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Contrast.
+        /// </summary>
+        public static string Contrast {
+            get {
+                return ResourceManager.GetString("Contrast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Customize.
         /// </summary>
         public static string Customize {

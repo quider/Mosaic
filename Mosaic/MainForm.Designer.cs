@@ -72,6 +72,8 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nudContrast = new System.Windows.Forms.NumericUpDown();
+            this.lblSetContrast = new System.Windows.Forms.Label();
             this.gbxTiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudWidth)).BeginInit();
@@ -80,6 +82,7 @@
             this.gbxMosaic.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
             this.menuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudContrast)).BeginInit();
             this.SuspendLayout();
             // 
             // lbxTiles
@@ -237,6 +240,8 @@
             // 
             // gbxMosaic
             // 
+            this.gbxMosaic.Controls.Add(this.lblSetContrast);
+            this.gbxMosaic.Controls.Add(this.nudContrast);
             this.gbxMosaic.Controls.Add(this.lblOpacity);
             this.gbxMosaic.Controls.Add(this.cbOpacity);
             this.gbxMosaic.Controls.Add(this.trackBar);
@@ -403,6 +408,34 @@
             resources.ApplyResources(this.checkUpdatesToolStripMenuItem, "checkUpdatesToolStripMenuItem");
             this.checkUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkUpdatesToolStripMenuItem_Click);
             // 
+            // nudContrast
+            // 
+            this.nudContrast.Increment = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.nudContrast.InterceptArrowKeys = false;
+            resources.ApplyResources(this.nudContrast, "nudContrast");
+            this.nudContrast.Maximum = new decimal(new int[] {
+            240,
+            0,
+            0,
+            0});
+            this.nudContrast.Minimum = new decimal(new int[] {
+            240,
+            0,
+            0,
+            -2147483648});
+            this.nudContrast.Name = "nudContrast";
+            this.nudContrast.ReadOnly = true;
+            this.nudContrast.ValueChanged += new System.EventHandler(this.nudContrast_ValueChanged);
+            // 
+            // lblSetContrast
+            // 
+            resources.ApplyResources(this.lblSetContrast, "lblSetContrast");
+            this.lblSetContrast.Name = "lblSetContrast";
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -427,6 +460,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudContrast)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -477,6 +511,8 @@
         private System.Windows.Forms.TrackBar trackBar;
         private System.Windows.Forms.Label lblOpacity;
         private System.Windows.Forms.CheckBox cbOpacity;
+        private System.Windows.Forms.Label lblSetContrast;
+        private System.Windows.Forms.NumericUpDown nudContrast;
     }
 }
 
