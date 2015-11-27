@@ -102,7 +102,7 @@ namespace Mosaic
                         this.nudWidth.Value = new Decimal(w * (Settings.Default.Ratio / 100));
                     }
 
-                    this.Ctx.RunBackgroundWorkerForCalculateColorsOfMosaic(openDialog.FileName);
+                    this.RunBackgroundWorkerForCalculateColorsOfMosaic(openDialog.FileName);
 
                     gbxTiles.Enabled = true;
                 }
@@ -113,13 +113,31 @@ namespace Mosaic
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        private void RunBackgroundWorkerForCalculateColorsOfMosaic(string fileName)
+        {
+            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
+            {
+                this.Ctx.MosaicColors = new ColorCalculation();
+                var backgroundCalculateColorsOnPicture = new BackgroundWorker();
+                backgroundCalculateColorsOnPicture.WorkerReportsProgress = true;
+                backgroundCalculateColorsOnPicture.DoWork += Ctx.MosaicColors.CalculateColorsWork;
+                backgroundCalculateColorsOnPicture.ProgressChanged += this.CalculateColorsProgressChanged;
+                backgroundCalculateColorsOnPicture.RunWorkerCompleted += this.CalculateColorsCompleted;
+                backgroundCalculateColorsOnPicture.RunWorkerAsync(new object[] { Image.FromFile(fileName), this.nudHeight.Value, nudWidth.Value });
+            }
+        }
+
         
 
         /// <summary>
         /// Set values to 0 for all settings
         /// </summary>
         /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="e"></param>      
         private void CalculateColorsCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
@@ -315,6 +333,23 @@ namespace Mosaic
             finally
             {
                 Cursor = Cursors.Default;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CalculateColorsProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
+            {
+                var progres = e.ProgressPercentage;
+                var v = e.UserState as String;
+                this.pgbOperation.Value = progres;
+                this.lblPercentage.Text = string.Format("{0}%", progres);
+                this.lblOperation.Text = v;
             }
         }
 
@@ -517,7 +552,7 @@ namespace Mosaic
         {
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
             {
-                Ctx.RunBackgroundWorkerForCalculateColorsOfMosaic(this.tbxBrowse.Text);
+                RunBackgroundWorkerForCalculateColorsOfMosaic(this.tbxBrowse.Text);
             }
         }
 
