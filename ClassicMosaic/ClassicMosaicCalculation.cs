@@ -1,4 +1,5 @@
-﻿using i18n;
+﻿using API;
+using i18n;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ using Utilities;
 
 namespace ClassicMosaic
 {
-    public class ClassicMosaicCalculation
+    public class ClassicMosaicCalculation:Mosaic
     {
         private static ILog log = LogManager.GetLogger(typeof(ClassicMosaicCalculation));
         private bool useHue;
@@ -31,7 +32,7 @@ namespace ClassicMosaic
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public void CalculateMosaic(object sender, DoWorkEventArgs e)
+        public override void CalculateMosaic(object sender, DoWorkEventArgs e)
         {
             object[] arguments = e.Argument as object[];
             var image = arguments[0] as Image;
@@ -58,40 +59,40 @@ namespace ClassicMosaic
             Directory.CreateDirectory("tiles\\");
 
             double maximum = tilesNames.Count;
-            int index = 0;
+            //int index = 0;
 
-            foreach (var tilePath in tilesNames)
-            {
-                try
-                {
-                    var tilename = "tiles\\" + index.ToString() + ".bmp";
-                    log.DebugFormat("Creating tile {0}", tilename);
-                    using (Stream stream = new FileStream(tilePath, FileMode.Open))
-                    {
-                        Bitmap bitmapTile;
-                        using (bitmapTile = (Bitmap)Bitmap.FromStream(stream))
-                        {
-                            bitmapTile = Utils.ResizeBitmap(bitmapTile, sizeTile);
-                            bitmapTile.Save(tilename);
-                            log.DebugFormat("Tile saved");
-                            tilesColors.Add(tilename, Utils.GetTileAverage(bitmapTile, 0, 0, sizeTile.Width, sizeTile.Height));
-                            log.DebugFormat("Color added to collection {0}", tilesColors[tilename]);
-                            worker.ReportProgress((int)((index / maximum) * 100), String.Format(strings.LoadingAndResizingTiles));
-                        }
-                        index++;
-                    }
-                }
-                catch (ArgumentException ex)
-                {
-                    log.ErrorFormat("{0}: {1}", tilePath, ex.Message);
-                }
-                catch (OutOfMemoryException ex)
-                {
-                    log.ErrorFormat("Problem with image {0}", tilePath);
-                    log.Error(ex.Message, ex);
-                    GC.WaitForPendingFinalizers();
-                }
-            }
+            //foreach (var tilePath in tilesNames)
+            //{
+            //    try
+            //    {
+            //        var tilename = "tiles\\" + index.ToString() + ".bmp";
+            //        log.DebugFormat("Creating tile {0}", tilename);
+            //        using (Stream stream = new FileStream(tilePath, FileMode.Open))
+            //        {
+            //            Bitmap bitmapTile;
+            //            using (bitmapTile = (Bitmap)Bitmap.FromStream(stream))
+            //            {
+            //                bitmapTile = Utils.ResizeBitmap(bitmapTile, sizeTile);
+            //                bitmapTile.Save(tilename);
+            //                log.DebugFormat("Tile saved");
+            //                tilesColors.Add(tilename, Utils.GetTileAverage(bitmapTile, 0, 0, sizeTile.Width, sizeTile.Height));
+            //                log.DebugFormat("Color added to collection {0}", tilesColors[tilename]);
+            //                worker.ReportProgress((int)((index / maximum) * 100), String.Format(strings.LoadingAndResizingTiles));
+            //            }
+            //            index++;
+            //        }
+            //    }
+            //    catch (ArgumentException ex)
+            //    {
+            //        log.ErrorFormat("{0}: {1}", tilePath, ex.Message);
+            //    }
+            //    catch (OutOfMemoryException ex)
+            //    {
+            //        log.ErrorFormat("Problem with image {0}", tilePath);
+            //        log.Error(ex.Message, ex);
+            //        GC.WaitForPendingFinalizers();
+            //    }
+            //}
 
             if (tilesColors.Count > 0)
             {
