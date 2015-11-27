@@ -191,13 +191,13 @@ namespace Mosaic
         {
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
             {
-                FolderBrowserDialog oD = new FolderBrowserDialog();
-                if (oD.ShowDialog() == DialogResult.OK)
+                FolderBrowserDialog browserDialog = new FolderBrowserDialog();
+                if (browserDialog.ShowDialog() == DialogResult.OK)
                 {
-                    if (Directory.Exists(oD.SelectedPath))
+                    if (Directory.Exists(browserDialog.SelectedPath))
                     {
-                        log.InfoFormat("Selected directory {0}", oD.SelectedPath);
-                        DirectoryInfo di = new DirectoryInfo(oD.SelectedPath);
+                        log.InfoFormat("Selected directory {0}", browserDialog.SelectedPath);
+                        DirectoryInfo di = new DirectoryInfo(browserDialog.SelectedPath);
                         foreach (FileInfo fN in di.GetFiles())
                         {
                             var name = fN.FullName;
