@@ -40,7 +40,7 @@ namespace Mosaic
             this.btnAdd.Text = strings.Add;
             this.btnRemove.Text = strings.Remove;
             this.btnGo.Text = strings.Go;
-            this.btnGo.Image = LibResources.Properties.Resources.send.GetThumbnailImage(16,16,Abort,IntPtr.Zero);
+            this.btnGo.Image = LibResources.Properties.Resources.send.GetThumbnailImage(16, 16, Abort, IntPtr.Zero);
             this.lblAddFirst.Text = strings.AddTilesFirst;
             this.cbxAdjustTiles.Text = strings.AdjustHue;
             this.lblHeight.Text = strings.Height;
@@ -131,7 +131,7 @@ namespace Mosaic
             }
         }
 
-        
+
 
         /// <summary>
         /// Set values to 0 for all settings
@@ -180,7 +180,7 @@ namespace Mosaic
             }
         }
 
-        
+
 
         /// <summary>
         /// 
@@ -191,48 +191,19 @@ namespace Mosaic
         {
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
             {
+                int count = 0;
                 FolderBrowserDialog browserDialog = new FolderBrowserDialog();
                 if (browserDialog.ShowDialog() == DialogResult.OK)
                 {
-                    if (Directory.Exists(browserDialog.SelectedPath))
-                    {
-                        log.InfoFormat("Selected directory {0}", browserDialog.SelectedPath);
-                        DirectoryInfo di = new DirectoryInfo(browserDialog.SelectedPath);
-                        foreach (FileInfo fN in di.GetFiles())
-                        {
-                            var name = fN.FullName;
-                            if (name.Equals(this.tbxBrowse.Text))
-                            {
-                                var result = MessageBox.Show(strings.SamePictureFound, strings.Warning, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                                if (result == System.Windows.Forms.DialogResult.Yes)
-                                {
-                                    do
-                                    {
-                                        name = Path.Combine(Path.GetDirectoryName(name), Path.GetFileNameWithoutExtension(name) + "_Copy" + Path.GetExtension(name));
-                                    } while (File.Exists(name));
-
-                                    File.Copy(this.tbxBrowse.Text, name);
-                                }
-                                else
-                                {
-                                    continue;
-                                }
-                            }
-                            if (!(lbxTiles.Items.Contains(name)))
-                            {
-                                lbxTiles.Items.Add(name);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        log.InfoFormat(strings.DirectoryDoesNotExist);
-                        MessageBox.Show(strings.DirectoryDoesNotExist);
-                    }
+                     count = Ctx.CollectImages(browserDialog.SelectedPath, (int)nudWidth.Value, (int)nudHeight.Value);
+                }
+                else
+                {                    
+                    MessageBox.Show(strings.DirectoryDoesNotExist);
                 }
 
-                log.DebugFormat("Count tiles {0}", this.lbxTiles.Items.Count);
-                if (this.lbxTiles.Items.Count > 15)
+                log.DebugFormat("Count tiles {0}", count);
+                if (count > 15)
                 {
                     btnGo.Enabled = true;
                     lblAddFirst.Visible = false;
@@ -598,7 +569,7 @@ namespace Mosaic
                 catch (Exception ex)
                 {
                     log.ErrorFormat("Generic error {0}", ex.Message, ex);
-                } 
+                }
             }
         }
 

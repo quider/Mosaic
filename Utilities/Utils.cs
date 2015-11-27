@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -190,6 +191,26 @@ namespace Utilities
             bitmap.UnlockBits(bmpData);
 
             return bitmap;
+        }
+
+        /// <summary>
+        /// Creates empty direcory. When directory already exists
+        /// this method removes it and creates new one.
+        /// </summary>
+        /// <param name="path">string path of the directory. IE: "tiles\\"</param>
+        public static void CreateEmptyDirectory(string path)
+        {
+            log.InfoFormat("{0} path passed as param", path);
+            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
+            {
+                if (Directory.Exists(Path.Combine(path)))
+                {
+                    log.InfoFormat("Direcory tiles exists");
+                    Directory.Delete(Path.Combine(path), true);
+                    log.InfoFormat("Direcory tiles removed");
+                }
+                Directory.CreateDirectory(path);
+            }
         }
 
 
