@@ -197,6 +197,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\API\API.csproj">
+      <Project>{c82205e8-5d60-4723-a3cb-05261c8c04da}</Project>
+      <Name>API</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ClassicMosaic\ClassicMosaic.csproj">
       <Project>{5d46c3c1-f22e-4aca-aabc-13d7ac9b1371}</Project>
       <Name>ClassicMosaic</Name>
