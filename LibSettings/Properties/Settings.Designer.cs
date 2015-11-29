@@ -82,5 +82,44 @@ namespace LibSettings.Properties {
                 this["TilesPlaced"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("tiles\\\\")]
+        public string TilesFolder {
+            get {
+                return ((string)(this["TilesFolder"]));
+            }
+            set {
+                this["TilesFolder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>.bmp</string>\r\n  <string>.png</string>\r\n  <string>.jpg</string>\r\n</ArrayOf" +
+            "String>")]
+        public global::System.Collections.Specialized.StringCollection TilesExtList {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["TilesExtList"]));
+            }
+            set {
+                this["TilesExtList"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int TilesExt {
+            get {
+                return ((int)(this["TilesExt"]));
+            }
+            set {
+                this["TilesExt"] = value;
+            }
+        }
     }
 }
