@@ -87,11 +87,7 @@ namespace Mosaic
                                         bitmapTile = Utils.ResizeBitmap(bitmapTile, sizeTile);
                                         //TODO: format to change
                                         bitmapTile.Save(saveStream,ImageFormat.Bmp);
-                                    }
-                                    //log.DebugFormat("Tile saved");
-                                    //tilesColors.Add(tilename, Utils.GetTileAverage(bitmapTile, 0, 0, sizeTile.Width, sizeTile.Height));
-                                    //log.DebugFormat("Color added to collection {0}", tilesColors[tilename]);
-                                    // worker.ReportProgress((int)((index / maximum) * 100), String.Format(strings.LoadingAndResizingTiles));
+                                    }                                    
                                 }
                                 index++;
                             }
