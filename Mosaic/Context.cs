@@ -1,5 +1,6 @@
 ﻿using ColorsCalculation;
 using i18n;
+using LibSettings.Properties;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,12 @@ namespace Mosaic
         private static ILog log = LogManager.GetLogger(typeof(Context));
 
         internal ColorCalculation MosaicColors
+        {
+            get;
+            set;
+        }
+
+        internal List<string> TilesImages
         {
             get;
             set;
@@ -50,11 +57,12 @@ namespace Mosaic
         /// <returns>number of collected images</returns>
         internal int CollectImages(string directoryOfImages, int width, int height)
         {
+            TilesImages = new List<string>();
             int index = 0;
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
             {
-
-                Utils.CreateEmptyDirectory(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "tiles"));
+                string tilesDirectory = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), Settings.Default.TilesFolder);
+                Utils.CreateEmptyDirectory(tilesDirectory);
 
                 if (Directory.Exists(directoryOfImages))
                 {
@@ -66,7 +74,8 @@ namespace Mosaic
                         try
                         {
                             var sizeTile = new Size(width, height);
-                            var tilename = "tiles\\" + index.ToString() + ".bmp";
+                            var tilename = Path.Combine(tilesDirectory, name + Settings.Default.TilesExtList[Settings.Default.TilesExt]);
+                            TilesImages.Add(tilename);
                             log.DebugFormat("Creating tile {0}", tilename);
                             using (Stream stream = new FileStream(name, FileMode.Open,FileAccess.ReadWrite))
                             {
@@ -76,7 +85,8 @@ namespace Mosaic
                                     using (Stream saveStream = new FileStream(tilename, FileMode.OpenOrCreate, FileAccess.ReadWrite))
                                     {
                                         bitmapTile = Utils.ResizeBitmap(bitmapTile, sizeTile);
-                                        bitmapTile.Save(saveStream,ImageFormat.Png);
+                                        //TODO: format to change
+                                        bitmapTile.Save(saveStream,ImageFormat.Bmp);
                                     }
                                     //log.DebugFormat("Tile saved");
                                     //tilesColors.Add(tilename, Utils.GetTileAverage(bitmapTile, 0, 0, sizeTile.Width, sizeTile.Height));
