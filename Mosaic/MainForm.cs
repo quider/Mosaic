@@ -102,7 +102,7 @@ namespace Mosaic
                         this.nudWidth.Value = new Decimal(w * (Settings.Default.Ratio / 100));
                     }
 
-                    this.RunBackgroundWorkerForCalculateColorsOfMosaic(openDialog.FileName);
+                    //this.RunBackgroundWorkerForCalculateColorsOfMosaic(openDialog.FileName);
 
                     gbxTiles.Enabled = true;
                 }
@@ -202,6 +202,7 @@ namespace Mosaic
 
                          string fileName = Path.GetFileNameWithoutExtension(file);
                          ListViewItem item = new ListViewItem(fileName);
+                         item.SubItems.Add(browserDialog.SelectedPath);
                          item.Tag = file;
 
                          listView.Items.Add(item);

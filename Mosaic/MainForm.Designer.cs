@@ -74,6 +74,7 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listView = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.gbxTiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudWidth)).BeginInit();
@@ -431,9 +432,12 @@
             // 
             // listView
             // 
+            this.listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1});
             resources.ApplyResources(this.listView, "listView");
             this.listView.Name = "listView";
             this.listView.UseCompatibleStateImageBehavior = false;
+            this.listView.View = System.Windows.Forms.View.Details;
             // 
             // MainForm
             // 
@@ -512,6 +516,7 @@
         private System.Windows.Forms.Label lblSetContrast;
         private System.Windows.Forms.NumericUpDown nudContrast;
         private System.Windows.Forms.ListView listView;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
     }
 }
 
