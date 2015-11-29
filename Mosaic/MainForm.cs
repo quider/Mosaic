@@ -24,7 +24,19 @@ namespace Mosaic
         private BackgroundWorker calculateMosaicBackgroundWorker;
         private Image orginalImage;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Context Ctx
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Image AverageImage
         {
             get;
             set;
@@ -98,8 +110,8 @@ namespace Mosaic
                         this.pictureBox.Image = Image.FromFile(openDialog.FileName);
                         var w = this.pictureBox.Image.Width;
                         var h = this.pictureBox.Image.Height;
-                        this.nudHeight.Value = new Decimal(h * (Settings.Default.Ratio / 100));
-                        this.nudWidth.Value = new Decimal(w * (Settings.Default.Ratio / 100));
+                        this.nudHeight.Value = new Decimal(h * (LibSettings.Properties.Settings.Default.Ratio / 100));
+                        this.nudWidth.Value = new Decimal(w * (LibSettings.Properties.Settings.Default.Ratio / 100));
                     }
 
                     //this.RunBackgroundWorkerForCalculateColorsOfMosaic(openDialog.FileName);
@@ -130,8 +142,6 @@ namespace Mosaic
                 backgroundCalculateColorsOnPicture.RunWorkerAsync(new object[] { Image.FromFile(fileName), this.nudHeight.Value, nudWidth.Value });
             }
         }
-
-
 
         /// <summary>
         /// Set values to 0 for all settings
@@ -180,8 +190,6 @@ namespace Mosaic
             }
         }
 
-
-
         /// <summary>
         /// 
         /// </summary>
@@ -191,25 +199,12 @@ namespace Mosaic
         {
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
             {
+                this.lblOperation.Text = "Ładuję obrazki";
                 int count = 0;
                 FolderBrowserDialog browserDialog = new FolderBrowserDialog();
                 if (browserDialog.ShowDialog() == DialogResult.OK)
                 {
-                     count = Ctx.CollectImages(browserDialog.SelectedPath, (int)nudWidth.Value, (int)nudHeight.Value);
-                     string[] files = Directory.GetFiles(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "tiles"));
-                     foreach (string file in files)
-                     {
-
-                         string fileName = Path.GetFileNameWithoutExtension(file);
-                         ListViewItem item = new ListViewItem(fileName);
-                         item.SubItems.Add(browserDialog.SelectedPath);
-                         item.Tag = file;
-
-                         listView.Items.Add(item);
-
-                     }
-
-
+                    count = Ctx.CollectImages(browserDialog.SelectedPath, (int)nudWidth.Value, (int)nudHeight.Value);
                 }
                 else
                 {                    
@@ -228,7 +223,26 @@ namespace Mosaic
                     lblAddFirst.Visible = true;
                     lblAddFirst.Text = strings.AddAtLeast15Tiles;
                 }
+                this.lblOperation.Text = "Obrazki załadowane";
+                this.lblPercentage.Text = "0%";
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="realPath"></param>
+        /// <param name="filename"></param>
+        internal void TileCollected(string realPath, string filename, int index, int fileCount)
+        {
+            string fileName = Path.GetFileNameWithoutExtension(filename);
+            ListViewItem item = new ListViewItem(fileName);
+            item.SubItems.Add(realPath);
+            item.Tag = filename;
+
+            listView.Items.Add(item);
+            this.pgbOperation.Value = (int)(100 * (float)index / (float)fileCount);
+            this.lblPercentage.Text = ((float)index / (float)fileCount).ToString("P1");
         }
 
         /// <summary>
@@ -270,7 +284,7 @@ namespace Mosaic
                     log.InfoFormat("Procedure terminated by user");
                     return;
                 }
-                switch (Settings.Default.TilesPlaced)
+                switch (LibSettings.Properties.Settings.Default.TilesPlaced)
                 {
                     case 0:
                         RandomMosaic();
@@ -288,7 +302,7 @@ namespace Mosaic
         /// </summary>
         private void RandomMosaic()
         {
-            var mosaicClass = new RandomMosaicCalculation(Settings.Default.Hue);
+            var mosaicClass = new RandomMosaicCalculation(LibSettings.Properties.Settings.Default.Hue);
 
             try
             {
@@ -343,7 +357,7 @@ namespace Mosaic
         /// </summary>
         private void ClassicMosaic()
         {
-            var mosaicClass = new ClassicMosaic.ClassicMosaicCalculation(Settings.Default.Hue, Settings.Default.Treshold, Settings.Default.TilesInGroup);
+            var mosaicClass = new ClassicMosaic.ClassicMosaicCalculation(LibSettings.Properties.Settings.Default.Hue, LibSettings.Properties.Settings.Default.Treshold, LibSettings.Properties.Settings.Default.TilesInGroup);
 
             try
             {
@@ -396,15 +410,6 @@ namespace Mosaic
         {
             var about = new AboutBox();
             about.ShowDialog();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public Image AverageImage
-        {
-            get;
-            set;
         }
 
         /// <summary>
@@ -621,17 +626,26 @@ namespace Mosaic
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void checkUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(strings.WillBeInFuture, strings.Warning, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void nudContrast_ValueChanged(object sender, EventArgs e)
         {
             var contrastedimage = Utilities.Utils.SetContrast(new Bitmap(this.tbxBrowse.Text), (double)nudContrast.Value);
             //Ctx.RunBackgroundWorkerForCalculateColorsOfMosaic()
         }
-
 
     }
 }

@@ -16,8 +16,12 @@ using Utilities;
 
 namespace Mosaic
 {
+    public delegate void TileCollectedEventHandler(string realPath, string filename, int index, int fileCount);
+
     public class Context : ApplicationContext
     {
+        internal event TileCollectedEventHandler TileCollected;
+
         private static ILog log = LogManager.GetLogger(typeof(Context));
 
         internal ColorCalculation MosaicColors
@@ -26,7 +30,7 @@ namespace Mosaic
             set;
         }
 
-        internal List<string> TilesImages
+        internal HashSet<string> TilesImages
         {
             get;
             set;
@@ -45,6 +49,7 @@ namespace Mosaic
         public Form CreateMainForm()
         {
             this.MainForm = new MainForm();
+            this.TileCollected += ((MainForm)this.MainForm).TileCollected;
             ((MainForm)this.MainForm).Ctx = this;
             return this.MainForm;
         }
@@ -57,7 +62,9 @@ namespace Mosaic
         /// <returns>number of collected images</returns>
         internal int CollectImages(string directoryOfImages, int width, int height)
         {
-            TilesImages = new List<string>();
+            if(TilesImages == null)
+                TilesImages = new HashSet<string>();
+
             int index = 0;
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
             {
@@ -68,45 +75,19 @@ namespace Mosaic
                 {
                     log.InfoFormat("Selected directory {0}", directoryOfImages);
                     DirectoryInfo di = new DirectoryInfo(directoryOfImages);
-                    foreach (FileInfo fN in di.GetFiles())
+                    var directoryInfo = di.GetFiles();
+                    var ofFiles = directoryInfo.Length;
+                    foreach (FileInfo fN in directoryInfo)
                     {
-                        var name = fN.FullName;
-                        try
+                        bool saved = SaveTileInFolder(fN, tilesDirectory, width, height);
+                        if (saved)
                         {
-                            var sizeTile = new Size(width, height);
-                            var tilename = Path.Combine(tilesDirectory, Path.GetFileNameWithoutExtension(fN.Name) + Settings.Default.TilesExtList[Settings.Default.TilesExt]);
-                            TilesImages.Add(tilename);
-                            log.DebugFormat("Creating tile {0}", tilename);
-                            using (Stream stream = new FileStream(name, FileMode.Open,FileAccess.ReadWrite))
+                            if (TileCollected != null)
                             {
-                                Bitmap bitmapTile;
-                                using (bitmapTile = (Bitmap)Bitmap.FromStream(stream))
-                                {
-                                    using (Stream saveStream = new FileStream(tilename, FileMode.OpenOrCreate, FileAccess.ReadWrite))
-                                    {
-                                        bitmapTile = Utils.ResizeBitmap(bitmapTile, sizeTile);
-                                        //TODO: format to change
-                                        bitmapTile.Save(saveStream,ImageFormat.Bmp);
-                                    }                                    
-                                }
-                                index++;
+                                TileCollected(fN.FullName, fN.Name, index, ofFiles);
                             }
+                            index++;
                         }
-                        catch (ArgumentException ex)
-                        {
-                            log.ErrorFormat("{0}: {1}", name, ex.Message);
-                        }
-                        catch (OutOfMemoryException ex)
-                        {
-                            log.ErrorFormat("Problem with image {0}", name);
-                            log.Error(ex.Message, ex);
-                            GC.WaitForPendingFinalizers();
-                        }
-                        catch (Exception ex)
-                        {
-                            log.Error(ex.Message, ex);
-                        }
-                        //what when file already exists?
                     }
                 }
                 else
@@ -116,6 +97,58 @@ namespace Mosaic
                 return index;
 
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fN"></param>
+        /// <param name="tilesDirectory"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <returns></returns>
+        private bool SaveTileInFolder(FileInfo fN, string tilesDirectory, int width, int height)
+        {
+            var name = fN.FullName;
+            try
+            {
+                var sizeTile = new Size(width, height);
+                var tilename = Path.Combine(tilesDirectory, Path.GetFileNameWithoutExtension(fN.Name) + Settings.Default.TilesExtList[Settings.Default.TilesExt]);
+                TilesImages.Add(tilename);
+                log.DebugFormat("Creating tile {0}", tilename);
+                using (Stream stream = new FileStream(name, FileMode.Open, FileAccess.ReadWrite))
+                {
+                    Bitmap bitmapTile;
+                    using (bitmapTile = (Bitmap)Bitmap.FromStream(stream))
+                    {
+                        using (Stream saveStream = new FileStream(tilename, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+                        {
+                            bitmapTile = Utils.ResizeBitmap(bitmapTile, sizeTile);
+                            //TODO: format to change
+                            bitmapTile.Save(saveStream, ImageFormat.Bmp);
+                        }
+                    }
+                }
+                return true;
+            }
+            catch (ArgumentException ex)
+            {
+                log.ErrorFormat("{0}: {1}", name, ex.Message);
+                return false;
+            }
+            catch (OutOfMemoryException ex)
+            {
+                log.ErrorFormat("Problem with image {0}", name);
+                log.Error(ex.Message, ex);
+                GC.WaitForPendingFinalizers();
+                return false;
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message, ex);
+                return false;
+            }
+            //what when file already exists?
         }
 
     }
