@@ -196,6 +196,19 @@ namespace Mosaic
                 if (browserDialog.ShowDialog() == DialogResult.OK)
                 {
                      count = Ctx.CollectImages(browserDialog.SelectedPath, (int)nudWidth.Value, (int)nudHeight.Value);
+                     string[] files = Directory.GetFiles(Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "tiles"));
+                     foreach (string file in files)
+                     {
+
+                         string fileName = Path.GetFileNameWithoutExtension(file);
+                         ListViewItem item = new ListViewItem(fileName);
+                         item.Tag = file;
+
+                         listView.Items.Add(item);
+
+                     }
+
+
                 }
                 else
                 {                    
@@ -226,16 +239,16 @@ namespace Mosaic
         {
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
             {
-                List<String> fNS = new List<String>();
-                for (int i = 0; i < lbxTiles.Items.Count; i++)
-                {
-                    if (!(lbxTiles.SelectedIndices.Contains(i)))
-                    {
-                        fNS.Add((String)lbxTiles.Items[i]);
-                    }
-                }
-                lbxTiles.Items.Clear();
-                lbxTiles.Items.AddRange(fNS.ToArray());
+                //List<String> fNS = new List<String>();
+                //for (int i = 0; i < lbxTiles.Items.Count; i++)
+                //{
+                //    if (!(lbxTiles.SelectedIndices.Contains(i)))
+                //    {
+                //        fNS.Add((String)lbxTiles.Items[i]);
+                //    }
+                //}
+                //lbxTiles.Items.Clear();
+                //lbxTiles.Items.AddRange(fNS.ToArray());
             }
         }
 
@@ -279,10 +292,10 @@ namespace Mosaic
             try
             {
                 List<string> items = new List<string>();
-                foreach (string item in this.lbxTiles.Items)
-                {
-                    items.Add(item);
-                }
+                //foreach (string item in this.lbxTiles.Items)
+                //{
+                //    items.Add(item);
+                //}
 
                 Cursor = Cursors.WaitCursor;
                 Size szTile = new Size(Convert.ToInt16(nudWidth.Value), Convert.ToInt16(nudHeight.Value));
@@ -334,10 +347,10 @@ namespace Mosaic
             try
             {
                 List<string> items = new List<string>();
-                foreach (string item in this.lbxTiles.Items)
-                {
-                    items.Add(item);
-                }
+                //foreach (string item in this.lbxTiles.Items)
+                //{
+                //    items.Add(item);
+                //}
 
                 Cursor = Cursors.WaitCursor;
                 Size szTile = new Size(Convert.ToInt16(nudWidth.Value), Convert.ToInt16(nudHeight.Value));

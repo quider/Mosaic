@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.lbxTiles = new System.Windows.Forms.ListBox();
             this.gbxTiles = new System.Windows.Forms.GroupBox();
             this.lblPercentage = new System.Windows.Forms.Label();
             this.lblHeight = new System.Windows.Forms.Label();
@@ -48,6 +47,8 @@
             this.btnGo = new System.Windows.Forms.Button();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.gbxMosaic = new System.Windows.Forms.GroupBox();
+            this.lblSetContrast = new System.Windows.Forms.Label();
+            this.nudContrast = new System.Windows.Forms.NumericUpDown();
             this.lblOpacity = new System.Windows.Forms.Label();
             this.cbOpacity = new System.Windows.Forms.CheckBox();
             this.trackBar = new System.Windows.Forms.TrackBar();
@@ -72,29 +73,22 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.nudContrast = new System.Windows.Forms.NumericUpDown();
-            this.lblSetContrast = new System.Windows.Forms.Label();
+            this.listView = new System.Windows.Forms.ListView();
             this.gbxTiles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudWidth)).BeginInit();
             this.gbxMaster.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.gbxMosaic.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudContrast)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
             this.menuStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudContrast)).BeginInit();
             this.SuspendLayout();
-            // 
-            // lbxTiles
-            // 
-            resources.ApplyResources(this.lbxTiles, "lbxTiles");
-            this.lbxTiles.FormattingEnabled = true;
-            this.lbxTiles.Name = "lbxTiles";
-            this.lbxTiles.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             // 
             // gbxTiles
             // 
             resources.ApplyResources(this.gbxTiles, "gbxTiles");
+            this.gbxTiles.Controls.Add(this.listView);
             this.gbxTiles.Controls.Add(this.lblPercentage);
             this.gbxTiles.Controls.Add(this.lblHeight);
             this.gbxTiles.Controls.Add(this.lblWidth);
@@ -104,7 +98,6 @@
             this.gbxTiles.Controls.Add(this.pgbOperation);
             this.gbxTiles.Controls.Add(this.btnRemove);
             this.gbxTiles.Controls.Add(this.btnAdd);
-            this.gbxTiles.Controls.Add(this.lbxTiles);
             this.gbxTiles.Name = "gbxTiles";
             this.gbxTiles.TabStop = false;
             // 
@@ -252,6 +245,34 @@
             resources.ApplyResources(this.gbxMosaic, "gbxMosaic");
             this.gbxMosaic.Name = "gbxMosaic";
             this.gbxMosaic.TabStop = false;
+            // 
+            // lblSetContrast
+            // 
+            resources.ApplyResources(this.lblSetContrast, "lblSetContrast");
+            this.lblSetContrast.Name = "lblSetContrast";
+            // 
+            // nudContrast
+            // 
+            this.nudContrast.Increment = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.nudContrast.InterceptArrowKeys = false;
+            resources.ApplyResources(this.nudContrast, "nudContrast");
+            this.nudContrast.Maximum = new decimal(new int[] {
+            240,
+            0,
+            0,
+            0});
+            this.nudContrast.Minimum = new decimal(new int[] {
+            240,
+            0,
+            0,
+            -2147483648});
+            this.nudContrast.Name = "nudContrast";
+            this.nudContrast.ReadOnly = true;
+            this.nudContrast.ValueChanged += new System.EventHandler(this.nudContrast_ValueChanged);
             // 
             // lblOpacity
             // 
@@ -408,33 +429,11 @@
             resources.ApplyResources(this.checkUpdatesToolStripMenuItem, "checkUpdatesToolStripMenuItem");
             this.checkUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkUpdatesToolStripMenuItem_Click);
             // 
-            // nudContrast
+            // listView
             // 
-            this.nudContrast.Increment = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            this.nudContrast.InterceptArrowKeys = false;
-            resources.ApplyResources(this.nudContrast, "nudContrast");
-            this.nudContrast.Maximum = new decimal(new int[] {
-            240,
-            0,
-            0,
-            0});
-            this.nudContrast.Minimum = new decimal(new int[] {
-            240,
-            0,
-            0,
-            -2147483648});
-            this.nudContrast.Name = "nudContrast";
-            this.nudContrast.ReadOnly = true;
-            this.nudContrast.ValueChanged += new System.EventHandler(this.nudContrast_ValueChanged);
-            // 
-            // lblSetContrast
-            // 
-            resources.ApplyResources(this.lblSetContrast, "lblSetContrast");
-            this.lblSetContrast.Name = "lblSetContrast";
+            resources.ApplyResources(this.listView, "listView");
+            this.listView.Name = "listView";
+            this.listView.UseCompatibleStateImageBehavior = false;
             // 
             // MainForm
             // 
@@ -457,10 +456,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.gbxMosaic.ResumeLayout(false);
             this.gbxMosaic.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudContrast)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudContrast)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -468,7 +467,6 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox lbxTiles;
         private System.Windows.Forms.GroupBox gbxTiles;
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Button btnAdd;
@@ -513,6 +511,7 @@
         private System.Windows.Forms.CheckBox cbOpacity;
         private System.Windows.Forms.Label lblSetContrast;
         private System.Windows.Forms.NumericUpDown nudContrast;
+        private System.Windows.Forms.ListView listView;
     }
 }
 
