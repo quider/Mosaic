@@ -47,19 +47,19 @@ namespace Mosaic
 
         private void btMosaicSettingsOK_Click(object sender, EventArgs e)
         {
-            Settings.Default.Ratio = double.Parse(tbRatio.Text);
-            Settings.Default.Treshold = (int)nudTreshold.Value;
+            LibSettings.Properties.Settings.Default.Ratio = double.Parse(tbRatio.Text);
+            LibSettings.Properties.Settings.Default.Treshold = (int)nudTreshold.Value;
             if (rdbtFindColors.Checked)
             {
-                Settings.Default.TilesPlaced = 1;
+                LibSettings.Properties.Settings.Default.TilesPlaced = 1;
             }
             else if (rbtRandomTiles.Checked)
             {
-                Settings.Default.TilesPlaced = 0;
+                LibSettings.Properties.Settings.Default.TilesPlaced = 0;
             }
-            Settings.Default.TilesInGroup = (int)nudTilesInGroup.Value;
-            Settings.Default.Hue = cbxHueSetting.Checked;
-            Settings.Default.Save();
+            LibSettings.Properties.Settings.Default.TilesInGroup = (int)nudTilesInGroup.Value;
+            LibSettings.Properties.Settings.Default.Hue = cbxHueSetting.Checked;
+            LibSettings.Properties.Settings.Default.Save();
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.Close();
         }
