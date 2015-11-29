@@ -74,7 +74,7 @@ namespace Mosaic
                         try
                         {
                             var sizeTile = new Size(width, height);
-                            var tilename = Path.Combine(tilesDirectory, name + Settings.Default.TilesExtList[Settings.Default.TilesExt]);
+                            var tilename = Path.Combine(tilesDirectory, Path.GetFileNameWithoutExtension(fN.Name) + Settings.Default.TilesExtList[Settings.Default.TilesExt]);
                             TilesImages.Add(tilename);
                             log.DebugFormat("Creating tile {0}", tilename);
                             using (Stream stream = new FileStream(name, FileMode.Open,FileAccess.ReadWrite))
