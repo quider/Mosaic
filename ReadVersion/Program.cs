@@ -15,7 +15,7 @@ namespace ReadVersion
             var dllForVersionExamination = args[0];
             Assembly assembly = Assembly.LoadFile(dllForVersionExamination);
             var version = assembly.GetName().Version;
-            Console.WriteLine("Version: "+version.ToString());
+            Console.WriteLine(version.ToString());
         }
     }
 }
