@@ -15,7 +15,12 @@ namespace ReadVersion
             var dllForVersionExamination = args[0];
             Assembly assembly = Assembly.LoadFile(dllForVersionExamination);
             var version = assembly.GetName().Version;
-            Console.WriteLine(version.ToString());
+            if(args[1] == "vo"){
+                Console.WriteLine(version.ToString());
+            }else {
+
+            Console.WriteLine("Version: "+version.ToString());
+            }
         }
     }
 }
