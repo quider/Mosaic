@@ -207,8 +207,10 @@ namespace Mosaic
                     count = Ctx.CollectImages(browserDialog.SelectedPath, (int)nudWidth.Value, (int)nudHeight.Value);
                 }
                 else
-                {                    
-                    MessageBox.Show(strings.DirectoryDoesNotExist);
+                {  
+                    //TODO: fix this
+                    //this message is stupid
+                    //MessageBox.Show(strings.DirectoryDoesNotExist);
                 }
 
                 log.DebugFormat("Count tiles {0}", count);
@@ -224,6 +226,7 @@ namespace Mosaic
                     lblAddFirst.Text = strings.AddAtLeast15Tiles;
                 }
                 this.lblOperation.Text = "Obrazki załadowane";
+                this.pgbOperation.Value = 0;
                 this.lblPercentage.Text = "0%";
             }
         }
