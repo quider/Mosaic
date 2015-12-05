@@ -1,7 +1,8 @@
-﻿using ColorsCalculation;
+﻿using API;
+using ColorsCalculation;
 using i18n;
 using log4net;
-using Mosaic.Properties;
+using MosaicApplication.Properties;
 using RandomMosaic;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ using System.Text;
 using System.Windows.Forms;
 using Utilities;
 
-namespace Mosaic
+namespace MosaicApplication
 {
     public partial class MainForm : Form
     {
@@ -310,10 +311,10 @@ namespace Mosaic
             try
             {
                 List<string> items = new List<string>();
-                //foreach (string item in this.lbxTiles.Items)
-                //{
-                //    items.Add(item);
-                //}
+                foreach (string item in this.Ctx.TilesImages)
+                {
+                    items.Add(item);
+                }
 
                 Cursor = Cursors.WaitCursor;
                 Size szTile = new Size(Convert.ToInt16(nudWidth.Value), Convert.ToInt16(nudHeight.Value));
@@ -360,15 +361,16 @@ namespace Mosaic
         /// </summary>
         private void ClassicMosaic()
         {
-            var mosaicClass = new ClassicMosaic.ClassicMosaicCalculation(LibSettings.Properties.Settings.Default.Hue, LibSettings.Properties.Settings.Default.Treshold, LibSettings.Properties.Settings.Default.TilesInGroup);
+            Mosaic mosaicClass = new ClassicMosaic.ClassicMosaicCalculation(LibSettings.Properties.Settings.Default.Hue, LibSettings.Properties.Settings.Default.Treshold, LibSettings.Properties.Settings.Default.TilesInGroup);
 
             try
             {
                 List<string> items = new List<string>();
-                //foreach (string item in this.lbxTiles.Items)
-                //{
-                //    items.Add(item);
-                //}
+                foreach (string item in this.Ctx.TilesImages)
+                {
+                    items.Add(item);
+                }
+                
 
                 Cursor = Cursors.WaitCursor;
                 Size szTile = new Size(Convert.ToInt16(nudWidth.Value), Convert.ToInt16(nudHeight.Value));
@@ -648,6 +650,7 @@ namespace Mosaic
         {
             var contrastedimage = Utilities.Utils.SetContrast(new Bitmap(this.tbxBrowse.Text), (double)nudContrast.Value);
             //Ctx.RunBackgroundWorkerForCalculateColorsOfMosaic()
+            this.pictureBox.Image = contrastedimage;
         }
 
     }

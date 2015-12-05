@@ -8,7 +8,7 @@
     <ProjectGuid>{D4BE187E-FA10-4417-95FC-98BF0D3A5528}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Mosaic</RootNamespace>
+    <RootNamespace>MosaicApplication</RootNamespace>
     <AssemblyName>Mosaic</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>

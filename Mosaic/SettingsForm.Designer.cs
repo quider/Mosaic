@@ -1,4 +1,4 @@
-﻿namespace Mosaic
+﻿namespace MosaicApplication
 {
     partial class SettingsForm
     {

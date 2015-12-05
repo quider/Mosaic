@@ -14,7 +14,7 @@ using System.Text;
 using System.Windows.Forms;
 using Utilities;
 
-namespace Mosaic
+namespace MosaicApplication
 {
     public delegate void TileCollectedEventHandler(string realPath, string filename, int index, int fileCount);
 

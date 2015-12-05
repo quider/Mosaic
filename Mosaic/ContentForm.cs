@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Mosaic
+namespace MosaicApplication
 {
     public partial class ContentForm : Form
     {

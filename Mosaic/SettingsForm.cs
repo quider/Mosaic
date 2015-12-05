@@ -1,5 +1,5 @@
 ﻿using i18n;
-using Mosaic.Properties;
+using MosaicApplication.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Mosaic
+namespace MosaicApplication
 {
     public partial class SettingsForm : Form
     {

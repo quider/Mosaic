@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace Mosaic
+namespace MosaicApplication
 {
     partial class AboutBox : Form
     {

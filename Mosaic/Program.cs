@@ -5,7 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace Mosaic
+namespace MosaicApplication
 {
     static class Program
     {
