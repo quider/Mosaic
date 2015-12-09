@@ -1,4 +1,5 @@
-﻿using i18n;
+﻿using API;
+using i18n;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -12,31 +13,30 @@ using Utilities;
 
 namespace ColorsCalculation
 {
-    public class ColorCalculation
+    public class ColorCalculation : ACalculateColors
     {
         private static ILog log = LogManager.GetLogger(typeof(ColorCalculation));
-        
+        private int height;
+        private int width;
+
         public Color[,] avgsMaster
         {
             get;
             set;
         }
 
-
-        public ColorCalculation()
-        {
-        
+        public ColorCalculation(int w, int h){
+            this.width = w;
+            this.height = h;
         }
 
-        public void CalculateColorsWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        public override Image CalculateColors(string fileName, out Color[,] color)
         {
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
             {
-                var arguments = e.Argument as object[];
-                var worker = sender as BackgroundWorker;
-                var image = arguments[0] as Image;
-                var height = (decimal)arguments[1];
-                var width = (decimal)arguments[2];
+                var image = Image.FromFile(fileName);
+                var height = this.height;
+                var width = this.width;
                 log.InfoFormat("Images size of {0}x{1}", width, height);
                 var szTile = new Size((int)width, (int)height);
                 Boolean bLoaded = false;
@@ -44,7 +44,6 @@ namespace ColorsCalculation
 
                 log.Info("Averaging colors");
 
-                worker.ReportProgress(1, String.Format(strings.LoadingMasterFile));
 
                 while (!bLoaded)
                 {
@@ -65,7 +64,6 @@ namespace ColorsCalculation
                 int tY = bMaster.Height / szTile.Height;
                 this.avgsMaster = new Color[tX, tY];
 
-                worker.ReportProgress(1, String.Format(strings.AveragingMasterBitmap));
 
                 var maximum = tX * tY;
 
@@ -79,11 +77,11 @@ namespace ColorsCalculation
                             {
                                 avgsMaster[x, y] = Utils.GetTileAverage(bMaster, x * szTile.Width, y * szTile.Height, szTile.Width, szTile.Height);
                                 Rectangle r = new Rectangle(szTile.Width * x, szTile.Height * y, szTile.Width, szTile.Height);
-                                worker.ReportProgress((int)((double)x / tX * 100), String.Format(strings.AveragingMasterBitmap));
 
                                 using (Graphics g = Graphics.FromImage(image))
                                 {
                                     g.FillRectangle(new SolidBrush(avgsMaster[x, y]), r);
+                                    OnColorCalculated(avgsMaster[x, y], x, y, tX, tY);
                                 }
                             };
                         };
@@ -93,14 +91,10 @@ namespace ColorsCalculation
                 {
                     log.FatalFormat("Fatal error during putting images into big image");
                     log.Fatal(ex.Message, ex);
-                    worker.CancelAsync();
-                    return;
                 }
-
-                e.Result = image;
+                color = this.avgsMaster;
+                return image;
             }
         }
-
-       
     }
 }

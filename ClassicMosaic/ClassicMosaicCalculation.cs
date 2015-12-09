@@ -32,7 +32,7 @@ namespace ClassicMosaic
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public override void CalculateMosaic(object sender, DoWorkEventArgs e)
+        public void CalculateMosaic(object sender, DoWorkEventArgs e)
         {
             object[] arguments = e.Argument as object[];
             var image = arguments[0] as Image;
@@ -205,6 +205,12 @@ namespace ClassicMosaic
             }
             log.DebugFormat("Finishig calculate of mosaic");
             e.Result = image;
+        }
+
+
+        public override Image CalculateMosaic(Image averageImage, Color[,] colorMatrix, List<string> tilesNames)
+        {
+            throw new NotImplementedException();
         }
     }
 }

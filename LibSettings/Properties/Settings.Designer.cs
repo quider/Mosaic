@@ -85,7 +85,7 @@ namespace LibSettings.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("tiles\\\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("tiles\\")]
         public string TilesFolder {
             get {
                 return ((string)(this["TilesFolder"]));

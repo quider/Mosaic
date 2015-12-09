@@ -25,5 +25,41 @@ namespace API
             get;
             set;
         }
+
+        public int CurrentY
+        {
+            get;
+            set;
+        }
+
+        public int CurrentX
+        {
+            get;
+            set;
+        }
+
+        public int Y
+        {
+            get;
+            set;
+        }
+
+        public int X
+        {
+            get;
+            set;
+        }
+
+        public double MaximumTiles
+        {
+            get;
+            set;
+        }
+
+        public int Percentage
+        {
+            get;
+            set;
+        }
     }
 }

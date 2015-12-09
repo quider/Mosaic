@@ -24,6 +24,7 @@ namespace MosaicApplication
         private static ILog log = LogManager.GetLogger(typeof(MainForm));
         private BackgroundWorker calculateMosaicBackgroundWorker;
         private Image orginalImage;
+        private int progressBarCounter;
 
         /// <summary>
         /// 
@@ -134,15 +135,27 @@ namespace MosaicApplication
         {
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
             {
-                this.Ctx.MosaicColors = new ColorCalculation();
-                var backgroundCalculateColorsOnPicture = new BackgroundWorker();
-                backgroundCalculateColorsOnPicture.WorkerReportsProgress = true;
-                backgroundCalculateColorsOnPicture.DoWork += Ctx.MosaicColors.CalculateColorsWork;
-                backgroundCalculateColorsOnPicture.ProgressChanged += this.CalculateColorsProgressChanged;
-                backgroundCalculateColorsOnPicture.RunWorkerCompleted += this.CalculateColorsCompleted;
-                backgroundCalculateColorsOnPicture.RunWorkerAsync(new object[] { Image.FromFile(fileName), this.nudHeight.Value, nudWidth.Value });
+                Color[,] averageColors;
+                int w, h;
+                w = (int)nudWidth.Value;
+                h = (int)nudHeight.Value;
+                ACalculateColors mosaicColors = new ColorCalculation(w,h);
+                mosaicColors.ColorCalculated += mosaicColors_ColorCalculated;
+                this.AverageImage = mosaicColors.CalculateColors(fileName, out averageColors);
+                this.pictureBox.Image = AverageImage;
+                Ctx.AverageColors = averageColors;
+                this.ActualizeProgressBar("", 0, 1);
             }
         }
+
+        private void mosaicColors_ColorCalculated(ColorCalculationEventArgs color)
+        {
+            float current = (color.y+1f) * (color.x+1f);
+            float total = (color.AmountOfX+1) * (color.AmountOfY+1);
+            this.ActualizeProgressBar(i18n.strings.ColorsCalculated, current, total);
+        }
+
+      
 
         /// <summary>
         /// Set values to 0 for all settings
@@ -306,7 +319,8 @@ namespace MosaicApplication
         /// </summary>
         private void RandomMosaic()
         {
-            var mosaicClass = new RandomMosaicCalculation(LibSettings.Properties.Settings.Default.Hue);
+            var mosaicClass = new RandomMosaicCalculation(LibSettings.Properties.Settings.Default.Hue, (int)this.nudWidth.Value, (int)this.nudHeight.Value);
+            mosaicClass.TilePlaced += mosaicClass_TilePlaced;
 
             try
             {
@@ -316,16 +330,8 @@ namespace MosaicApplication
                     items.Add(item);
                 }
 
-                Cursor = Cursors.WaitCursor;
-                Size szTile = new Size(Convert.ToInt16(nudWidth.Value), Convert.ToInt16(nudHeight.Value));
-                this.calculateMosaicBackgroundWorker = new BackgroundWorker();
-                this.calculateMosaicBackgroundWorker.ProgressChanged += CalculateColorsProgressChanged;
-                this.calculateMosaicBackgroundWorker.RunWorkerCompleted += calculateMosaicBackgroundWorker_RunWorkerCompleted;
-                this.calculateMosaicBackgroundWorker.DoWork += mosaicClass.CalculateRandomMosaic;
-                this.calculateMosaicBackgroundWorker.WorkerReportsProgress = true;
-                this.calculateMosaicBackgroundWorker.WorkerSupportsCancellation = true;
                 btCancelCalculate.Visible = true;
-                this.calculateMosaicBackgroundWorker.RunWorkerAsync(new object[] { this.AverageImage, items, (int)this.nudHeight.Value, (int)this.nudWidth.Value, this.Ctx.MosaicColors.avgsMaster });
+                pictureBox.Image = mosaicClass.CalculateMosaic(this.AverageImage, this.Ctx.AverageColors, this.Ctx.TilesImages.ToList<string>());               
                 btnGo.Enabled = false;
             }
             catch (Exception x)
@@ -339,11 +345,20 @@ namespace MosaicApplication
             }
         }
 
+        void mosaicClass_TilePlaced(Mosaic sender, MosaicEventArgs e)
+        {
+            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
+            {
+                this.ActualizeProgressBar("Ładowanie obrazków", e.CurrentX * e.CurrentY + 1, e.X * e.Y + 1);
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        [Obsolete("Orphant method. Will be removed soon")]
         private void CalculateColorsProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
@@ -374,14 +389,14 @@ namespace MosaicApplication
 
                 Cursor = Cursors.WaitCursor;
                 Size szTile = new Size(Convert.ToInt16(nudWidth.Value), Convert.ToInt16(nudHeight.Value));
-                this.calculateMosaicBackgroundWorker = new BackgroundWorker();
-                this.calculateMosaicBackgroundWorker.ProgressChanged += CalculateColorsProgressChanged;
-                this.calculateMosaicBackgroundWorker.RunWorkerCompleted += calculateMosaicBackgroundWorker_RunWorkerCompleted;
-                this.calculateMosaicBackgroundWorker.DoWork += mosaicClass.CalculateMosaic;
-                this.calculateMosaicBackgroundWorker.WorkerReportsProgress = true;
-                this.calculateMosaicBackgroundWorker.WorkerSupportsCancellation = true;
-                btCancelCalculate.Visible = true;
-                this.calculateMosaicBackgroundWorker.RunWorkerAsync(new object[] { this.AverageImage, items, (int)this.nudHeight.Value, (int)this.nudWidth.Value, this.Ctx.MosaicColors.avgsMaster });
+                //this.calculateMosaicBackgroundWorker = new BackgroundWorker();
+                //this.calculateMosaicBackgroundWorker.ProgressChanged += CalculateColorsProgressChanged;
+                //this.calculateMosaicBackgroundWorker.RunWorkerCompleted += calculateMosaicBackgroundWorker_RunWorkerCompleted;
+                //this.calculateMosaicBackgroundWorker.DoWork += mosaicClass.CalculateMosaic;
+                //this.calculateMosaicBackgroundWorker.WorkerReportsProgress = true;
+                //this.calculateMosaicBackgroundWorker.WorkerSupportsCancellation = true;
+                //btCancelCalculate.Visible = true;
+                //this.calculateMosaicBackgroundWorker.RunWorkerAsync(new object[] { this.AverageImage, items, (int)this.nudHeight.Value, (int)this.nudWidth.Value, this.Ctx.MosaicColors.avgsMaster });
                 btnGo.Enabled = false;
             }
             catch (Exception x)
@@ -515,8 +530,8 @@ namespace MosaicApplication
         {
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
             {
-                this.calculateMosaicBackgroundWorker.CancelAsync();
-                btnGo.Enabled = true;
+                MessageBox.Show(strings.WillBeInFuture, strings.Warning, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                log.Error("Cancel will be present in future");
             }
         }
 
@@ -653,5 +668,12 @@ namespace MosaicApplication
             this.pictureBox.Image = contrastedimage;
         }
 
+
+        private void ActualizeProgressBar(string text, float value, float total)
+        {
+            this.lblOperation.Text = text;
+            this.pgbOperation.Value = (int)(100 * value / total);
+            this.lblPercentage.Text = (value / total).ToString("P1");
+        }
     }
 }

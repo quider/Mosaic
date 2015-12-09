@@ -36,6 +36,12 @@ namespace MosaicApplication
             set;
         }
 
+        public Color[,] AverageColors
+        {
+            get;
+            set;
+        }
+
         public Form MainForm
         {
             get;
@@ -150,6 +156,7 @@ namespace MosaicApplication
             }
             //what when file already exists?
         }
+
 
     }
 }

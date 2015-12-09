@@ -1,4 +1,5 @@
-﻿using i18n;
+﻿using API;
+using i18n;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -12,127 +13,118 @@ using Utilities;
 
 namespace RandomMosaic
 {
-    public class RandomMosaicCalculation
+    public class RandomMosaicCalculation : Mosaic
     {
         private static ILog log = LogManager.GetLogger(typeof(RandomMosaicCalculation));
         private bool useHue;
 
-        public RandomMosaicCalculation(bool applyHue)
+        public int Height
         {
-            this.useHue = applyHue;
+            get;
+            set;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public void CalculateRandomMosaic(object sender, DoWorkEventArgs e)
+        public int Width
         {
-            object[] arguments = e.Argument as object[];
-            var image = arguments[0] as Image;
-            var copyOfOryginalImage = (Image)image.Clone();
-            List<string> tilesNames = arguments[1] as List<string>;
-            var height = (int)arguments[2];
-            var width = (int)arguments[3];
-            var avgsMaster = (Color[,])arguments[4];
-            var worker = sender as BackgroundWorker;
-            var sizeTile = new Size(width, height);
-            int tX = image.Width / sizeTile.Width;
-            int tY = image.Height / sizeTile.Height;
+            get;
+            set;
+        }
+
+        public RandomMosaicCalculation(bool applyHue, int width, int height)
+        {
+            this.useHue = applyHue;
+            this.Width = width;
+            this.Height = height;
+        }
+
+        public override Image CalculateMosaic(Image averageImage, Color[,] colorMatrix, List<string> tilesNames)
+        {
+            var copyOfOryginalImage = (Image)averageImage.Clone();
+            var sizeTile = new Size(this.Width, this.Height);
+            int tX = averageImage.Width / sizeTile.Width;
+            int tY = averageImage.Height / sizeTile.Height;
             string[,] usedTiles = new string[tX, tY];
 
-
-            worker.ReportProgress(0, String.Format(strings.LoadingAndResizingTiles));
-
-            Dictionary<string, Color> tilesColors = new Dictionary<string, Color>();
-
-            if (Directory.Exists("tiles\\"))
-            {
-                Directory.Delete("tiles\\", true);
-            }
-
-            Directory.CreateDirectory("tiles\\");
-
             double maximum = tilesNames.Count;
-            int index = 0;
-
-            foreach (var tilePath in tilesNames)
-            {
-                try
-                {
-                    var tilename = "tiles\\" + index.ToString() + ".bmp";
-                    log.DebugFormat("Creating tile {0}", tilename);
-                    using (Stream stream = new FileStream(tilePath, FileMode.Open))
-                    {
-                        Bitmap bitmapTile;
-                        using (bitmapTile = (Bitmap)Bitmap.FromStream(stream))
-                        {
-                            bitmapTile = Utils.ResizeBitmap(bitmapTile, sizeTile);
-                            bitmapTile.Save(tilename);
-                            log.DebugFormat("Tile saved");
-                            worker.ReportProgress((int)((index / maximum) * 100), String.Format(strings.LoadingAndResizingTiles));
-                        }
-                        index++;
-                    }
-                }
-                catch (ArgumentException ex)
-                {
-                    log.ErrorFormat("{0}: {1}", tilePath, ex.Message);
-                }
-                catch (OutOfMemoryException ex)
-                {
-                    log.ErrorFormat("Problem with image {0}", tilePath);
-                    log.Error(ex.Message, ex);
-                    GC.WaitForPendingFinalizers();
-                }
-            }
-
-            worker.ReportProgress(0, strings.CalculateMosaic);
-
+ 
             log.DebugFormat("Image divided onto {0}x{1}", tX, tY);
             var searchCounter = 1;
             List<string>[,] matchedColors = new List<string>[tX, tY];
             Random random = new Random();
-            Parallel.For(0, tX, x =>
+            //Parallel.For(0, tX, x =>
+            for (int x =0 ; x<= tX; x++)
             {
-                Parallel.For(0, tY, (y) =>
+                //Parallel.For(0, tY, (y) =>
+                for(int y = 0; y<= tY; y++)
                 {
                     Bitmap found = null;
                     maximum = tX * tY + 1;
                     var percentage = (int)((searchCounter / maximum) * 100);
-                    worker.ReportProgress(percentage, strings.CalculateMosaic);
+                    //worker.ReportProgress(percentage, strings.CalculateMosaic);
                     var i = random.Next(tilesNames.Count - 1);
                     log.DebugFormat("Used image: {0}, index: {1}", searchCounter, i);
-                    string name = "tiles\\" + i.ToString() + ".bmp";
+                    string name = Path.Combine(tilesNames[i]);
                     log.DebugFormat("Tile name {0}", name);
                     try
                     {
                         found = new Bitmap(name);
+                        OnTileFit(this, new MosaicEventArgs()
+                        {
+                            TileAverage = colorMatrix[x, y],
+                            TilePath = name,
+                            X = tX,
+                            Y = tY,
+                            CurrentX = x,
+                            CurrentY = y,
+                            Percentage = percentage,
+                            MaximumTiles = maximum
+                        });
+
                         log.DebugFormat("Created bitmap from image {0}", name);
 
-                        TextureBrush tBrush = new TextureBrush(Utils.AdjustHue(found, avgsMaster[x, y]));
+                        TextureBrush tBrush = new TextureBrush(Utils.AdjustHue(found, colorMatrix[x, y]));
 
                         Pen blackPen = new Pen(Color.Black);
 
-                        using (var g = Graphics.FromImage(image))
+                        using (var g = Graphics.FromImage(averageImage))
                         {
-                            g.FillRectangle(tBrush, new Rectangle(x * width, y * height, width, height));
+                            g.FillRectangle(tBrush, new Rectangle(x * this.Width, y * this.Height,this.Width, this.Height));
+                            OnTilePlaced(this, new MosaicEventArgs()
+                            {
+                                TileAverage = colorMatrix[x,y],
+                                TilePath = name,
+                                X = tX,
+                                Y = tY,
+                                CurrentX = x,
+                                CurrentY = y,
+                                Percentage = percentage,
+                                MaximumTiles = maximum
+                            });
                         }
                     }
                     catch (Exception ex)
                     {
                         log.ErrorFormat("Name of tile during error {0}", name);
                         log.Error(ex.Message, ex);
+                        OnTileSkipped(this,  new MosaicEventArgs()
+                            {
+                                TileAverage = colorMatrix[x,y],
+                                TilePath = name,
+                                X = tX,
+                                Y = tY,
+                                CurrentX = x,
+                                CurrentY = y,
+                                Percentage = percentage,
+                                MaximumTiles = maximum
+                            });
                     }
                     i++;
                     searchCounter++;
-                });
-            });
-            
+                }//);
+            }//);
+            OnCalculated(this, new MosaicEventArgs());
             log.DebugFormat("Finishig calculate of mosaic");
-            e.Result = image;
+            return averageImage;
         }
-
     }
 }

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Utilities
 {
@@ -213,6 +214,14 @@ namespace Utilities
             }
         }
 
-
+        /// <summary>
+        /// Returns path of executable 
+        /// </summary>
+        /// <returns>string path</returns>
+        public static string GetExePath()
+        {
+            string directory = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath));
+            return directory;
+        }
     }
 }
