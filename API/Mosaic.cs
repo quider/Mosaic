@@ -17,6 +17,7 @@ namespace API
         public event MosaicEventHandler Calculated;
         public event MosaicEventHandler TilePlaced;
         public event MosaicEventHandler TileSkipped;
+        public event MosaicEventHandler TileAverageColorCalculated;
 
         public abstract Image CalculateMosaic(Image averageImage, Color[,] colorMatrix, List<string> tilesNames);     
    
@@ -52,6 +53,19 @@ namespace API
         }
 
         protected virtual void OnTileSkipped(Mosaic mosaic, MosaicEventArgs eventArgs)
+        {
+            if (TileSkipped != null)
+            {
+                TileSkipped(mosaic, eventArgs);
+            }
+        }
+
+        /// <summary>
+        /// Should be fired when average color of tile is calculated
+        /// </summary>
+        /// <param name="mosaic"></param>
+        /// <param name="eventArgs"></param>
+        protected virtual void OnTileAverageColorCalculated(Mosaic mosaic, MosaicEventArgs eventArgs)
         {
             if (TileSkipped != null)
             {

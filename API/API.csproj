@@ -49,6 +49,7 @@
     <Compile Include="ColorCalculationEventArgs.cs" />
     <Compile Include="Mosaic.cs" />
     <Compile Include="MosaicEventArgs.cs" />
+    <Compile Include="MosaicException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
