@@ -77,10 +77,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\API\API.csproj">
-      <Project>{c82205e8-5d60-4723-a3cb-05261c8c04da}</Project>
-      <Name>API</Name>
-    </ProjectReference>
     <ProjectReference Include="..\i18n\i18n.csproj">
       <Project>{cd996780-9d9f-4d53-b92d-8ffcb90b2ce7}</Project>
       <Name>i18n</Name>

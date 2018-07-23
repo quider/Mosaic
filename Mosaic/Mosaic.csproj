@@ -112,6 +112,13 @@
     <Compile Include="AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="API\ACalculateColors.cs" />
+    <Compile Include="API\ColorCalculationEventArgs.cs" />
+    <Compile Include="API\Mosaic.cs" />
+    <Compile Include="API\MosaicEventArgs.cs" />
+    <Compile Include="API\MosaicException.cs" />
+    <Compile Include="ClassicMosaic\ClassicMosaicCalculation.cs" />
+    <Compile Include="ColorsCalculation\ColorCalculation.cs" />
     <Compile Include="ContentForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,12 +126,23 @@
       <DependentUpon>ContentForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Context.cs" />
+    <Compile Include="i18n\strings.Designer.cs">
+      <DependentUpon>strings.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="i18n\strings.pl.Designer.cs">
+      <DependentUpon>strings.pl.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="RandomMosaic\RandomMosaicCalculation.cs" />
     <Compile Include="SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,11 +162,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Settings\Settings.cs" />
+    <Compile Include="Utilities\Utils.cs" />
     <EmbeddedResource Include="AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ContentForm.resx">
       <DependentUpon>ContentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="i18n\strings.pl.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>strings.pl.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="i18n\strings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
@@ -197,37 +225,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\API\API.csproj">
-      <Project>{c82205e8-5d60-4723-a3cb-05261c8c04da}</Project>
-      <Name>API</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ClassicMosaic\ClassicMosaic.csproj">
-      <Project>{5d46c3c1-f22e-4aca-aabc-13d7ac9b1371}</Project>
-      <Name>ClassicMosaic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ColorsCalculation\ColorsCalculation.csproj">
-      <Project>{b61b5c72-527a-4de4-b884-31e418561319}</Project>
-      <Name>ColorsCalculation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\i18n\i18n.csproj">
-      <Project>{cd996780-9d9f-4d53-b92d-8ffcb90b2ce7}</Project>
-      <Name>i18n</Name>
-    </ProjectReference>
     <ProjectReference Include="..\LibResources\LibResources.csproj">
       <Project>{f0b71b92-dfbf-4cbf-8f68-1b9297bc7865}</Project>
       <Name>LibResources</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LibSettings\LibSettings.csproj">
-      <Project>{c4dd5147-e569-4c00-be58-a32068a15d22}</Project>
-      <Name>LibSettings</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RandomMosaic\RandomMosaic.csproj">
-      <Project>{b7c89fc0-823c-4e85-a786-582b6df67dc1}</Project>
-      <Name>RandomMosaic</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Utilities\Utilities.csproj">
-      <Project>{0da09bee-406c-421c-a06d-01647d1c3b2d}</Project>
-      <Name>Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

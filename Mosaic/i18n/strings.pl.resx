@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Aboutbox" xml:space="preserve">
+    <value>O programie</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Dodaj</value>
+  </data>
+  <data name="AddAtLeast15Tiles" xml:space="preserve">
+    <value>Musisz dodać co najmniej 15 obrazków.</value>
+  </data>
+  <data name="AddHue" xml:space="preserve">
+    <value>Dodaj odcień</value>
+  </data>
+  <data name="AddTilesFirst" xml:space="preserve">
+    <value>Najpierw dodaj zdjęcia miniaturek</value>
+  </data>
+  <data name="AdjustHue" xml:space="preserve">
+    <value>Dopasuj odcień miniaturek</value>
+  </data>
+  <data name="AveragingMasterBitmap" xml:space="preserve">
+    <value>Uśredniam kolory obrazu...</value>
+  </data>
+  <data name="Bitmap" xml:space="preserve">
+    <value>Bitmapa</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Wyszukaj</value>
+  </data>
+  <data name="Buffer" xml:space="preserve">
+    <value>Próg dopasowania</value>
+  </data>
+  <data name="CalculateMosaic" xml:space="preserve">
+    <value>Dopasowuje zdjęcia do mozaiki. To może potrwać parę minut.</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Anuluj</value>
+  </data>
+  <data name="ColorPlacedTiles" xml:space="preserve">
+    <value>Rozmieszczenie wg pasujących kolorów.</value>
+  </data>
+  <data name="ColorsCalculated" xml:space="preserve">
+    <value>Kolory obliczone.</value>
+  </data>
+  <data name="Contents" xml:space="preserve">
+    <value>Zawartość</value>
+  </data>
+  <data name="Customize" xml:space="preserve">
+    <value>Ustawienia mozaiki</value>
+  </data>
+  <data name="DirectoryDoesNotExist" xml:space="preserve">
+    <value>Katalog nie istnieje!</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Błąd</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Zakończ</value>
+  </data>
+  <data name="FileMenu" xml:space="preserve">
+    <value>Plik</value>
+  </data>
+  <data name="Finished" xml:space="preserve">
+    <value>Gotowe, możesz zapisać (Ctrl + S) obraz.</value>
+  </data>
+  <data name="GIFPicture" xml:space="preserve">
+    <value>Obraz GIF</value>
+  </data>
+  <data name="Go" xml:space="preserve">
+    <value>Oblicz</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>Wysokość</value>
+  </data>
+  <data name="HelpMenu" xml:space="preserve">
+    <value>Pomoc i inne</value>
+  </data>
+  <data name="LoadingAndResizingTiles" xml:space="preserve">
+    <value>Ładuję i zmieniam rozmiar miniaturek</value>
+  </data>
+  <data name="LoadingMasterFile" xml:space="preserve">
+    <value>Ładuję główny obraz...</value>
+  </data>
+  <data name="MasterImage" xml:space="preserve">
+    <value>Główny obrazek</value>
+  </data>
+  <data name="Mosaic" xml:space="preserve">
+    <value>Mozaika</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>Nowy</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>Otwórz</value>
+  </data>
+  <data name="Options" xml:space="preserve">
+    <value>Opcje </value>
+  </data>
+  <data name="PNGPicture" xml:space="preserve">
+    <value>Obraz PNG</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>Drukuj</value>
+  </data>
+  <data name="PrintPreview" xml:space="preserve">
+    <value>Pokaż podgląd</value>
+  </data>
+  <data name="Randomizing" xml:space="preserve">
+    <value>Uzupełniam mozaikę</value>
+  </data>
+  <data name="RandomPlacedTiles" xml:space="preserve">
+    <value>Tylko losowe rozmeszczenie</value>
+  </data>
+  <data name="Ratio" xml:space="preserve">
+    <value>Współczynnik wielkości obrazków.</value>
+  </data>
+  <data name="RatioExplanation" xml:space="preserve">
+    <value>Współczynnik wielkości obrazków to stosunek dłuższego boku dużego zdjęcia do dłuższego boku małego zdjęcia.</value>
+  </data>
+  <data name="Ready" xml:space="preserve">
+    <value>Gotowy</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Usuń</value>
+  </data>
+  <data name="Rescale" xml:space="preserve">
+    <value>Przelicz kolory</value>
+  </data>
+  <data name="SamePictureFound" xml:space="preserve">
+    <value>Nie można użyć zdjęcia głownego jako kawałka mozaiki. Czy chcesz zrobić kopię obrazka i użyć go?</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Zapisz mozaikę</value>
+  </data>
+  <data name="SaveAs" xml:space="preserve">
+    <value>Zapisz projekt</value>
+  </data>
+  <data name="TerminatedByUser" xml:space="preserve">
+    <value>Proces przerwany przez użytkownika!</value>
+  </data>
+  <data name="Tiles" xml:space="preserve">
+    <value>Miniaurki</value>
+  </data>
+  <data name="TilesInGroup" xml:space="preserve">
+    <value>Obrazków w grupie</value>
+  </data>
+  <data name="TilesRandomize" xml:space="preserve">
+    <value>Mieszanie obrazków</value>
+  </data>
+  <data name="ToolsMenu" xml:space="preserve">
+    <value>Narzędzia</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Sprawdź aktualizacje</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Uwaga!</value>
+  </data>
+  <data name="Width" xml:space="preserve">
+    <value>Szerokość</value>
+  </data>
+  <data name="WillBeInFuture" xml:space="preserve">
+    <value>Zostanie zaimplementowane w kolejnej wersji.</value>
+  </data>
+  <data name="Opacity" xml:space="preserve">
+    <value>Przeźroczystość</value>
+  </data>
+  <data name="Contrast" xml:space="preserve">
+    <value>Kontrast</value>
+  </data>
+</root>

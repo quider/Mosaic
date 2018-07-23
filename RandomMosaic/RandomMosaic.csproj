@@ -77,21 +77,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\API\API.csproj">
-      <Project>{c82205e8-5d60-4723-a3cb-05261c8c04da}</Project>
-      <Name>API</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\i18n\i18n.csproj">
-      <Project>{cd996780-9d9f-4d53-b92d-8ffcb90b2ce7}</Project>
-      <Name>i18n</Name>
-    </ProjectReference>
     <ProjectReference Include="..\LibResources\LibResources.csproj">
       <Project>{f0b71b92-dfbf-4cbf-8f68-1b9297bc7865}</Project>
       <Name>LibResources</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LibSettings\LibSettings.csproj">
-      <Project>{c4dd5147-e569-4c00-be58-a32068a15d22}</Project>
-      <Name>LibSettings</Name>
     </ProjectReference>
     <ProjectReference Include="..\Utilities\Utilities.csproj">
       <Project>{0da09bee-406c-421c-a06d-01647d1c3b2d}</Project>

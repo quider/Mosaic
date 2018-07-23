@@ -4,3 +4,6 @@
 [Dd]ebug/
 *.msi
 *.user
+.vs/
+UpgradeLog2.htm
+UpgradeLog.htm

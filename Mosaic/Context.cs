@@ -122,7 +122,7 @@ namespace MosaicApplication
                 var tilename = Path.Combine(tilesDirectory, Path.GetFileNameWithoutExtension(fN.Name) + Settings.Default.TilesExtList[Settings.Default.TilesExt]);
                 TilesImages.Add(tilename);
                 log.DebugFormat("Creating tile {0}", tilename);
-                using (Stream stream = new FileStream(name, FileMode.Open, FileAccess.ReadWrite))
+                using (Stream stream = new FileStream(name, FileMode.Open, FileAccess.Read))
                 {
                     Bitmap bitmapTile;
                     using (bitmapTile = (Bitmap)Bitmap.FromStream(stream))
