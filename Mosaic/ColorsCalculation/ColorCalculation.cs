@@ -10,29 +10,24 @@ using System.Text;
 using System.Threading.Tasks;
 using Utilities;
 
-namespace ColorsCalculation
-{
-    public class ColorCalculation : ACalculateColors
-    {
+namespace ColorsCalculation {
+    public class ColorCalculation : ACalculateColors {
         private static ILog log = LogManager.GetLogger(typeof(ColorCalculation));
         private int height;
         private int width;
 
-        public Color[,] avgsMaster
-        {
+        public Color[,] avgsMaster {
             get;
             set;
         }
 
-        public ColorCalculation(int w, int h){
+        public ColorCalculation(int w, int h) {
             this.width = w;
             this.height = h;
         }
 
-        public override Image CalculateColors(string fileName, out Color[,] color)
-        {
-            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
-            {
+        public override Image CalculateColors(string fileName, out Color[,] color) {
+            using (NDC.Push(MethodBase.GetCurrentMethod().Name)) {
                 var image = Image.FromFile(fileName);
                 var height = this.height;
                 var width = this.width;
@@ -44,16 +39,12 @@ namespace ColorsCalculation
                 log.Info("Averaging colors");
 
 
-                while (!bLoaded)
-                {
-                    try
-                    {
+                while (!bLoaded) {
+                    try {
                         bMaster = new Bitmap((Image)image.Clone());
                         log.InfoFormat("Main image set");
                         bLoaded = true;
-                    }
-                    catch (OutOfMemoryException ex)
-                    {
+                    } catch (OutOfMemoryException ex) {
                         log.Error(ex.Message, ex);
                         GC.WaitForPendingFinalizers();
                     }
@@ -66,28 +57,21 @@ namespace ColorsCalculation
 
                 var maximum = tX * tY;
 
-                try
-                {
-                    lock (image)
-                    {
-                        for (int x = 0; x < tX; x++)
-                        {
-                            for (int y = 0; y < tY; y++)
-                            {
+                try {
+                    lock (image) {
+                        for (int x = 0; x < tX; x++) {
+                            for (int y = 0; y < tY; y++) {
                                 avgsMaster[x, y] = Utils.GetTileAverage(bMaster, x * szTile.Width, y * szTile.Height, szTile.Width, szTile.Height);
                                 Rectangle r = new Rectangle(szTile.Width * x, szTile.Height * y, szTile.Width, szTile.Height);
 
-                                using (Graphics g = Graphics.FromImage(image))
-                                {
+                                using (Graphics g = Graphics.FromImage(image)) {
                                     g.FillRectangle(new SolidBrush(avgsMaster[x, y]), r);
                                     OnColorCalculated(avgsMaster[x, y], x, y, tX, tY);
                                 }
                             };
                         };
                     }
-                }
-                catch (Exception ex)
-                {
+                } catch (Exception ex) {
                     log.FatalFormat("Fatal error during putting images into big image");
                     log.Fatal(ex.Message, ex);
                 }

@@ -16,20 +16,15 @@ using System.Text;
 using System.Windows.Forms;
 using Utilities;
 
-namespace MosaicApplication
-{
-    public partial class MainForm : Form
-    {
+namespace MosaicApplication {
+    public partial class MainForm : Form {
         private static ILog log = LogManager.GetLogger(typeof(MainForm));
-        private BackgroundWorker calculateMosaicBackgroundWorker;
         private Image orginalImage;
-        private int progressBarCounter;
 
         /// <summary>
         /// 
         /// </summary>
-        public Context Ctx
-        {
+        public Context Ctx {
             get;
             set;
         }
@@ -37,14 +32,12 @@ namespace MosaicApplication
         /// <summary>
         /// 
         /// </summary>
-        public Image AverageImage
-        {
+        public Image AverageImage {
             get;
             set;
         }
 
-        public MainForm()
-        {
+        public MainForm() {
             this.MaximizeBox = false;
             log.Debug("initializing components");
             InitializeComponent();
@@ -84,8 +77,7 @@ namespace MosaicApplication
             this.lblSetContrast.Text = strings.Contrast;
         }
 
-        private bool Abort()
-        {
+        private bool Abort() {
             throw new NotImplementedException();
         }
 
@@ -94,19 +86,15 @@ namespace MosaicApplication
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnBrowse_Click(object sender, EventArgs e)
-        {
-            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
-            {
-                try
-                {
+        private void btnBrowse_Click(object sender, EventArgs e) {
+            using (NDC.Push(MethodBase.GetCurrentMethod().Name)) {
+                try {
                     this.pictureBox.Image = null;
                     this.pictureBox.Refresh();
                     OpenFileDialog openDialog = new OpenFileDialog();
                     openDialog.Multiselect = false;
 
-                    if (openDialog.ShowDialog() == DialogResult.OK)
-                    {
+                    if (openDialog.ShowDialog() == DialogResult.OK) {
                         tbxBrowse.Text = openDialog.FileName;
                         this.pictureBox.Image = Image.FromFile(openDialog.FileName);
                         var w = this.pictureBox.Image.Width;
@@ -114,13 +102,8 @@ namespace MosaicApplication
                         this.nudHeight.Value = new Decimal(h * (Properties.Settings.Default.Ratio / 100));
                         this.nudWidth.Value = new Decimal(w * (Properties.Settings.Default.Ratio / 100));
                     }
-
-                    //this.RunBackgroundWorkerForCalculateColorsOfMosaic(openDialog.FileName);
-
                     gbxTiles.Enabled = true;
-                }
-                catch (Exception ex)
-                {
+                } catch (Exception ex) {
                     log.Fatal(ex.Message, ex);
                 }
             }
@@ -130,15 +113,13 @@ namespace MosaicApplication
         /// 
         /// </summary>
         /// <param name="fileName"></param>
-        private void RunBackgroundWorkerForCalculateColorsOfMosaic(string fileName)
-        {
-            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
-            {
+        private void RunBackgroundWorkerForCalculateColorsOfMosaic(string fileName) {
+            using (NDC.Push(MethodBase.GetCurrentMethod().Name)) {
                 Color[,] averageColors;
                 int w, h;
                 w = (int)nudWidth.Value;
                 h = (int)nudHeight.Value;
-                ACalculateColors mosaicColors = new ColorCalculation(w,h);
+                ACalculateColors mosaicColors = new ColorCalculation(w, h);
                 mosaicColors.ColorCalculated += mosaicColors_ColorCalculated;
                 this.AverageImage = mosaicColors.CalculateColors(fileName, out averageColors);
                 this.pictureBox.Image = AverageImage;
@@ -147,24 +128,21 @@ namespace MosaicApplication
             }
         }
 
-        private void mosaicColors_ColorCalculated(ColorCalculationEventArgs color)
-        {
-            float current = (color.y+1f) * (color.x+1f);
-            float total = (color.AmountOfX+1) * (color.AmountOfY+1);
+        private void mosaicColors_ColorCalculated(ColorCalculationEventArgs color) {
+            float current = (color.y + 1f) * (color.x + 1f);
+            float total = (color.AmountOfX + 1) * (color.AmountOfY + 1);
             this.ActualizeProgressBar(strings.ColorsCalculated, current, total);
         }
 
-      
+
 
         /// <summary>
         /// Set values to 0 for all settings
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>      
-        private void CalculateColorsCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
-            {
+        private void CalculateColorsCompleted(object sender, RunWorkerCompletedEventArgs e) {
+            using (NDC.Push(MethodBase.GetCurrentMethod().Name)) {
                 //Set all to 0;
                 pgbOperation.Value = 0;
                 this.lblPercentage.Text = "0%";
@@ -182,10 +160,8 @@ namespace MosaicApplication
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void calculateMosaicBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
-            {
+        void calculateMosaicBackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e) {
+            using (NDC.Push(MethodBase.GetCurrentMethod().Name)) {
                 var image = e.Result as Image;
                 this.orginalImage = e.Result as Image;
                 this.pictureBox.Image = image;
@@ -196,8 +172,7 @@ namespace MosaicApplication
                 this.btnGo.Enabled = true;
                 this.btCancelCalculate.Visible = false;
 
-                if (this.cbOpacity.Checked)
-                {
+                if (this.cbOpacity.Checked) {
                     this.trackBar_ValueChanged(this.trackBar, new EventArgs());
                 }
             }
@@ -208,32 +183,24 @@ namespace MosaicApplication
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
-            {
+        private void btnAdd_Click(object sender, EventArgs e) {
+            using (NDC.Push(MethodBase.GetCurrentMethod().Name)) {
                 this.lblOperation.Text = "Ładuję obrazki";
                 int count = 0;
                 FolderBrowserDialog browserDialog = new FolderBrowserDialog();
-                if (browserDialog.ShowDialog() == DialogResult.OK)
-                {
+                if (browserDialog.ShowDialog() == DialogResult.OK) {
                     count = Ctx.CollectImages(browserDialog.SelectedPath, (int)nudWidth.Value, (int)nudHeight.Value);
-                }
-                else
-                {  
+                } else {
                     //TODO: fix this
                     //this message is stupid
                     //MessageBox.Show(strings.DirectoryDoesNotExist);
                 }
 
                 log.DebugFormat("Count tiles {0}", count);
-                if (count > 15)
-                {
+                if (count > 15) {
                     btnGo.Enabled = true;
                     lblAddFirst.Visible = false;
-                }
-                else
-                {
+                } else {
                     btnGo.Enabled = false;
                     lblAddFirst.Visible = true;
                     lblAddFirst.Text = strings.AddAtLeast15Tiles;
@@ -249,8 +216,7 @@ namespace MosaicApplication
         /// </summary>
         /// <param name="realPath"></param>
         /// <param name="filename"></param>
-        internal void TileCollected(string realPath, string filename, int index, int fileCount)
-        {
+        internal void TileCollected(string realPath, string filename, int index, int fileCount) {
             string fileName = Path.GetFileNameWithoutExtension(filename);
             ListViewItem item = new ListViewItem(fileName);
             item.SubItems.Add(realPath);
@@ -266,10 +232,8 @@ namespace MosaicApplication
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnRemove_Click(object sender, EventArgs e)
-        {
-            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
-            {
+        private void btnRemove_Click(object sender, EventArgs e) {
+            using (NDC.Push(MethodBase.GetCurrentMethod().Name)) {
                 //List<String> fNS = new List<String>();
                 //for (int i = 0; i < lbxTiles.Items.Count; i++)
                 //{
@@ -288,20 +252,16 @@ namespace MosaicApplication
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnGo_Click(object sender, EventArgs e)
-        {
-            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
-            {
+        private void btnGo_Click(object sender, EventArgs e) {
+            using (NDC.Push(MethodBase.GetCurrentMethod().Name)) {
                 var settingsForm = new SettingsForm();
                 var result = settingsForm.ShowDialog();
-                if (result != System.Windows.Forms.DialogResult.OK)
-                {
+                if (result != System.Windows.Forms.DialogResult.OK) {
                     MessageBox.Show(strings.TerminatedByUser, strings.Warning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     log.InfoFormat("Procedure terminated by user");
                     return;
                 }
-                switch (Properties.Settings.Default.TilesPlaced)
-                {
+                switch (Properties.Settings.Default.TilesPlaced) {
                     case 0:
                         RandomMosaic();
                         break;
@@ -316,38 +276,40 @@ namespace MosaicApplication
         /// <summary>
         /// 
         /// </summary>
-        private void RandomMosaic()
-        {
+        private void RandomMosaic() {
             var mosaicClass = new RandomMosaicCalculation(Properties.Settings.Default.Hue, (int)this.nudWidth.Value, (int)this.nudHeight.Value);
             mosaicClass.TilePlaced += mosaicClass_TilePlaced;
+            mosaicClass.Calculated += mosaicClass_MosaicCalculated;
 
-            try
-            {
+            try {
                 List<string> items = new List<string>();
-                foreach (string item in this.Ctx.TilesImages)
-                {
+                foreach (string item in this.Ctx.TilesImages) {
                     items.Add(item);
                 }
 
                 btCancelCalculate.Visible = true;
-                pictureBox.Image = mosaicClass.CalculateMosaic(this.AverageImage, this.Ctx.AverageColors, this.Ctx.TilesImages.ToList<string>());               
+                pictureBox.Image = mosaicClass.CalculateMosaic(this.AverageImage, this.Ctx.AverageColors, this.Ctx.TilesImages.ToList<string>());
                 btnGo.Enabled = false;
-            }
-            catch (Exception x)
-            {
+            } catch (Exception x) {
                 log.Fatal(x.Message, x);
                 MessageBox.Show(this, x.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
+            } finally {
                 Cursor = Cursors.Default;
             }
         }
 
-        void mosaicClass_TilePlaced(Mosaic sender, MosaicEventArgs e)
-        {
-            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
-            {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mosaicClass_MosaicCalculated(Mosaic sender, MosaicEventArgs e) {
+            throw new NotImplementedException();
+        }
+
+
+        void mosaicClass_TilePlaced(Mosaic sender, MosaicEventArgs e) {
+            using (NDC.Push(MethodBase.GetCurrentMethod().Name)) {
                 this.ActualizeProgressBar("Ładowanie obrazków", e.CurrentX * e.CurrentY + 1, e.X * e.Y + 1);
             }
         }
@@ -358,10 +320,8 @@ namespace MosaicApplication
         /// <param name="sender"></param>
         /// <param name="e"></param>
         [Obsolete("Orphant method. Will be removed soon")]
-        private void CalculateColorsProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
-            {
+        private void CalculateColorsProgressChanged(object sender, ProgressChangedEventArgs e) {
+            using (NDC.Push(MethodBase.GetCurrentMethod().Name)) {
                 var progres = e.ProgressPercentage;
                 var v = e.UserState as String;
                 this.pgbOperation.Value = progres;
@@ -373,18 +333,15 @@ namespace MosaicApplication
         /// <summary>
         /// 
         /// </summary>
-        private void ClassicMosaic()
-        {
+        private void ClassicMosaic() {
             Mosaic mosaicClass = new ClassicMosaic.ClassicMosaicCalculation(Properties.Settings.Default.Hue, Properties.Settings.Default.Treshold, Properties.Settings.Default.TilesInGroup);
 
-            try
-            {
+            try {
                 List<string> items = new List<string>();
-                foreach (string item in this.Ctx.TilesImages)
-                {
+                foreach (string item in this.Ctx.TilesImages) {
                     items.Add(item);
                 }
-                
+
 
                 Cursor = Cursors.WaitCursor;
                 Size szTile = new Size(Convert.ToInt16(nudWidth.Value), Convert.ToInt16(nudHeight.Value));
@@ -397,14 +354,10 @@ namespace MosaicApplication
                 //btCancelCalculate.Visible = true;
                 //this.calculateMosaicBackgroundWorker.RunWorkerAsync(new object[] { this.AverageImage, items, (int)this.nudHeight.Value, (int)this.nudWidth.Value, this.Ctx.MosaicColors.avgsMaster });
                 btnGo.Enabled = false;
-            }
-            catch (Exception x)
-            {
+            } catch (Exception x) {
                 log.Fatal(x.Message, x);
                 MessageBox.Show(this, x.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
+            } finally {
                 Cursor = Cursors.Default;
             }
         }
@@ -414,8 +367,7 @@ namespace MosaicApplication
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void MainForm_Shown(object sender, EventArgs e)
-        {
+        private void MainForm_Shown(object sender, EventArgs e) {
             btnGo.Enabled = false;
             lblAddFirst.Visible = true;
         }
@@ -425,8 +377,7 @@ namespace MosaicApplication
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e) {
             var about = new AboutBox();
             about.ShowDialog();
         }
@@ -436,12 +387,9 @@ namespace MosaicApplication
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
-            {
-                try
-                {
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e) {
+            using (NDC.Push(MethodBase.GetCurrentMethod().Name)) {
+                try {
                     SaveFileDialog sfd = new SaveFileDialog();
                     StringBuilder sb = new StringBuilder();
                     sb.Append(strings.Bitmap);
@@ -454,9 +402,7 @@ namespace MosaicApplication
                     sfd.Filter = sb.ToString();
                     sfd.FileOk += sfd_FileOk;
                     sfd.ShowDialog();
-                }
-                catch (Exception ex)
-                {
+                } catch (Exception ex) {
                     log.Error(ex.Message, ex);
                     MessageBox.Show(ex.Message, strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -468,13 +414,11 @@ namespace MosaicApplication
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        internal void sfd_FileOk(object sender, CancelEventArgs e)
-        {
+        internal void sfd_FileOk(object sender, CancelEventArgs e) {
             var sfd = sender as SaveFileDialog;
             var extension = Path.GetExtension(sfd.FileName).ToUpper();
             ImageFormat imageFormat = ImageFormat.Bmp;
-            switch (extension)
-            {
+            switch (extension) {
                 case ".BMP":
                     imageFormat = ImageFormat.Bmp;
                     break;
@@ -493,8 +437,7 @@ namespace MosaicApplication
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void newToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void newToolStripMenuItem_Click(object sender, EventArgs e) {
             Application.Restart();
         }
 
@@ -503,8 +446,7 @@ namespace MosaicApplication
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void contentsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void contentsToolStripMenuItem_Click(object sender, EventArgs e) {
             var form = new ContentForm();
             form.ShowDialog();
         }
@@ -514,8 +456,7 @@ namespace MosaicApplication
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void customizeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void customizeToolStripMenuItem_Click(object sender, EventArgs e) {
             var form = new SettingsForm();
             form.ShowDialog();
         }
@@ -525,10 +466,8 @@ namespace MosaicApplication
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btCancelCalculate_Click(object sender, EventArgs e)
-        {
-            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
-            {
+        private void btCancelCalculate_Click(object sender, EventArgs e) {
+            using (NDC.Push(MethodBase.GetCurrentMethod().Name)) {
                 MessageBox.Show(strings.WillBeInFuture, strings.Warning, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 log.Error("Cancel will be present in future");
             }
@@ -540,14 +479,10 @@ namespace MosaicApplication
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void tbxBrowse_TextChanged(object sender, EventArgs e)
-        {
-            if (tbxBrowse.Text.Length > 0)
-            {
+        private void tbxBrowse_TextChanged(object sender, EventArgs e) {
+            if (tbxBrowse.Text.Length > 0) {
                 btRescale.Enabled = true;
-            }
-            else
-            {
+            } else {
                 btRescale.Enabled = false;
             }
         }
@@ -557,10 +492,8 @@ namespace MosaicApplication
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btRescale_Click(object sender, EventArgs e)
-        {
-            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
-            {
+        private void btRescale_Click(object sender, EventArgs e) {
+            using (NDC.Push(MethodBase.GetCurrentMethod().Name)) {
                 RunBackgroundWorkerForCalculateColorsOfMosaic(this.tbxBrowse.Text);
             }
         }
@@ -570,18 +503,14 @@ namespace MosaicApplication
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void trackBar_ValueChanged(object sender, EventArgs e)
-        {
-            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
-            {
+        private void trackBar_ValueChanged(object sender, EventArgs e) {
+            using (NDC.Push(MethodBase.GetCurrentMethod().Name)) {
 
-                try
-                {
+                try {
                     this.lblOpacity.Text = trackBar.Value.ToString();
                     this.pictureBox.Image = null;
                     this.pictureBox.Refresh();
-                    if (this.orginalImage != null)
-                    {
+                    if (this.orginalImage != null) {
                         //using (
                         var image = new Bitmap(this.orginalImage);//)
                         //  {
@@ -590,22 +519,17 @@ namespace MosaicApplication
 
                         Pen blackPen = new Pen(Color.Black);
 
-                        using (var g = Graphics.FromImage(image))
-                        {
+                        using (var g = Graphics.FromImage(image)) {
                             g.FillRectangle(tBrush, new Rectangle(0, 0, image.Width, image.Height));
                         }
                         this.pictureBox.Image = image;
                         this.pictureBox.Refresh();
                         //   }
                     }
-                }
-                catch (OutOfMemoryException ex)
-                {
+                } catch (OutOfMemoryException ex) {
                     log.Error("Out of memory!", ex);
 
-                }
-                catch (Exception ex)
-                {
+                } catch (Exception ex) {
                     log.ErrorFormat("Generic error {0}", ex.Message, ex);
                 }
             }
@@ -616,30 +540,22 @@ namespace MosaicApplication
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void cbOpacity_CheckedChanged(object sender, EventArgs e)
-        {
-            using (NDC.Push(MethodBase.GetCurrentMethod().Name))
-            {
-                try
-                {
+        private void cbOpacity_CheckedChanged(object sender, EventArgs e) {
+            using (NDC.Push(MethodBase.GetCurrentMethod().Name)) {
+                try {
                     log.DebugFormat("Changing opacity of image. Checkbox opacity is {0}", this.cbOpacity.Checked);
                     this.trackBar.Enabled = this.cbOpacity.Checked;
 
-                    if (this.cbOpacity.Checked)
-                    {
+                    if (this.cbOpacity.Checked) {
                         log.DebugFormat("Opacity Trackbar value: {0}", this.trackBar.Value);
                         this.trackBar.Value = 25;
                         log.DebugFormat("Value changed delegate fired");
                         this.trackBar_ValueChanged(this.trackBar, new EventArgs());
-                    }
-                    else
-                    {
+                    } else {
                         log.DebugFormat("Changing opacity is disabled");
                         this.trackBar.Value = 0;
                     }
-                }
-                catch (Exception ex)
-                {
+                } catch (Exception ex) {
                     log.Error(ex);
                 }
             }
@@ -650,8 +566,7 @@ namespace MosaicApplication
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void checkUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void checkUpdatesToolStripMenuItem_Click(object sender, EventArgs e) {
             MessageBox.Show(strings.WillBeInFuture, strings.Warning, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -660,16 +575,14 @@ namespace MosaicApplication
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void nudContrast_ValueChanged(object sender, EventArgs e)
-        {
+        private void nudContrast_ValueChanged(object sender, EventArgs e) {
             var contrastedimage = Utilities.Utils.SetContrast(new Bitmap(this.tbxBrowse.Text), (double)nudContrast.Value);
             //Ctx.RunBackgroundWorkerForCalculateColorsOfMosaic()
             this.pictureBox.Image = contrastedimage;
         }
 
 
-        private void ActualizeProgressBar(string text, float value, float total)
-        {
+        private void ActualizeProgressBar(string text, float value, float total) {
             this.lblOperation.Text = text;
             this.pgbOperation.Value = (int)(100 * value / total);
             this.lblPercentage.Text = (value / total).ToString("P1");

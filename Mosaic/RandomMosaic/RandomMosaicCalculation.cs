@@ -10,34 +10,28 @@ using System.Text;
 using System.Threading.Tasks;
 using Utilities;
 
-namespace RandomMosaic
-{
-    public class RandomMosaicCalculation : Mosaic
-    {
+namespace RandomMosaic {
+    public class RandomMosaicCalculation : Mosaic {
         private static ILog log = LogManager.GetLogger(typeof(RandomMosaicCalculation));
         private bool useHue;
 
-        public int Height
-        {
+        public int Height {
             get;
             set;
         }
 
-        public int Width
-        {
+        public int Width {
             get;
             set;
         }
 
-        public RandomMosaicCalculation(bool applyHue, int width, int height)
-        {
+        public RandomMosaicCalculation(bool applyHue, int width, int height) {
             this.useHue = applyHue;
             this.Width = width;
             this.Height = height;
         }
 
-        public override Image CalculateMosaic(Image averageImage, Color[,] colorMatrix, List<string> tilesNames)
-        {
+        public override Image CalculateMosaic(Image averageImage, Color[,] colorMatrix, List<string> tilesNames) {
             var copyOfOryginalImage = (Image)averageImage.Clone();
             var sizeTile = new Size(this.Width, this.Height);
             int tX = averageImage.Width / sizeTile.Width;
@@ -45,17 +39,13 @@ namespace RandomMosaic
             string[,] usedTiles = new string[tX, tY];
 
             double maximum = tilesNames.Count;
- 
+
             log.DebugFormat("Image divided onto {0}x{1}", tX, tY);
             var searchCounter = 1;
             List<string>[,] matchedColors = new List<string>[tX, tY];
             Random random = new Random();
-            //Parallel.For(0, tX, x =>
-            for (int x =0 ; x< tX; x++)
-            {
-                //Parallel.For(0, tY, (y) =>
-                for(int y = 0; y< tY; y++)
-                {
+            for (int x = 0; x < tX; x++) {
+                for (int y = 0; y < tY; y++) {
                     Bitmap found = null;
                     maximum = tX * tY + 1;
                     var percentage = (int)((searchCounter / maximum) * 100);
@@ -64,11 +54,9 @@ namespace RandomMosaic
                     log.DebugFormat("Used image: {0}, index: {1}", searchCounter, i);
                     string name = Path.Combine(tilesNames[i]);
                     log.DebugFormat("Tile name {0}", name);
-                    try
-                    {
+                    try {
                         found = new Bitmap(name);
-                        OnTileFit(this, new MosaicEventArgs()
-                        {
+                        OnTileFit(this, new MosaicEventArgs() {
                             TileAverage = colorMatrix[x, y],
                             TilePath = name,
                             X = tX,
@@ -85,12 +73,10 @@ namespace RandomMosaic
 
                         Pen blackPen = new Pen(Color.Black);
 
-                        using (var g = Graphics.FromImage(averageImage))
-                        {
-                            g.FillRectangle(tBrush, new Rectangle(x * this.Width, y * this.Height,this.Width, this.Height));
-                            OnTilePlaced(this, new MosaicEventArgs()
-                            {
-                                TileAverage = colorMatrix[x,y],
+                        using (var g = Graphics.FromImage(averageImage)) {
+                            g.FillRectangle(tBrush, new Rectangle(x * this.Width, y * this.Height, this.Width, this.Height));
+                            OnTilePlaced(this, new MosaicEventArgs() {
+                                TileAverage = colorMatrix[x, y],
                                 TilePath = name,
                                 X = tX,
                                 Y = tY,
@@ -100,27 +86,24 @@ namespace RandomMosaic
                                 MaximumTiles = maximum
                             });
                         }
-                    }
-                    catch (Exception ex)
-                    {
+                    } catch (Exception ex) {
                         log.ErrorFormat("Name of tile during error {0}", name);
                         log.Error(ex.Message, ex);
-                        OnTileSkipped(this,  new MosaicEventArgs()
-                            {
-                                TileAverage = colorMatrix[x,y],
-                                TilePath = name,
-                                X = tX,
-                                Y = tY,
-                                CurrentX = x,
-                                CurrentY = y,
-                                Percentage = percentage,
-                                MaximumTiles = maximum
-                            });
+                        OnTileSkipped(this, new MosaicEventArgs() {
+                            TileAverage = colorMatrix[x, y],
+                            TilePath = name,
+                            X = tX,
+                            Y = tY,
+                            CurrentX = x,
+                            CurrentY = y,
+                            Percentage = percentage,
+                            MaximumTiles = maximum
+                        });
                     }
                     i++;
                     searchCounter++;
-                }//);
-            }//);
+                }
+            }
             OnCalculated(this, new MosaicEventArgs());
             log.DebugFormat("Finishig calculate of mosaic");
             return averageImage;

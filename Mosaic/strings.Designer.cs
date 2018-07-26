@@ -10,8 +10,8 @@
 
 namespace MosaicApplication {
     using System;
-    
-    
+
+
     /// <summary>
     ///   Klasa zasobu wymagająca zdefiniowania typu do wyszukiwania zlokalizowanych ciągów itd.
     /// </summary>
@@ -23,15 +23,15 @@ namespace MosaicApplication {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class strings {
-        
+
         private static global::System.Resources.ResourceManager resourceMan;
-        
+
         private static global::System.Globalization.CultureInfo resourceCulture;
-        
+
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal strings() {
         }
-        
+
         /// <summary>
         /// Zwraca buforowane wystąpienie ResourceManager używane przez tę klasę.
         /// </summary>
@@ -45,7 +45,7 @@ namespace MosaicApplication {
                 return resourceMan;
             }
         }
-        
+
         /// <summary>
         ///   Przesłania właściwość CurrentUICulture bieżącego wątku dla wszystkich
         ///   przypadków przeszukiwania zasobów za pomocą tej klasy zasobów wymagającej zdefiniowania typu.
@@ -59,7 +59,7 @@ namespace MosaicApplication {
                 resourceCulture = value;
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu About.
         /// </summary>
@@ -68,7 +68,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("Aboutbox", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Add.
         /// </summary>
@@ -77,7 +77,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("Add", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu At least you have to add 15 tiles..
         /// </summary>
@@ -86,7 +86,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("AddAtLeast15Tiles", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Add hue to each tile.
         /// </summary>
@@ -95,7 +95,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("AddHue", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu You have to add some tiles first..
         /// </summary>
@@ -104,7 +104,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("AddTilesFirst", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Adjust tile hue.
         /// </summary>
@@ -113,7 +113,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("AdjustHue", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Averaging Master Bitmap....
         /// </summary>
@@ -122,7 +122,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("AveragingMasterBitmap", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Bitmap.
         /// </summary>
@@ -131,7 +131,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("Bitmap", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Browse.
         /// </summary>
@@ -140,7 +140,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("Browse", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Buffer.
         /// </summary>
@@ -149,7 +149,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("Buffer", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu I&apos;m calculating mosaic. This may take a while....
         /// </summary>
@@ -158,7 +158,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("CalculateMosaic", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Cancel.
         /// </summary>
@@ -167,7 +167,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("Cancel", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Color tiles.
         /// </summary>
@@ -176,7 +176,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("ColorPlacedTiles", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Colors calculated..
         /// </summary>
@@ -185,7 +185,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("ColorsCalculated", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Contents.
         /// </summary>
@@ -194,7 +194,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("Contents", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Contrast.
         /// </summary>
@@ -203,7 +203,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("Contrast", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Customize.
         /// </summary>
@@ -212,7 +212,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("Customize", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Directory does not exist..
         /// </summary>
@@ -221,7 +221,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("DirectoryDoesNotExist", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Error.
         /// </summary>
@@ -230,7 +230,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("Error", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Exit.
         /// </summary>
@@ -239,7 +239,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("Exit", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu File.
         /// </summary>
@@ -248,7 +248,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("FileMenu", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Done!.
         /// </summary>
@@ -257,7 +257,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("Finished", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu GIF image.
         /// </summary>
@@ -266,7 +266,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("GIFPicture", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Go.
         /// </summary>
@@ -275,7 +275,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("Go", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Height.
         /// </summary>
@@ -284,7 +284,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("Height", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Help.
         /// </summary>
@@ -293,7 +293,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("HelpMenu", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Loading and Resizing Tile Images....
         /// </summary>
@@ -302,7 +302,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("LoadingAndResizingTiles", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Loading maser file....
         /// </summary>
@@ -311,7 +311,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("LoadingMasterFile", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Master image.
         /// </summary>
@@ -320,7 +320,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("MasterImage", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Mosaic.
         /// </summary>
@@ -329,7 +329,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("Mosaic", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu New.
         /// </summary>
@@ -338,7 +338,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("New", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Opacity.
         /// </summary>
@@ -347,7 +347,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("Opacity", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Open.
         /// </summary>
@@ -356,7 +356,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("Open", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Options.
         /// </summary>
@@ -365,7 +365,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("Options", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu PNG image.
         /// </summary>
@@ -374,7 +374,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("PNGPicture", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Print.
         /// </summary>
@@ -383,7 +383,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("Print", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Print preview.
         /// </summary>
@@ -392,7 +392,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("PrintPreview", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Filling main picture.
         /// </summary>
@@ -401,7 +401,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("Randomizing", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Random tiles.
         /// </summary>
@@ -410,7 +410,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("RandomPlacedTiles", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Ratio.
         /// </summary>
@@ -419,7 +419,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("Ratio", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu This is ratio of longer edge of main picture to longer edge of tile..
         /// </summary>
@@ -428,7 +428,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("RatioExplanation", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Ready.
         /// </summary>
@@ -437,7 +437,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("Ready", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Remove.
         /// </summary>
@@ -446,7 +446,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("Remove", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Rescale.
         /// </summary>
@@ -455,7 +455,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("Rescale", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu It&apos;s not possible to use main image as tile. Do you want to make a copy of and use it as tile?.
         /// </summary>
@@ -464,7 +464,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("SamePictureFound", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Save picture.
         /// </summary>
@@ -473,7 +473,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("Save", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Save project.
         /// </summary>
@@ -482,7 +482,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("SaveAs", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Procedure terminated by user..
         /// </summary>
@@ -491,7 +491,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("TerminatedByUser", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Tiles.
         /// </summary>
@@ -500,7 +500,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("Tiles", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Tiles in group.
         /// </summary>
@@ -509,7 +509,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("TilesInGroup", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Tiles randomize.
         /// </summary>
@@ -518,7 +518,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("TilesRandomize", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Tools.
         /// </summary>
@@ -527,7 +527,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("ToolsMenu", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Check update.
         /// </summary>
@@ -536,7 +536,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("Update", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Warning.
         /// </summary>
@@ -545,7 +545,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("Warning", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Width.
         /// </summary>
@@ -554,7 +554,7 @@ namespace MosaicApplication {
                 return ResourceManager.GetString("Width", resourceCulture);
             }
         }
-        
+
         /// <summary>
         /// Wyszukuje zlokalizowany ciąg podobny do ciągu Will be in future.
         /// </summary>
