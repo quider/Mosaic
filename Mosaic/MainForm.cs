@@ -1,6 +1,5 @@
 ﻿using API;
 using ColorsCalculation;
-using i18n;
 using log4net;
 using MosaicApplication.Properties;
 using RandomMosaic;
@@ -112,8 +111,8 @@ namespace MosaicApplication
                         this.pictureBox.Image = Image.FromFile(openDialog.FileName);
                         var w = this.pictureBox.Image.Width;
                         var h = this.pictureBox.Image.Height;
-                        this.nudHeight.Value = new Decimal(h * (LibSettings.Properties.Settings.Default.Ratio / 100));
-                        this.nudWidth.Value = new Decimal(w * (LibSettings.Properties.Settings.Default.Ratio / 100));
+                        this.nudHeight.Value = new Decimal(h * (Properties.Settings.Default.Ratio / 100));
+                        this.nudWidth.Value = new Decimal(w * (Properties.Settings.Default.Ratio / 100));
                     }
 
                     //this.RunBackgroundWorkerForCalculateColorsOfMosaic(openDialog.FileName);
@@ -152,7 +151,7 @@ namespace MosaicApplication
         {
             float current = (color.y+1f) * (color.x+1f);
             float total = (color.AmountOfX+1) * (color.AmountOfY+1);
-            this.ActualizeProgressBar(i18n.strings.ColorsCalculated, current, total);
+            this.ActualizeProgressBar(strings.ColorsCalculated, current, total);
         }
 
       
@@ -301,7 +300,7 @@ namespace MosaicApplication
                     log.InfoFormat("Procedure terminated by user");
                     return;
                 }
-                switch (LibSettings.Properties.Settings.Default.TilesPlaced)
+                switch (Properties.Settings.Default.TilesPlaced)
                 {
                     case 0:
                         RandomMosaic();
@@ -319,7 +318,7 @@ namespace MosaicApplication
         /// </summary>
         private void RandomMosaic()
         {
-            var mosaicClass = new RandomMosaicCalculation(LibSettings.Properties.Settings.Default.Hue, (int)this.nudWidth.Value, (int)this.nudHeight.Value);
+            var mosaicClass = new RandomMosaicCalculation(Properties.Settings.Default.Hue, (int)this.nudWidth.Value, (int)this.nudHeight.Value);
             mosaicClass.TilePlaced += mosaicClass_TilePlaced;
 
             try
@@ -376,7 +375,7 @@ namespace MosaicApplication
         /// </summary>
         private void ClassicMosaic()
         {
-            Mosaic mosaicClass = new ClassicMosaic.ClassicMosaicCalculation(LibSettings.Properties.Settings.Default.Hue, LibSettings.Properties.Settings.Default.Treshold, LibSettings.Properties.Settings.Default.TilesInGroup);
+            Mosaic mosaicClass = new ClassicMosaic.ClassicMosaicCalculation(Properties.Settings.Default.Hue, Properties.Settings.Default.Treshold, Properties.Settings.Default.TilesInGroup);
 
             try
             {

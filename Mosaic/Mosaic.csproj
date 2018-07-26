@@ -126,12 +126,12 @@
       <DependentUpon>ContentForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Context.cs" />
-    <Compile Include="i18n\strings.Designer.cs">
+    <Compile Include="strings.Designer.cs">
       <DependentUpon>strings.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="i18n\strings.pl.Designer.cs">
+    <Compile Include="strings.pl.Designer.cs">
       <DependentUpon>strings.pl.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -170,11 +170,11 @@
     <EmbeddedResource Include="ContentForm.resx">
       <DependentUpon>ContentForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="i18n\strings.pl.resx">
+    <EmbeddedResource Include="strings.pl.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>strings.pl.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="i18n\strings.resx">
+    <EmbeddedResource Include="strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>

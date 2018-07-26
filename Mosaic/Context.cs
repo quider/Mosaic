@@ -1,5 +1,4 @@
 ﻿using ColorsCalculation;
-using i18n;
 using LibSettings.Properties;
 using log4net;
 using System;
@@ -73,8 +72,8 @@ namespace MosaicApplication
 
             int index = 0;
             using (NDC.Push(MethodBase.GetCurrentMethod().Name))
-            {
-                string tilesDirectory = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), Settings.Default.TilesFolder);
+            {               
+                string tilesDirectory = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), Properties.Settings.Default.TilesFolder);
                 Utils.CreateEmptyDirectory(tilesDirectory);
 
                 if (Directory.Exists(directoryOfImages))
@@ -119,7 +118,7 @@ namespace MosaicApplication
             try
             {
                 var sizeTile = new Size(width, height);
-                var tilename = Path.Combine(tilesDirectory, Path.GetFileNameWithoutExtension(fN.Name) + Settings.Default.TilesExtList[Settings.Default.TilesExt]);
+                var tilename = Path.Combine(tilesDirectory, Path.GetFileNameWithoutExtension(fN.Name) + Properties.Settings.Default.TilesExtList[Properties.Settings.Default.TilesExt]);
                 TilesImages.Add(tilename);
                 log.DebugFormat("Creating tile {0}", tilename);
                 using (Stream stream = new FileStream(name, FileMode.Open, FileAccess.Read))

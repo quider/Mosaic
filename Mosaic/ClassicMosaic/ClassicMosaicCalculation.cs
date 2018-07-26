@@ -1,5 +1,4 @@
 ﻿using API;
-using i18n;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -51,7 +50,7 @@ namespace ClassicMosaic
             string[,] usedTiles = new string[tX, tY];
 
 
-            worker.ReportProgress(0, String.Format(strings.LoadingAndResizingTiles));
+            worker.ReportProgress(0, String.Format(MosaicApplication.strings.LoadingAndResizingTiles));
 
             Dictionary<string, Color> tilesColors = new Dictionary<string, Color>();
 
