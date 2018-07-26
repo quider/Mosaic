@@ -16,7 +16,7 @@ namespace ColorsCalculation {
         private int height;
         private int width;
 
-        public Color[,] avgsMaster {
+        public Color[,] averageColorsOfMasterImage {
             get;
             set;
         }
@@ -26,33 +26,32 @@ namespace ColorsCalculation {
             this.height = h;
         }
 
-        public override Image CalculateColors(string fileName, out Color[,] color) {
+        public override Image CalculateColors(string fileName, out Color[,] colorsArray) {
             using (NDC.Push(MethodBase.GetCurrentMethod().Name)) {
                 var image = Image.FromFile(fileName);
                 var height = this.height;
                 var width = this.width;
                 log.InfoFormat("Images size of {0}x{1}", width, height);
-                var szTile = new Size((int)width, (int)height);
-                Boolean bLoaded = false;
-                Bitmap bMaster = null;
+                var tileSize = new Size((int)width, (int)height);
+                Boolean bitmapLoaded = false;
+                Bitmap masterBitMap = null;
 
                 log.Info("Averaging colors");
 
-
-                while (!bLoaded) {
+                while (!bitmapLoaded) {
                     try {
-                        bMaster = new Bitmap((Image)image.Clone());
+                        masterBitMap = new Bitmap((Image)image.Clone());
                         log.InfoFormat("Main image set");
-                        bLoaded = true;
+                        bitmapLoaded = true;
                     } catch (OutOfMemoryException ex) {
                         log.Error(ex.Message, ex);
                         GC.WaitForPendingFinalizers();
                     }
                 }
 
-                int tX = bMaster.Width / szTile.Width;
-                int tY = bMaster.Height / szTile.Height;
-                this.avgsMaster = new Color[tX, tY];
+                int tX = masterBitMap.Width / tileSize.Width;
+                int tY = masterBitMap.Height / tileSize.Height;
+                averageColorsOfMasterImage = new Color[tX, tY];
 
 
                 var maximum = tX * tY;
@@ -61,12 +60,12 @@ namespace ColorsCalculation {
                     lock (image) {
                         for (int x = 0; x < tX; x++) {
                             for (int y = 0; y < tY; y++) {
-                                avgsMaster[x, y] = Utils.GetTileAverage(bMaster, x * szTile.Width, y * szTile.Height, szTile.Width, szTile.Height);
-                                Rectangle r = new Rectangle(szTile.Width * x, szTile.Height * y, szTile.Width, szTile.Height);
+                                averageColorsOfMasterImage[x, y] = Utils.GetTileAverage(masterBitMap, x * tileSize.Width, y * tileSize.Height, tileSize.Width, tileSize.Height);
+                                Rectangle r = new Rectangle(tileSize.Width * x, tileSize.Height * y, tileSize.Width, tileSize.Height);
 
                                 using (Graphics g = Graphics.FromImage(image)) {
-                                    g.FillRectangle(new SolidBrush(avgsMaster[x, y]), r);
-                                    OnColorCalculated(avgsMaster[x, y], x, y, tX, tY);
+                                    g.FillRectangle(new SolidBrush(averageColorsOfMasterImage[x, y]), r);
+                                    OnColorCalculated(averageColorsOfMasterImage[x, y], x, y, tX, tY);
                                 }
                             };
                         };
@@ -75,7 +74,7 @@ namespace ColorsCalculation {
                     log.FatalFormat("Fatal error during putting images into big image");
                     log.Fatal(ex.Message, ex);
                 }
-                color = this.avgsMaster;
+                colorsArray = averageColorsOfMasterImage;
                 return image;
             }
         }

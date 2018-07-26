@@ -91,9 +91,7 @@ namespace ClassicMosaic {
                                     TileAverage = tilesColors[tilePath],
 
                                 });
-                                //worker.ReportProgress((int)((index / maximum) * 100), String.Format(strings.LoadingAndResizingTiles));
                             }
-                            //index++;
                         }
                     } catch (ArgumentException ex) {
                         log.ErrorFormat("{0}: {1}", tilePath, ex.Message);
@@ -173,9 +171,7 @@ namespace ClassicMosaic {
         protected void PlaceTilesInImage(ref List<string>[,] matchedColors, ref Color[,] avgsMaster, ref Image image, int tX, int tY) {
             var random = new Random();
             var searchCounter = 0;
-            //Parallel.For(0, tX, x =>
             for (int x = 0; x <= tX; x++) {
-                //Parallel.For(0, tY, y =>
                 for (int y = 0; y <= tY; y++) {
                     try {
                         searchCounter++;
@@ -231,19 +227,15 @@ namespace ClassicMosaic {
             int tY = image.Height / sizeTile.Height;
             string[,] usedTiles = new string[tX, tY];
 
-            var tilesColors = this.FindAverageColorForTiles(tilesNames);
+            var tilesColors = FindAverageColorForTiles(tilesNames);
 
-            //TODO: get as parameter
+            //TODO: get hue as parameter
             //if (bAdjustHue)
             log.Debug("Non hue algorythm");
             //worker.ReportProgress(0, strings.CalculateMosaic);
             // Don't adjust hue - keep searching for a tile close enough
             log.DebugFormat("Image divided onto {0}x{1}", tX, tY);
-            var matchedColors = this.MatchTilesToColor(tilesColors, avgsMaster, tX, tY);
-
-
-
-
+            var matchedColors = MatchTilesToColor(tilesColors, avgsMaster, tX, tY);
             return averageImage;
         }
     }

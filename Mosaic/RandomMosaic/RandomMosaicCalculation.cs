@@ -49,7 +49,6 @@ namespace RandomMosaic {
                     Bitmap found = null;
                     maximum = tX * tY + 1;
                     var percentage = (int)((searchCounter / maximum) * 100);
-                    //worker.ReportProgress(percentage, strings.CalculateMosaic);
                     var i = random.Next(tilesNames.Count - 1);
                     log.DebugFormat("Used image: {0}, index: {1}", searchCounter, i);
                     string name = Path.Combine(tilesNames[i]);
@@ -74,7 +73,7 @@ namespace RandomMosaic {
                         Pen blackPen = new Pen(Color.Black);
 
                         using (var g = Graphics.FromImage(averageImage)) {
-                            g.FillRectangle(tBrush, new Rectangle(x * this.Width, y * this.Height, this.Width, this.Height));
+                            g.FillRectangle(tBrush, new Rectangle(x * Width, y * Height, Width, Height));
                             OnTilePlaced(this, new MosaicEventArgs() {
                                 TileAverage = colorMatrix[x, y],
                                 TilePath = name,

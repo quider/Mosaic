@@ -6,12 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace API
-{
+namespace API {
     public delegate void MosaicEventHandler(Mosaic sender, MosaicEventArgs e);
 
-    public abstract class Mosaic
-    {
+    public abstract class Mosaic {
         public event MosaicEventHandler TileFit;
         public event MosaicEventHandler TileDontFit;
         public event MosaicEventHandler Calculated;
@@ -19,43 +17,34 @@ namespace API
         public event MosaicEventHandler TileSkipped;
         public event MosaicEventHandler TileAverageColorCalculated;
 
-        public abstract Image CalculateMosaic(Image averageImage, Color[,] colorMatrix, List<string> tilesNames);     
-   
-        protected virtual void OnTileFit(Mosaic mosaic, MosaicEventArgs eventArgs){
-            if (TileFit != null)
-            {
+        public abstract Image CalculateMosaic(Image averageImage, Color[,] colorMatrix, List<string> tilesNames);
+
+        protected virtual void OnTileFit(Mosaic mosaic, MosaicEventArgs eventArgs) {
+            if (TileFit != null) {
                 TileFit(mosaic, eventArgs);
             }
         }
 
-        protected virtual void OnTileDontFit(Mosaic mosaic, MosaicEventArgs eventArgs)
-        {
-            if (TileDontFit != null)
-            {
+        protected virtual void OnTileDontFit(Mosaic mosaic, MosaicEventArgs eventArgs) {
+            if (TileDontFit != null) {
                 TileDontFit(mosaic, eventArgs);
             }
         }
 
-        protected virtual void OnCalculated(Mosaic mosaic, MosaicEventArgs eventArgs)
-        {
-            if (Calculated != null)
-            {
+        protected virtual void OnCalculated(Mosaic mosaic, MosaicEventArgs eventArgs) {
+            if (Calculated != null) {
                 Calculated(mosaic, eventArgs);
             }
         }
 
-        protected virtual void OnTilePlaced(Mosaic mosaic, MosaicEventArgs eventArgs)
-        {
-            if (TilePlaced != null)
-            {
+        protected virtual void OnTilePlaced(Mosaic mosaic, MosaicEventArgs eventArgs) {
+            if (TilePlaced != null) {
                 TilePlaced(mosaic, eventArgs);
             }
         }
 
-        protected virtual void OnTileSkipped(Mosaic mosaic, MosaicEventArgs eventArgs)
-        {
-            if (TileSkipped != null)
-            {
+        protected virtual void OnTileSkipped(Mosaic mosaic, MosaicEventArgs eventArgs) {
+            if (TileSkipped != null) {
                 TileSkipped(mosaic, eventArgs);
             }
         }
@@ -65,10 +54,8 @@ namespace API
         /// </summary>
         /// <param name="mosaic"></param>
         /// <param name="eventArgs"></param>
-        protected virtual void OnTileAverageColorCalculated(Mosaic mosaic, MosaicEventArgs eventArgs)
-        {
-            if (TileSkipped != null)
-            {
+        protected virtual void OnTileAverageColorCalculated(Mosaic mosaic, MosaicEventArgs eventArgs) {
+            if (TileSkipped != null) {
                 TileSkipped(mosaic, eventArgs);
             }
         }

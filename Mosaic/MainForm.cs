@@ -131,7 +131,7 @@ namespace MosaicApplication {
         private void mosaicColors_ColorCalculated(ColorCalculationEventArgs color) {
             float current = (color.y + 1f) * (color.x + 1f);
             float total = (color.AmountOfX + 1) * (color.AmountOfY + 1);
-            this.ActualizeProgressBar(strings.ColorsCalculated, current, total);
+            ActualizeProgressBar(strings.ColorsCalculated, current, total);
         }
 
 
@@ -142,8 +142,7 @@ namespace MosaicApplication {
         /// <param name="sender"></param>
         /// <param name="e"></param>      
         private void CalculateColorsCompleted(object sender, RunWorkerCompletedEventArgs e) {
-            using (NDC.Push(MethodBase.GetCurrentMethod().Name)) {
-                //Set all to 0;
+            using (NDC.Push(MethodBase.GetCurrentMethod().Name)) {               
                 pgbOperation.Value = 0;
                 this.lblPercentage.Text = "0%";
                 lblOperation.Text = strings.ColorsCalculated;
@@ -304,7 +303,8 @@ namespace MosaicApplication {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void mosaicClass_MosaicCalculated(Mosaic sender, MosaicEventArgs e) {
-            throw new NotImplementedException();
+            btnGo.Enabled = true;
+            pgbOperation.Value = 0;
         }
 
 
@@ -335,7 +335,8 @@ namespace MosaicApplication {
         /// </summary>
         private void ClassicMosaic() {
             Mosaic mosaicClass = new ClassicMosaic.ClassicMosaicCalculation(Properties.Settings.Default.Hue, Properties.Settings.Default.Treshold, Properties.Settings.Default.TilesInGroup);
-
+            mosaicClass.Calculated += mosaicClass_MosaicCalculated;
+            mosaicClass.TilePlaced += mosaicClass_TilePlaced;
             try {
                 List<string> items = new List<string>();
                 foreach (string item in this.Ctx.TilesImages) {
@@ -345,14 +346,7 @@ namespace MosaicApplication {
 
                 Cursor = Cursors.WaitCursor;
                 Size szTile = new Size(Convert.ToInt16(nudWidth.Value), Convert.ToInt16(nudHeight.Value));
-                //this.calculateMosaicBackgroundWorker = new BackgroundWorker();
-                //this.calculateMosaicBackgroundWorker.ProgressChanged += CalculateColorsProgressChanged;
-                //this.calculateMosaicBackgroundWorker.RunWorkerCompleted += calculateMosaicBackgroundWorker_RunWorkerCompleted;
-                //this.calculateMosaicBackgroundWorker.DoWork += mosaicClass.CalculateMosaic;
-                //this.calculateMosaicBackgroundWorker.WorkerReportsProgress = true;
-                //this.calculateMosaicBackgroundWorker.WorkerSupportsCancellation = true;
-                //btCancelCalculate.Visible = true;
-                //this.calculateMosaicBackgroundWorker.RunWorkerAsync(new object[] { this.AverageImage, items, (int)this.nudHeight.Value, (int)this.nudWidth.Value, this.Ctx.MosaicColors.avgsMaster });
+                pictureBox.Image = mosaicClass.CalculateMosaic(AverageImage, Ctx.AverageColors, Ctx.TilesImages.ToList<string>());
                 btnGo.Enabled = false;
             } catch (Exception x) {
                 log.Fatal(x.Message, x);
@@ -494,7 +488,7 @@ namespace MosaicApplication {
         /// <param name="e"></param>
         private void btRescale_Click(object sender, EventArgs e) {
             using (NDC.Push(MethodBase.GetCurrentMethod().Name)) {
-                RunBackgroundWorkerForCalculateColorsOfMosaic(this.tbxBrowse.Text);
+                RunBackgroundWorkerForCalculateColorsOfMosaic(tbxBrowse.Text);
             }
         }
 
